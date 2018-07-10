@@ -4,29 +4,12 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.blankj.utilcode.util.PermissionUtils;
-import com.blankj.utilcode.util.Utils;
 import com.jia.libutils.SettingUtil;
-import com.tbruyelle.rxpermissions.RxPermissions;
 import com.wlw.bookkeeptool.editor_page.see_and_editor_activity;
-
-import java.util.List;
-
-import rx.Observer;
-
-import static com.blankj.utilcode.util.PermissionUtils.getPermissions;
-import static com.blankj.utilcode.util.PermissionUtils.isGranted;
-import static com.blankj.utilcode.util.PermissionUtils.permission;
 
 /**
  * Created by wlw on 2018/7/3.

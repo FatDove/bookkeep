@@ -3,4 +3,5 @@
     <string name="login_title">欢迎登录</string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
+    <string name="register">注册</string>
 </resources>

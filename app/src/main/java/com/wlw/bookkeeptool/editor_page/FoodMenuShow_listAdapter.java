@@ -11,9 +11,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.wlw.bookkeeptool.R;
 import com.wlw.bookkeeptool.tableBean.menuBean;
 
-
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * https://github.com/CymChad/BaseRecyclerViewAdapterHelper
@@ -27,7 +25,7 @@ public class FoodMenuShow_listAdapter extends BaseQuickAdapter<menuBean,BaseView
         super(R.layout.food_menu_show_list_item, its);
         this.context=context;
         this.its=its;
-                Log.i(TAG, "convert123: " + its.get(0).getFoodname().toString());
+//                Log.i(TAG, "convert123: " + its.get(0).getFoodname().toString());
     }
 
     @Override
