@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <RelativeLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <TextView
+            android:id="@+id/dest_num"
+            android:text="9号桌"
+            android:background="@drawable/button_border_cyan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_toLeftOf="@+id/now_Price"
+            android:text="使用"
+            android:background="@drawable/button_border_cyan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/now_Price"
+            android:layout_alignParentRight="true"
+            android:text="200.5"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_border_cyan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+         <TextView
+             android:id="@+id/menu_describe"
+             android:text="描述111111111111111111111111111111111111111111122222222222222222222222222222222222222222222222222233333333333333333333333333333333333333"
+             android:maxLines="3"
+             android:ellipsize="end"
+             android:layout_below="@+id/dest_num"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv2"
+            android:text="描述"
+            android:layout_below="@+id/menu_describe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/place_order_time"
+            android:text="描述"
+            android:layout_below="@+id/menu_describe"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@mipmap/login_bg">
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/login_title"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+<LinearLayout
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content">
+
+   <RelativeLayout
+       android:id="@+id/r1"
+       android:layout_width="200dp"
+       android:layout_height="60dp"
+       android:background="@drawable/button_border"
+       >
+       <com.rengwuxian.materialedittext.MaterialEditText
+           android:id="@+id/username"
+           android:hint="@string/username"
+           app:met_textColorHint="@color/white"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:paddingLeft="10dp"
+           />
+   </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/r2"
+        android:background="@drawable/button_border3"
+        android:layout_below="@+id/r1"
+        android:layout_marginTop="15dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        >
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/pass"
+            android:hint="@string/password"
+            app:met_textColorHint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/r3"
+        android:background="@drawable/button_border2"
+        android:layout_toRightOf="@id/r1"
+        android:layout_marginLeft="15dp"
+        android:layout_width="65dp"
+        android:layout_height="135dp">
+    </RelativeLayout>
+
+  </RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="注 册"
+            android:textSize="20sp"
+            android:textColor="@drawable/register_text_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>

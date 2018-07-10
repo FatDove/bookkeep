@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.jakewharton.butterknife'// 每个用到黄油刀的module都需要依赖
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile project(':lib_net')
+    compile project(':lib_ui')
+    compile project(':lib_utils')
+    // 事件总线
+    compile 'org.greenrobot:eventbus:3.0.0'
+    // RxLifecycle
+    compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+    // 分享
+    compile 'com.elbbbird.android:socialsdk:0.2.0@aar'
+    // 播放器
+    //    compile 'com.github.shuaijia:JsPlayer:v1.5.1'
+}

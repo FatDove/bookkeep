@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.wlw.bookkeeptool"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        packagingOptions {
+            exclude 'META-INF/rxjava.properties'  // 解决rxjava引入问题
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+//配置各个平台需要的KEY
+
+//MobSDK {
+//    appKey "替换为mob官方申请的appkey"
+//    appSecret "替换为mob官方申请的appkey对应的appSecret"
+//    ShareSDK {
+//        devInfo {
+//            Wechat {
+//                appId "wx8ec0cc8ae6d89066"
+//                appSecret "2a53d1db69bba449b30cf7fd0c8695c7"
+//                userName "gh_afb25ac019c9"
+//                path "pages/index/index.html?id=1"
+//                withShareTicket = true
+//                miniprogramType 2
+//                bypassApproval false
+//            }
+////            QQ {
+////                appId "100371282"
+////                appKey "aed9b0303e3ed1e27bae87c33761161d"
+////                shareByAppClient true
+////                bypassApproval false
+////            }
+//        }
+//    }
+//}
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //解决27.11包冲突问题
+    androidTestCompile('com.android.support:support-annotations:26.1.0') {
+        force = true
+    }
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+    implementation files('libs/MobCommons-2018.0614.1541.jar')
+    implementation files('libs/MobTools-2018.0614.1510.jar')
+    implementation files('libs/ShareSDK-Core-3.2.0.jar')
+    implementation files('libs/ShareSDK-QQ-3.2.0.jar')
+    implementation files('libs/ShareSDK-Wechat-3.2.0.jar')
+    implementation files('libs/ShareSDK-Wechat-Core-3.2.0.jar')
+    implementation files('libs/ShareSDK-Wechat-Favorite-3.2.0.jar')
+    implementation files('libs/ShareSDK-Wechat-Moments-3.2.0.jar')
+    implementation files('libs/SDKWrapper-2018.0201.1609.jar')
+    implementation files('libs/SMSSDK-3.2.1.jar')
+
+    implementation project(':base')
+}

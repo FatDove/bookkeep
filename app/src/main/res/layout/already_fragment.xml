@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.jia.libui.MyControl.EmptyRecyclerView
+      android:id="@+id/already_fragment_rv"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+        <!--Empty提示图-->
+
+    </com.jia.libui.MyControl.EmptyRecyclerView>
+    <ImageView
+        android:id="@+id/empty_iv"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_empty_48px"
+        android:layout_centerInParent="true" />
+</android.support.constraint.ConstraintLayout>

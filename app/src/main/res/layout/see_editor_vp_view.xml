@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+
+     <TextView
+         android:background="@drawable/button_border_red"
+         android:id="@+id/see_editor_vp_text"
+         android:layout_width="150dp"
+         android:layout_height="80dp"
+         android:text="其他"
+         android:textStyle="bold"
+         android:textSize="26sp"
+         android:gravity="center"
+         />
+
+</RelativeLayout>

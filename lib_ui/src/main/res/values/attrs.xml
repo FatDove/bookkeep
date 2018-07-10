@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- changeskin 默认 -->
+    <color name="tool_bar_color">#3F51B5</color>
+    <color name="tab_bar_color">#3F51B5</color>
+
+    <!--应用内换肤资源-->
+    <color name="tool_bar_color_blue">#3F51B5</color>
+    <color name="tab_bar_color_blue">#3F51B5</color>
+
+    <color name="tool_bar_color_pink">#F44336</color>
+    <color name="tab_bar_color_pink">#F44336</color>
+
+    <color name="tool_bar_color_red">#E91E63</color>
+    <color name="tab_bar_color_red">#E91E63</color>
+
+    <color name="tool_bar_color_purple">#673AB7</color>
+    <color name="tab_bar_color_purple">#673AB7</color>
+
+    <color name="tool_bar_color_green">#4CAF50</color>
+    <color name="tab_bar_color_green">#4CAF50</color>
+
+    <color name="tool_bar_color_yellow">#FFC107</color>
+    <color name="tab_bar_color_yellow">#FFC107</color>
+
+    <color name="tool_bar_color_orange">#FF5722</color>
+    <color name="tab_bar_color_orange">#FF5722</color>
+
+    <color name="tool_bar_color_gary">#9E9E9E</color>
+    <color name="tab_bar_color_gary">#9E9E9E</color>
+
+
+    <attr name="progress_unreach_color" format="color" />
+    <attr name="progress_unreach_height" format="dimension" />
+    <attr name="progress_reach_color" format="color" />
+    <attr name="progress_reach_height" format="dimension" />
+    <attr name="progress_text_color" format="color" />
+    <attr name="progress_text_size" format="dimension" />
+    <attr name="progress_text_offset" format="dimension" />
+    <!--自己创建一个View 把自定义的属性赋给它-->
+    <declare-styleable name="MyHorizontalProgressbar">
+        <attr name="progress_unreach_color" />
+        <attr name="progress_unreach_height" />
+        <attr name="progress_reach_color" />
+        <attr name="progress_reach_height" />
+        <attr name="progress_text_color" />
+        <attr name="progress_text_size" />
+        <attr name="progress_text_offset" />
+    </declare-styleable>
+    <!--自己创建一个View 把自定义的属性赋给它-->
+    <declare-styleable name="MyRoundProgressBar">
+        <attr name="radius" format="dimension"></attr>
+    </declare-styleable>
+    <!--自己创建一个View 把自定义的属性赋给它-->
+    <declare-styleable name="AutoScrollTextView">
+        <attr name="view_speed" format="dimension"></attr>
+    </declare-styleable>
+
+    <!--搜索放大镜的 view属性-->
+    <declare-styleable name="MySearchViewAttr">
+        <attr name="paintWidth" format="dimension"></attr>
+        <attr name="paintColor" format="color"></attr>
+        <attr name="viewBackground" format="color"></attr>
+        <attr name="paintStyle">
+            <enum name="STROKE" value="0" />
+            <enum name="FILL" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!--//Banner轮播图 属性-->
+    <declare-styleable name="Banner">
+        <attr name="delay_time" format="integer" />
+        <attr name="scroll_time" format="integer" />
+        <attr name="is_auto_play" format="boolean" />
+        <attr name="title_background" format="color|reference" />
+        <attr name="title_textcolor" format="color" />
+        <attr name="title_textsize" format="dimension" />
+        <attr name="title_height" format="dimension" />
+        <attr name="indicator_width" format="dimension" />
+        <attr name="indicator_height" format="dimension" />
+        <attr name="indicator_margin" format="dimension" />
+        <attr name="indicator_drawable_selected" format="reference" />
+        <attr name="indicator_drawable_unselected" format="reference" />
+        <attr name="banner_layout" format="reference"/>
+        <attr name="banner_default_image" format="reference"/>
+        <attr name="image_scale_type" format="enum">
+            <enum name="center" value="0" />
+            <enum name="center_crop" value="1" />
+            <enum name="center_inside" value="2" />
+            <enum name="fit_center" value="3" />
+            <enum name="fit_end" value="4" />
+            <enum name="fit_start" value="5" />
+            <enum name="fit_xy" value="6" />
+            <enum name="matrix" value="7" />
+        </attr>
+        <!--<attr name="indicator_animator" format="reference" />-->
+        <!--<attr name="indicator_animator_reverse" format="reference" />-->
+    </declare-styleable>
+</resources>

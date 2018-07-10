@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wlw.bookkeeptool.MainActivity">
+
+    <com.jia.libui.banner.Banner
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:indicator_drawable_unselected="@drawable/button_border2"
+        app:indicator_height="20dp"
+        />
+      <LinearLayout
+          android:layout_marginTop="20dp"
+          android:gravity="center_horizontal"
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+          <Button
+              android:padding="20dp"
+              android:text="实时政治"
+              android:textSize="@dimen/textSize1"
+              android:textStyle="bold"
+              android:textColor="@color/white"
+              android:id="@+id/editor"
+              android:background="@drawable/button_border_red"
+              android:layout_width="80dp"
+              android:layout_height="80dp" />
+          <Button
+              android:layout_marginLeft="90dp"
+              android:padding="20dp"
+              android:text="实时政治"
+              android:textSize="@dimen/textSize1"
+              android:textStyle="bold"
+              android:textColor="@color/white"
+              android:id="@+id/record"
+              android:background="@drawable/button_border_yellow"
+              android:layout_width="80dp"
+              android:layout_height="80dp"/>
+          
+      </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日任务"
+            android:textColor="@color/light_blue"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+        <com.jia.libui.MyControl.EmptyRecyclerView
+            android:id="@+id/today_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv"
+            />
+        <!--Empty提示图-->
+        <ImageView
+            android:id="@+id/empty_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:contentDescription="@null"
+            android:src="@mipmap/ic_launcher"
+            android:layout_centerInParent="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="25dp"
+            android:onClick="fabOnclick"
+            android:scaleType="center"
+            android:src="@drawable/ic_add_circle_48px"
+            app:backgroundTint="#ffffff"
+            app:borderWidth="0.0dip"
+            app:elevation="10.0dip"
+            app:fabSize="auto"
+            app:pressedTranslationZ="10.0dip"
+            app:rippleColor="#a6a6a6"
+            app:useCompatPadding="true"
+            tools:ignore="OnClick" />
+
+    </RelativeLayout>
+</LinearLayout>
