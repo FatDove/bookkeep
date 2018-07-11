@@ -12,7 +12,7 @@ import litepal.LitePalApplication;
 // */
 //
 public class MyApplication extends LitePalApplication {
-  String string ="";
+    String string ="";
     public static String AppImgFile ="XiaoZhuShou";
 
     @Override

@@ -41,7 +41,7 @@ public class FoodMenuShow_listAdapter extends BaseQuickAdapter<menuBean,BaseView
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 // .override(100, 100)
                 .into((ImageView) helper.getView(R.id.menu_show_item_img));
-
+        helper.addOnClickListener(R.id.menu_show_item_edit);
     }
 
 

@@ -19,6 +19,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jia.libui.CoverFlow.CoverFlowAdapter;
 import com.jia.libui.CoverFlow.CoverFlowViewPager;
 import com.jia.libui.CoverFlow.OnPageSelectListener;
@@ -101,13 +102,12 @@ public class see_and_editor_activity extends Activity {
                 foodtype = position+"";
                 Toast.makeText(context, position+"?", Toast.LENGTH_SHORT).show();
                 initdata(foodtype);
+                initevent();
             }
         });
         addMenu = (ImageView) findViewById(R.id.add_menu);
         emptyRecyclerView = (EmptyRecyclerView) findViewById(R.id.see_editor_rv);
         emptyRecyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
-
-
     }
      private void initevent(){
          addMenu.setOnClickListener(new View.OnClickListener() {
@@ -116,14 +116,35 @@ public class see_and_editor_activity extends Activity {
                  ObjectAnimator ra = ObjectAnimator.ofFloat(v,"rotation", 0f, 180f);
                  ra.setDuration(1000);
                  ra.start();
-                 openPopuWindow();
+                 openPopuWindow_add();
+             }
+         });
+         foodMenuShow_listAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+             @Override
+             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                 if (view.getId()==R.id.menu_show_item_edit){
+                     openPopuWindow_edit((menuBean) adapter.getData().get(position));
+                 }
              }
          });
      }
 
     //打开PopuWindow 展示 列表
-    private void openPopuWindow() {
+    private void openPopuWindow_add() {
         seeEditorPopupWindow = new SeeEditorPopupWindow(context,foodtype);
+        seeEditorPopupWindow.setAnimationStyle(R.style.mine_popupwindow_anim);//设置出现的动画
+        seeEditorPopupWindow.showAsDropDown(addMenu,0,0);//设置显示位置
+        mWindowUtil.lightoff(activity);
+        seeEditorPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                mWindowUtil.lightOn(activity);
+            }
+        });
+    }
+    //打开PopuWindow 展示 列表
+    private void openPopuWindow_edit(menuBean menuBean){
+        seeEditorPopupWindow = new SeeEditorPopupWindow(context,menuBean);
         seeEditorPopupWindow.setAnimationStyle(R.style.mine_popupwindow_anim);//设置出现的动画
         seeEditorPopupWindow.showAsDropDown(addMenu,0,0);//设置显示位置
         mWindowUtil.lightoff(activity);
@@ -161,8 +182,8 @@ public class see_and_editor_activity extends Activity {
             Log.i("fjl","渲图");
             Uri uri = data.getData();
 
-            Toast.makeText(this, uri + "0000",Toast.LENGTH_SHORT).show();
-            Log.i("FanJava", uri.toString()+"666");
+            Toast.makeText(this,uri + "0000",Toast.LENGTH_SHORT).show();
+            Log.i("FanJava", uri.toString() + "666");
             //将从相册获取到的图片,做发送前  和 发送处理
             InputStream is = null; //设置一个输出流
             try {

@@ -91,7 +91,7 @@
     <Button
         android:id="@+id/submit_edit"
         android:background="@drawable/button_border_cyan"
-        android:text="提交完成"
+        android:text="添加完成"
         android:textColor="@color/white"
         android:textSize="35sp"
         android:layout_margin="5dp"
