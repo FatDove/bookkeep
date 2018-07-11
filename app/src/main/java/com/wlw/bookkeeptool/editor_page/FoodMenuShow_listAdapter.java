@@ -42,6 +42,7 @@ public class FoodMenuShow_listAdapter extends BaseQuickAdapter<menuBean,BaseView
                 // .override(100, 100)
                 .into((ImageView) helper.getView(R.id.menu_show_item_img));
         helper.addOnClickListener(R.id.menu_show_item_edit);
+        helper.addOnClickListener(R.id.delete_view);
     }
 
 

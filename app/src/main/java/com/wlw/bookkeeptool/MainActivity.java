@@ -13,9 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +31,8 @@ import com.jia.libui.banner.BannerConfig;
 import com.jia.libui.banner.Transformer;
 import com.jia.libui.banner.listener.OnBannerListener;
 import com.jia.libui.banner.loader.ImageLoader;
+import com.wlw.bookkeeptool.frist_page.fab_slide.FabScrollListener;
+import com.wlw.bookkeeptool.frist_page.fab_slide.HideShowScrollListener;
 import com.wlw.bookkeeptool.frist_page.first_page_adapter;
 import com.wlw.bookkeeptool.frist_page.today_order_bean;
 
@@ -36,7 +42,7 @@ import java.util.ArrayList;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 
-public class MainActivity extends AppCompatActivity implements OnBannerListener {
+public class MainActivity extends AppCompatActivity implements OnBannerListener,HideShowScrollListener {
 
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
@@ -44,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener 
     private Button editor;
     private Button record;
     private TextView tv;
-    private EmptyRecyclerView todayOrder;
+    private EmptyRecyclerView todayOrder_RV;
     private FloatingActionButton fab;
     private LinearLayout lay1;
     private ImageView emptyIv;
@@ -181,11 +187,13 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener 
         editor = (Button) findViewById(R.id.editor);
         record = (Button) findViewById(R.id.record);
         tv = (TextView) findViewById(R.id.tv);
-        todayOrder = (EmptyRecyclerView) findViewById(R.id.today_order);
+        todayOrder_RV = (EmptyRecyclerView) findViewById(R.id.today_order);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         emptyIv = (ImageView) findViewById(R.id.empty_iv);
-        todayOrder.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        todayOrder.setEmptyView(emptyIv);
+        todayOrder_RV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        //        给recycleview添加 滑动监听
+        todayOrder_RV.addOnScrollListener(new FabScrollListener(this));
+        todayOrder_RV.setEmptyView(emptyIv);
         first_page_adapter = new first_page_adapter(this, datalist);
         first_page_adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -193,7 +201,19 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener 
                 Toast.makeText(MainActivity.this, position+"?", Toast.LENGTH_SHORT).show();
             }
         });
-        todayOrder.setAdapter(first_page_adapter);
+        todayOrder_RV.setAdapter(first_page_adapter);
+    }
+    @Override
+    public void Hide(){
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) fab.getLayoutParams();
+        RelativeLayout.LayoutParams s = (RelativeLayout.LayoutParams) fab.getLayoutParams();
+        Log.i("fanjava", s.bottomMargin+"||"+ layoutParams.bottomMargin);
+        fab.animate().translationY(fab.getHeight()+layoutParams.bottomMargin).setInterpolator(new AccelerateInterpolator(3));
+    }
+    @Override
+    public void Show() {
+        RelativeLayout.LayoutParams s = (RelativeLayout.LayoutParams) fab.getLayoutParams();
+        fab.animate().translationY(0).setInterpolator(new DecelerateInterpolator(3));
     }
 
     //自定义的图片加载器

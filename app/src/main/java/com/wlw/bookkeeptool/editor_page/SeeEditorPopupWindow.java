@@ -222,14 +222,15 @@ public class SeeEditorPopupWindow extends PopupWindow {
             int i = update_menu.updateAll("foodid = ?", menuBean.getFoodid());
             if (i > 0) {
                 Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
+                see_and_editor_activity s = (see_and_editor_activity) this.context;
+                s.initdata(menuBean.getFoodtype());
+                dismiss();
             } else {
                 Toast.makeText(context, "修改失败", Toast.LENGTH_SHORT).show();
             }
         } else if (insert_or_updata == isInsert) {
-
             //判断是否包含
             if (isContainFood()) {
-
                 nameflag = true;
                 tempfoodname = food_name.getText().toString();
                 Toast.makeText(context, "该名称已存在", Toast.LENGTH_SHORT).show();

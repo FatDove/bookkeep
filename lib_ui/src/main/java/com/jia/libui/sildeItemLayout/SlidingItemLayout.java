@@ -1,6 +1,7 @@
 package com.jia.libui.sildeItemLayout;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.MotionEventCompat;
@@ -13,13 +14,22 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.jia.libui.R;
+
+
 //1、定义组件
 public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 
 	// 2、定义滑动视图摆放方向（采用枚举定义）
-	public enum SlidingType {
-		Left, Right;
-	}
+//	public enum SlidingType {
+//			Left(0), Right(1);
+//			SlidingType(int i) {
+//			}
+//	}
+
+	public static final int layout_left=0;
+	public static final int layout_right=1;
+
 
 	// 3、定义滑动视图滑动状态（采用枚举）
 	public enum SlidingStatus {
@@ -33,7 +43,7 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 	private int horizontalDX;
 
 	// 6.1.1 计算布局摆放的位置(矩形：left top right buttom)
-	private SlidingType slidingType = SlidingType.Right;
+	private int slidingType;
 	// 6.1.1 计算布局摆放的位置(矩形：left top right buttom)
 	private SlidingStatus slidingStatus = SlidingStatus.Close;
 
@@ -59,12 +69,19 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 	}
 
 	public SlidingItemLayout(Context context) {
-		super(context);
+		this(context,null);
 	}
 
 	public SlidingItemLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		obtainStyledAttrs(attrs);
 	}
+
+	private void obtainStyledAttrs(AttributeSet attrs) {
+		TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.MyFunctionViewLeft_right);
+		slidingType = ta.getInt(R.styleable.MyFunctionViewLeft_right_my_layout_type,layout_right);
+	}
+
 
 	@Override
 	protected void onFinishInflate() {
@@ -134,10 +151,10 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 		int left = 0;
 		// 处理true状态
 		if (isOpen) {
-			if (slidingType == SlidingType.Left) {
+			if (slidingType == layout_left) {
 				// 功能视图摆放方向---左边
 				left = horizontalDX;
-			} else if (slidingType == SlidingType.Right) {
+			} else if (slidingType == layout_right) {
 				// 功能视图摆放右边
 				left = -horizontalDX;
 			}
@@ -155,20 +172,20 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 		if (isOpen) {
 			// 打开状态
 			// 根据类型摆放
-			if (slidingType == SlidingType.Right) {
+			if (slidingType == layout_right) {
 				// 功能视图摆放在右边
 				left = getMeasuredWidth() - horizontalDX;
-			} else if (slidingType == SlidingType.Left) {
+			} else if (slidingType == layout_left) {
 				// 功能视图摆放在左边
 				left = 0;
 			}
 		} else {
 			// 这个判断目的：关闭状态
 			// 根据类型摆放
-			if (slidingType == SlidingType.Right) {
+			if (slidingType == layout_right) {
 				// 功能视图摆放在右边
 				left = rect.right;
-			} else if (slidingType == SlidingType.Left) {
+			} else if (slidingType == layout_left) {
 				// 功能视图摆放在左边
 				left = -horizontalDX;
 			}
@@ -241,7 +258,7 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 			if (child == contentView) {
 				// 是不是又分为了左边和右边
 				switch (slidingType) {
-				case Left:
+				case layout_left:
 					// 左边－（代表是FunctionView摆放在左边）
 					// ContentView滑动的范围（0～horizontalDX）
 					if (newLeft < 0) {
@@ -250,7 +267,7 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 						newLeft = horizontalDX;
 					}
 					break;
-				case Right:
+				case layout_right:
 					// 右边-（代表是FunctionView摆放在左边）
 					// //ContentView滑动的范围（-horizontalDX～0）
 					if (newLeft < -horizontalDX) {
@@ -263,7 +280,7 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 			} else if (child == functionView) {
 				// 当前拖拽是functionView
 				switch (slidingType) {
-				case Left:
+				case layout_left:
 					// 左边－（代表是FunctionView摆放在左边）
 					// 范围：-horizontalDX~0
 					if (newLeft < -horizontalDX) {
@@ -272,7 +289,7 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 						newLeft = 0;
 					}
 					break;
-				case Right:
+				case layout_right:
 					// 右边-（代表是FunctionView摆放在左边）
 					// 范围：屏幕宽度-horizontalDX至屏幕宽度
 					if (newLeft < contentViewWidth - horizontalDX) {
@@ -392,7 +409,7 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 	private void onContentViewReleased(float xvel, float yvel) {
 		// 第一步：判断摆放方向
 		switch (slidingType) {
-		case Left:// FunctionView摆放在左边
+		case layout_left:// FunctionView摆放在左边
 			// 根据速度取判断
 			if (xvel == 0) {
 				// 当前拖拽停下来了(需要判断拖拽停止之后，偏移量范围)
@@ -411,7 +428,7 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 				closeSlidingLayout(true);
 			}
 			break;
-		case Right:// FunctionView摆放在右边
+		case layout_right:// FunctionView摆放在右边
 			if (xvel == 0) {
 				// 右边的偏移量怎么计算（和左边相反）
 				if (contentView.getLeft() < -horizontalDX * 0.5f) {
@@ -518,7 +535,7 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 	private void onFunctionViewReleased(float xvel, float yvel) {
 		// 第一步：判断摆放方向
 		switch (slidingType) {
-		case Left:// FunctionView摆放在左边
+		case layout_left:// FunctionView摆放在左边
 			// 根据速度取判断
 			if (xvel == 0) {
 				// 当前拖拽停下来了(需要判断拖拽停止之后，偏移量范围)
@@ -536,7 +553,7 @@ public class SlidingItemLayout extends FrameLayout implements ISlidingLayout {
 				closeSlidingLayout(true);
 			}
 			break;
-		case Right:// FunctionView摆放在右边
+		case layout_right:// FunctionView摆放在右边
 			// 根据速度取判断
 			if (xvel == 0) {
 				// 当前拖拽停下来了(需要判断拖拽停止之后，偏移量范围)

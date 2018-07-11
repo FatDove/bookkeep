@@ -3,6 +3,7 @@ package com.wlw.bookkeeptool.editor_page;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -14,8 +15,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +29,10 @@ import com.jia.libui.CoverFlow.CoverFlowAdapter;
 import com.jia.libui.CoverFlow.CoverFlowViewPager;
 import com.jia.libui.CoverFlow.OnPageSelectListener;
 import com.jia.libui.MyControl.EmptyRecyclerView;
+import com.jia.libui.MyDialog.MyDialog;
 import com.wlw.bookkeeptool.R;
+import com.wlw.bookkeeptool.frist_page.fab_slide.FabScrollListener;
+import com.wlw.bookkeeptool.frist_page.fab_slide.HideShowScrollListener;
 import com.wlw.bookkeeptool.tableBean.menuBean;
 import com.wlw.bookkeeptool.utils.FileMananger;
 import com.wlw.bookkeeptool.utils.mWindowUtil;
@@ -124,10 +132,43 @@ public class see_and_editor_activity extends Activity {
              public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                  if (view.getId()==R.id.menu_show_item_edit){
                      openPopuWindow_edit((menuBean) adapter.getData().get(position));
+                 }else if (view.getId()==R.id.delete_view){
+                     openDialog((menuBean) adapter.getData().get(position),position);
                  }
              }
          });
      }
+
+    //打开弹窗
+    private void openDialog(final menuBean menuBean, final int position) {
+        MyDialog.Builde builder = new MyDialog.Builde(this);
+        builder.setMessage("您是否要删除此条内容？");
+        builder.setTitle("提示" );
+        builder.setPositiveButton("确定删除", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                delete_from_DB(menuBean,position);//上传接收状态 返回是否成功
+            }
+        });
+        builder.setNegativeButton("等等看", new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which){
+                //将最后提交的数据在这里保存以便使用
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+    //从数据库删除指定内容
+    private void delete_from_DB(menuBean menuBean, int position) {
+        int i = LitePal.deleteAll(menuBean.class, "foodid = ?", menuBean.getFoodid());
+        if (i>0){
+            Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
+            foodMenuShow_listAdapter.remove(position);
+            foodMenuShow_listAdapter.notifyDataSetChanged();
+        }else{
+            Toast.makeText(context, "删除失败", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     //打开PopuWindow 展示 列表
     private void openPopuWindow_add() {
@@ -216,6 +257,5 @@ public class see_and_editor_activity extends Activity {
 //
 //        }
     }
-
 
 }

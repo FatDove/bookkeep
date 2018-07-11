@@ -14,7 +14,6 @@ android {
         packagingOptions {
             exclude 'META-INF/rxjava.properties'  // 解决rxjava引入问题
         }
-
     }
     buildTypes {
         release {
@@ -53,6 +52,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'

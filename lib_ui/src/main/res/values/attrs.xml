@@ -96,4 +96,11 @@
         <!--<attr name="indicator_animator" format="reference" />-->
         <!--<attr name="indicator_animator_reverse" format="reference" />-->
     </declare-styleable>
+    <!--滑动item左右滑动-->
+    <declare-styleable name="MyFunctionViewLeft_right">
+        <attr name="my_layout_type">
+            <enum name="Left" value="0" />
+            <enum name="Right" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

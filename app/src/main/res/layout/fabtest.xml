@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:paddingRight="10dp"
+        android:paddingBottom="45dp"
+        android:paddingLeft="10dp"
+        app:menu_colorNormal="@color/colorAccent"
+        app:fab_colorPressed="@color/dark_blue"
+        android:src="@drawable/ic_delete2"
+        app:menu_labels_ellipsize="end"
+        app:menu_labels_singleLine="true"
+        app:menu_backgroundColor="#ccffffff">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/dark_blue"
+            android:src="@drawable/ic_delete2"
+            app:fab_size="mini"
+            app:fab_label="分享" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/dark_blue"
+            android:src="@drawable/ic_delete2"
+            app:fab_size="mini"
+            app:fab_label="上传" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/dark_blue"
+            android:src="@drawable/ic_delete2"
+            app:fab_size="mini"
+            app:fab_label="预览" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+</android.support.constraint.ConstraintLayout>

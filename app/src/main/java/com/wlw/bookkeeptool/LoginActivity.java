@@ -36,7 +36,7 @@ public class LoginActivity extends Activity {
         viewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, see_and_editor_activity.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
             }
         });
