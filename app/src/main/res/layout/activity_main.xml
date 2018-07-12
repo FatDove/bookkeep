@@ -75,24 +75,51 @@
             android:src="@mipmap/ic_launcher"
             android:layout_centerInParent="true" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_margin="25dp"
-            android:onClick="fabOnclick"
-            android:scaleType="center"
-            android:src="@drawable/ic_add_circle_48px"
-            app:backgroundTint="#ffffff"
-            app:borderWidth="0.0dip"
-            app:elevation="10.0dip"
-            app:fabSize="auto"
-            app:pressedTranslationZ="10.0dip"
-            app:rippleColor="#a6a6a6"
-            app:useCompatPadding="true"
-            tools:ignore="OnClick" />
+            android:paddingRight="10dp"
+            android:paddingBottom="45dp"
+            android:paddingLeft="10dp"
+            app:menu_icon="@drawable/ic_add_circle_48px"
+            app:menu_buttonSpacing="15dp"
+            app:menu_colorNormal="@color/white"
+            app:fab_colorPressed="@color/dark_blue"
+            app:menu_fab_size="normal"
+            android:src="@drawable/ic_add"
+            app:menu_labels_ellipsize="end"
+            app:menu_labels_singleLine="true"
+            app:menu_backgroundColor="#ccffffff">
+
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_work_out"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="50dp"
+                app:fab_colorNormal="@color/purple"
+                app:fab_colorPressed="@color/dark_blue"
+                android:src="@drawable/ic_work_out"
+                app:fabSize="auto"
+                app:fab_label="打烊收工"/>
+
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_order"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                app:fab_colorNormal="@color/dark_blue"
+                app:fab_colorPressed="@color/Yellow"
+                android:src="@drawable/ic_order_white"
+                android:padding="20dp"
+                app:fabSize="auto"
+                app:fab_label="下单" />
+
+        </com.github.clans.fab.FloatingActionMenu>
 
     </RelativeLayout>
 </LinearLayout>

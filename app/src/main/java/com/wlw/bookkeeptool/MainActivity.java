@@ -6,9 +6,9 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -25,12 +25,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.jia.libui.MyControl.EmptyRecyclerView;
 import com.jia.libui.banner.Banner;
 import com.jia.libui.banner.BannerConfig;
 import com.jia.libui.banner.Transformer;
 import com.jia.libui.banner.listener.OnBannerListener;
 import com.jia.libui.banner.loader.ImageLoader;
+import com.wlw.bookkeeptool.Order.OrderActivity;
+import com.wlw.bookkeeptool.editor_page.see_and_editor_activity;
 import com.wlw.bookkeeptool.frist_page.fab_slide.FabScrollListener;
 import com.wlw.bookkeeptool.frist_page.fab_slide.HideShowScrollListener;
 import com.wlw.bookkeeptool.frist_page.first_page_adapter;
@@ -42,8 +46,8 @@ import java.util.ArrayList;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 
-public class MainActivity extends AppCompatActivity implements OnBannerListener,HideShowScrollListener {
-
+public class MainActivity extends AppCompatActivity implements OnBannerListener, HideShowScrollListener, View.OnClickListener {
+    Context context;
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     private Banner banner;
@@ -51,18 +55,22 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
     private Button record;
     private TextView tv;
     private EmptyRecyclerView todayOrder_RV;
-    private FloatingActionButton fab;
+    private FloatingActionMenu fab;
     private LinearLayout lay1;
     private ImageView emptyIv;
     private ArrayList<today_order_bean> datalist;
     private first_page_adapter first_page_adapter;
+    private EmptyRecyclerView todayOrder;
+    private FloatingActionButton fabWorkOut;
+    private FloatingActionButton fabOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        File file = new File(Environment.getExternalStorageDirectory()+"/"+MyApplication.AppImgFile);
-        if (!file.exists()){
+        context =this;
+        File file = new File(Environment.getExternalStorageDirectory() + "/" + MyApplication.AppImgFile);
+        if (!file.exists()) {
             file.mkdirs();
         }
 //        showShare(); //分享
@@ -77,8 +85,43 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
         initBanner();
         initData();
         initView();
+        initEvent();
     }
-//  首次进入添加数据
+
+    private void initView() {
+        editor = (Button) findViewById(R.id.editor);
+        record = (Button) findViewById(R.id.record);
+        tv = (TextView) findViewById(R.id.tv);
+        todayOrder_RV = (EmptyRecyclerView) findViewById(R.id.today_order);
+
+        emptyIv = (ImageView) findViewById(R.id.empty_iv);
+        todayOrder_RV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        //        给recycleview添加 滑动监听
+        todayOrder_RV.addOnScrollListener(new FabScrollListener(this));
+        todayOrder_RV.setEmptyView(emptyIv);
+        first_page_adapter = new first_page_adapter(this, datalist);
+        first_page_adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(MainActivity.this, position + "?", Toast.LENGTH_SHORT).show();
+            }
+        });
+        todayOrder_RV.setAdapter(first_page_adapter);
+        todayOrder = (EmptyRecyclerView) findViewById(R.id.today_order);
+        fab = (FloatingActionMenu) findViewById(R.id.fab);
+        fab.setClosedOnTouchOutside(true);
+        fabWorkOut = (FloatingActionButton) findViewById(R.id.fab_work_out);
+        fabOrder = (FloatingActionButton) findViewById(R.id.fab_order);
+    }
+
+    private void initEvent() {
+        fabWorkOut.setOnClickListener(this);
+        fabOrder.setOnClickListener(this);
+        editor.setOnClickListener(this);
+        record.setOnClickListener(this);
+    }
+
+    //  首次进入添加数据
     private void initData() {
         datalist = new ArrayList<>();
         datalist.add(new today_order_bean("1"));
@@ -89,8 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
         datalist.add(new today_order_bean("6"));
         datalist.add(new today_order_bean("7"));
     }
-
-    private void initBanner()  {
+    private void initBanner() {
         banner = (Banner) findViewById(R.id.banner);
         //放图片地址的集合
         list_path = new ArrayList<>();
@@ -127,8 +169,25 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
                 //必须最后调用的方法，启动轮播图。
                 .start();
     }
-
-    private void showShare(){
+    @Override
+    public void onClick(View v) {
+          switch (v.getId())
+          {
+              case R.id.fab_work_out:
+                  break;
+              case R.id.fab_order:
+                  Intent intent2 = new Intent(context,OrderActivity.class);
+                  startActivity(intent2);
+                  break;
+              case R.id.record:
+                  break;
+              case R.id.editor:
+                  Intent intent4 = new Intent(context,see_and_editor_activity.class);
+                  startActivity(intent4);
+                  break;
+          }
+    }
+    private void showShare() {
         String Str = "我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-22我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-33";
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
@@ -149,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
         oks.show(this);
 
     }
-
 
 
     //按钮的缩放动画
@@ -183,38 +241,23 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
         Log.i("tag", "你点了第" + position + "张轮播图");
     }
 
-    private void initView() {
-        editor = (Button) findViewById(R.id.editor);
-        record = (Button) findViewById(R.id.record);
-        tv = (TextView) findViewById(R.id.tv);
-        todayOrder_RV = (EmptyRecyclerView) findViewById(R.id.today_order);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        emptyIv = (ImageView) findViewById(R.id.empty_iv);
-        todayOrder_RV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        //        给recycleview添加 滑动监听
-        todayOrder_RV.addOnScrollListener(new FabScrollListener(this));
-        todayOrder_RV.setEmptyView(emptyIv);
-        first_page_adapter = new first_page_adapter(this, datalist);
-        first_page_adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(MainActivity.this, position+"?", Toast.LENGTH_SHORT).show();
-            }
-        });
-        todayOrder_RV.setAdapter(first_page_adapter);
-    }
+
     @Override
-    public void Hide(){
+    public void Hide() {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) fab.getLayoutParams();
         RelativeLayout.LayoutParams s = (RelativeLayout.LayoutParams) fab.getLayoutParams();
-        Log.i("fanjava", s.bottomMargin+"||"+ layoutParams.bottomMargin);
-        fab.animate().translationY(fab.getHeight()+layoutParams.bottomMargin).setInterpolator(new AccelerateInterpolator(3));
+        Log.i("fanjava", s.bottomMargin + "||" + layoutParams.bottomMargin);
+        fab.close(true);
+        fab.animate().translationY(fab.getHeight() + layoutParams.bottomMargin).setInterpolator(new AccelerateInterpolator(3));
     }
+
     @Override
     public void Show() {
         RelativeLayout.LayoutParams s = (RelativeLayout.LayoutParams) fab.getLayoutParams();
         fab.animate().translationY(0).setInterpolator(new DecelerateInterpolator(3));
     }
+
+
 
     //自定义的图片加载器
     private class MyLoader extends ImageLoader {

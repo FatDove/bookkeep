@@ -124,7 +124,7 @@ public class see_and_editor_activity extends Activity {
                  ObjectAnimator ra = ObjectAnimator.ofFloat(v,"rotation", 0f, 180f);
                  ra.setDuration(1000);
                  ra.start();
-                 openPopuWindow_add();
+                 openPopuWindow_add(arrTitle);
              }
          });
          foodMenuShow_listAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -171,8 +171,9 @@ public class see_and_editor_activity extends Activity {
     }
 
     //打开PopuWindow 展示 列表
-    private void openPopuWindow_add() {
-        seeEditorPopupWindow = new SeeEditorPopupWindow(context,foodtype);
+    private void openPopuWindow_add(String[] arrTitle) {
+         int type =  Integer.parseInt(foodtype);
+        seeEditorPopupWindow = new SeeEditorPopupWindow(context,foodtype,arrTitle[type]);
         seeEditorPopupWindow.setAnimationStyle(R.style.mine_popupwindow_anim);//设置出现的动画
         seeEditorPopupWindow.showAsDropDown(addMenu,0,0);//设置显示位置
         mWindowUtil.lightoff(activity);
@@ -183,7 +184,7 @@ public class see_and_editor_activity extends Activity {
             }
         });
     }
-    //打开PopuWindow 展示 列表
+    //打开PopuWindow 修改 列表
     private void openPopuWindow_edit(menuBean menuBean){
         seeEditorPopupWindow = new SeeEditorPopupWindow(context,menuBean);
         seeEditorPopupWindow.setAnimationStyle(R.style.mine_popupwindow_anim);//设置出现的动画

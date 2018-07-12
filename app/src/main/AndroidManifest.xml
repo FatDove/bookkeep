@@ -31,7 +31,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestFabActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +39,9 @@
             </intent-filter>
         </activity>
 
-        <!--<activity android:name=".editor_page.editor_activity"/>-->
+        <activity android:name=".editor_page.editor_activity"/>
+
+        <activity android:name=".Order.OrderActivity"/>
         <!--主页面-->
         <activity android:name=".MainActivity"/>
         <!--查看与编辑页面-->

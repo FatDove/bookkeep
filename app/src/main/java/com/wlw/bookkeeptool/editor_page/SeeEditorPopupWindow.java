@@ -75,12 +75,14 @@ public class SeeEditorPopupWindow extends PopupWindow {
     private static final int isUpdata = 4;
     private menuBean menuBean;
     private String local_imgpath;
+    private String type_name;
 
 
     //添加时进来的构造
-    public SeeEditorPopupWindow(Context context, String food_type) {
+    public SeeEditorPopupWindow(Context context,String food_type,String type_name) {
         this.context = context;
         this.food_type = food_type;
+        this.type_name = type_name;
         //制定popupwindow的宽高
         calWidthAndHeight(context);
         popu_config(context);
@@ -256,6 +258,7 @@ public class SeeEditorPopupWindow extends PopupWindow {
             menuBean.setFoodimg_path(local_imgpath);
             menuBean.setFoodname(food_name.getText() + "");
             menuBean.setFoodtype(food_type + "");
+            menuBean.setTypename(type_name+"");
             menuBean.setPrice(UnitPrice.getText() + "");
             menuBean.setUsername("嘟小四");
             if (menuBean.save()) {

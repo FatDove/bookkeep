@@ -28,14 +28,14 @@
 
     <ImageView
         android:id="@+id/add_menu"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/cover"
         android:layout_marginRight="20dp"
         android:layout_marginTop="-20dp"
-        android:background="@drawable/button_border_rice_white2"
-        android:foreground="@drawable/ic_add_circle_48px"
+        android:background="@mipmap/ic_add_bg"
+        android:foreground="@mipmap/ic_add"
 
         />
 </RelativeLayout>

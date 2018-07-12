@@ -17,6 +17,7 @@ public class menuBean extends LitePalSupport {
    private String foodid;
    @Column(nullable = false)
    private String foodtype;
+   private String typename;
    private String foodimg_path;
    @Column(nullable = false)
    private String price;
@@ -86,6 +87,14 @@ public class menuBean extends LitePalSupport {
       this.id = id;
    }
 
+   public String getTypename() {
+      return typename == null ? "" : typename;
+   }
+
+   public void setTypename(String typename) {
+      this.typename = typename;
+   }
+
    @Override
    public String toString() {
       return "menuBean{" +
@@ -94,6 +103,7 @@ public class menuBean extends LitePalSupport {
               ", foodname='" + foodname + '\'' +
               ", foodid='" + foodid + '\'' +
               ", foodtype='" + foodtype + '\'' +
+              ", typename='" + typename + '\'' +
               ", foodimg_path='" + foodimg_path + '\'' +
               ", price='" + price + '\'' +
               ", description='" + description + '\'' +

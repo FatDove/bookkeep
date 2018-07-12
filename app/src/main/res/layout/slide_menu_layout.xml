@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/button_border_white"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:fitsSystemWindows="true"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    android:id="@+id/slide_menu"
+    >
+        <ListView
+            android:id="@+id/img_list"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="5dp"
+            android:background="@drawable/button_border_white"
+            >
+        </ListView>
+        <TextView
+            android:text="热"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/img_list"
+            android:layout_marginLeft="70dp"
+            android:id="@+id/type_show_id"
+            android:background="@color/orange"
+            android:layout_width="60dp"
+            android:layout_height="50dp"/>
+        <com.jia.libui.MyControl.EmptyRecyclerView
+            android:layout_toRightOf="@+id/img_list"
+            android:layout_below="@id/type_show_id"
+            android:id="@+id/show_menu_rv"
+            android:layout_width="210dp"
+            android:layout_height="match_parent">
+
+        </com.jia.libui.MyControl.EmptyRecyclerView>
+
+</RelativeLayout>
