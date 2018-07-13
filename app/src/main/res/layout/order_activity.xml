@@ -58,7 +58,7 @@
                   android:layout_marginTop="4dp"
                   android:layout_marginLeft="4dp"
                   android:layout_marginRight="4dp"
-                  android:layout_marginBottom="50dp"
+                  android:layout_marginBottom="60dp"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
               </com.jia.libui.MyControl.EmptyRecyclerView>
@@ -68,7 +68,7 @@
                   android:textSize="@dimen/textSize2"
                   android:layout_alignParentBottom="true"
                   android:layout_width="match_parent"
-                  android:layout_height="50dp" />
+                  android:layout_height="60dp" />
       </RelativeLayout>
       <!--侧边栏-->
        <include layout="@layout/slide_menu_layout"/>

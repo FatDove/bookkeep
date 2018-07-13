@@ -15,8 +15,19 @@ public class everyDishTable extends LitePalSupport {
    String username;
    String foodname;
    int foodCount; //数量
-   String totalPrice_dish; //一道菜的总和 比如 5个鸡蛋的总价
+   float totalPrice_dish; //一道菜的总和 比如 5个鸡蛋的总价
+   float unitPrice_dish; //一道菜的总和 比如 5个鸡蛋的总价
    Date startBillTime; //下单时间
+
+   public everyDishTable(String username, String foodname, int foodCount, float totalPrice_dish, float unitPrice_dish, Date startBillTime) {
+      this.username = username;
+      this.foodname = foodname;
+      this.foodCount = foodCount;
+      this.totalPrice_dish = totalPrice_dish;
+      this.unitPrice_dish = unitPrice_dish;
+      this.startBillTime = startBillTime;
+   }
+
 
    public String getUsername() {
       return username == null ? "" : username;
@@ -42,12 +53,20 @@ public class everyDishTable extends LitePalSupport {
       this.foodCount = foodCount;
    }
 
-   public String getTotalPrice_dish() {
-      return totalPrice_dish == null ? "" : totalPrice_dish;
+   public float getTotalPrice_dish() {
+      return totalPrice_dish;
    }
 
-   public void setTotalPrice_dish(String totalPrice_dish) {
+   public void setTotalPrice_dish(float totalPrice_dish) {
       this.totalPrice_dish = totalPrice_dish;
+   }
+
+   public float getUnitPrice_dish() {
+      return unitPrice_dish;
+   }
+
+   public void setUnitPrice_dish(float unitPrice_dish) {
+      this.unitPrice_dish = unitPrice_dish;
    }
 
    public int getId() {

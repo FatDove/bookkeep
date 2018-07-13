@@ -15,10 +15,12 @@ public class everyDeskTable  extends LitePalSupport {
    @Column(unique = true)
    private int id;
    String username;
-   String deskNum;   //顾客所在的桌子号
-   String totalPrice_desk; // 这一桌的总价
+   String deskNum; //顾客所在的桌子号
+   float totalPrice_desk; // 这一桌的总价
    Date startBillTime; //下单时间
    Date endBillTime;  //每桌结账时间
+   @Column(defaultValue = "0")//指定字段默认值 0 代表没打样 ，1表示打过样的记录
+   private String isCheckout; //买单结账
    private List<everyDishTable> everyDeskTableList = new ArrayList<everyDishTable>(); //everyDishTable 表 与 everyDeskTable 表  是 多对一的关系
 
    public String getUsername() {
@@ -37,11 +39,11 @@ public class everyDeskTable  extends LitePalSupport {
       this.deskNum = deskNum;
    }
 
-   public String getTotalPrice_desk() {
-      return totalPrice_desk == null ? "" : totalPrice_desk;
+   public float getTotalPrice_desk() {
+      return totalPrice_desk;
    }
 
-   public void setTotalPrice_desk(String totalPrice_desk) {
+   public void setTotalPrice_desk(float totalPrice_desk) {
       this.totalPrice_desk = totalPrice_desk;
    }
 
@@ -67,6 +69,14 @@ public class everyDeskTable  extends LitePalSupport {
 
    public void setEndBillTime(Date endBillTime) {
       this.endBillTime = endBillTime;
+   }
+
+   public String getIs_shutDown() {
+      return isCheckout == null ? "" : isCheckout;
+   }
+
+   public void setIs_shutDown(String isCheckout) {
+      this.isCheckout = isCheckout;
    }
 
    public List<everyDishTable> getEveryDeskTableList() {
