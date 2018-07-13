@@ -171,21 +171,21 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
     }
     @Override
     public void onClick(View v) {
-          switch (v.getId())
-          {
-              case R.id.fab_work_out:
-                  break;
-              case R.id.fab_order:
-                  Intent intent2 = new Intent(context,OrderActivity.class);
-                  startActivity(intent2);
-                  break;
-              case R.id.record:
-                  break;
-              case R.id.editor:
-                  Intent intent4 = new Intent(context,see_and_editor_activity.class);
-                  startActivity(intent4);
-                  break;
-          }
+        switch (v.getId())
+        {
+            case R.id.fab_work_out:
+                break;
+            case R.id.fab_order:
+                Intent intent2 = new Intent(context,OrderActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.record:
+                break;
+            case R.id.editor:
+                Intent intent4 = new Intent(context,see_and_editor_activity.class);
+                startActivity(intent4);
+                break;
+        }
     }
     private void showShare() {
         String Str = "我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-22我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-我是分享文本-33";
@@ -256,9 +256,6 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
         RelativeLayout.LayoutParams s = (RelativeLayout.LayoutParams) fab.getLayoutParams();
         fab.animate().translationY(0).setInterpolator(new DecelerateInterpolator(3));
     }
-
-
-
     //自定义的图片加载器
     private class MyLoader extends ImageLoader {
         @Override
