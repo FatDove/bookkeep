@@ -105,7 +105,7 @@ public class SeeEditorPopupWindow extends PopupWindow {
         Glide.with(context).load(menuBean.getFoodimg_path()).error(R.drawable.no_banner).diskCacheStrategy(DiskCacheStrategy.NONE)
                 // .override(100, 100)
                 .into(add_food_img);
-        UnitPrice.setText(menuBean.getPrice());
+        UnitPrice.setText(menuBean.getPrice()+"");
         describe.setText(menuBean.getDescription());
         submit_edit.setText("修改完成");
         submit_edit.setBackground(context.getResources().getDrawable(R.drawable.button_border_yellow));
@@ -219,7 +219,7 @@ public class SeeEditorPopupWindow extends PopupWindow {
             menuBean update_menu = new menuBean();
             update_menu.setFoodname(food_name.getText().toString());
             update_menu.setFoodimg_path(local_imgpath);
-            update_menu.setPrice(UnitPrice.getText().toString());
+            update_menu.setPrice(Float.parseFloat(UnitPrice.getText().toString()));
             update_menu.setDescription(describe.getText().toString());
             int i = update_menu.updateAll("foodid = ?", menuBean.getFoodid());
             if (i > 0) {
@@ -230,7 +230,7 @@ public class SeeEditorPopupWindow extends PopupWindow {
             } else {
                 Toast.makeText(context, "修改失败", Toast.LENGTH_SHORT).show();
             }
-        } else if (insert_or_updata == isInsert) {
+        } else if (insert_or_updata == isInsert){
             //判断是否包含
             if (isContainFood()) {
                 nameflag = true;
@@ -259,7 +259,7 @@ public class SeeEditorPopupWindow extends PopupWindow {
             menuBean.setFoodname(food_name.getText() + "");
             menuBean.setFoodtype(food_type + "");
             menuBean.setTypename(type_name+"");
-            menuBean.setPrice(UnitPrice.getText() + "");
+            menuBean.setPrice(Float.parseFloat(UnitPrice.getText().toString()));
             menuBean.setUsername("嘟小四");
             if (menuBean.save()) {
                 Toast.makeText(context, menuBean.getId() + "测试", Toast.LENGTH_SHORT).show();

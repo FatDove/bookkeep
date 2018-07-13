@@ -14,6 +14,7 @@ import litepal.LitePalApplication;
 public class MyApplication extends LitePalApplication {
     String string ="";
     public static String AppImgFile ="XiaoZhuShou";
+    public static String UserName ="嘟小四";
 
     @Override
     public void onCreate() {

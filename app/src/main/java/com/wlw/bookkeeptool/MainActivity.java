@@ -39,11 +39,14 @@ import com.wlw.bookkeeptool.frist_page.fab_slide.FabScrollListener;
 import com.wlw.bookkeeptool.frist_page.fab_slide.HideShowScrollListener;
 import com.wlw.bookkeeptool.frist_page.first_page_adapter;
 import com.wlw.bookkeeptool.frist_page.today_order_bean;
+import com.wlw.bookkeeptool.tableBean.everyDeskTable;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import litepal.LitePal;
 
 
 public class MainActivity extends AppCompatActivity implements OnBannerListener, HideShowScrollListener, View.OnClickListener {
@@ -58,11 +61,11 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
     private FloatingActionMenu fab;
     private LinearLayout lay1;
     private ImageView emptyIv;
-    private ArrayList<today_order_bean> datalist;
     private first_page_adapter first_page_adapter;
     private EmptyRecyclerView todayOrder;
     private FloatingActionButton fabWorkOut;
     private FloatingActionButton fabOrder;
+    private ArrayList<everyDeskTable> everyDeskTablelist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
         //        给recycleview添加 滑动监听
         todayOrder_RV.addOnScrollListener(new FabScrollListener(this));
         todayOrder_RV.setEmptyView(emptyIv);
-        first_page_adapter = new first_page_adapter(this, datalist);
+        first_page_adapter = new first_page_adapter(this, everyDeskTablelist);
         first_page_adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -123,14 +126,9 @@ public class MainActivity extends AppCompatActivity implements OnBannerListener,
 
     //  首次进入添加数据
     private void initData() {
-        datalist = new ArrayList<>();
-        datalist.add(new today_order_bean("1"));
-        datalist.add(new today_order_bean("2"));
-        datalist.add(new today_order_bean("3"));
-        datalist.add(new today_order_bean("4"));
-        datalist.add(new today_order_bean("5"));
-        datalist.add(new today_order_bean("6"));
-        datalist.add(new today_order_bean("7"));
+        everyDeskTablelist = (ArrayList<everyDeskTable>) LitePal.where("isCheckout == ?"  ,"0").find(everyDeskTable.class);
+        int size = everyDeskTablelist.size();
+
     }
     private void initBanner() {
         banner = (Banner) findViewById(R.id.banner);

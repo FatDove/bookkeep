@@ -20,7 +20,7 @@ public class menuBean extends LitePalSupport {
    private String typename;
    private String foodimg_path;
    @Column(nullable = false)
-   private String price;
+   private float price;
    private String description;
 
    public String getUsername() {
@@ -63,11 +63,11 @@ public class menuBean extends LitePalSupport {
       this.foodimg_path = foodimg_path;
    }
 
-   public String getPrice() {
-      return price == null ? "" : price;
+   public float getPrice() {
+      return  price;
    }
 
-   public void setPrice(String price) {
+   public void setPrice(float price) {
       this.price = price;
    }
 
