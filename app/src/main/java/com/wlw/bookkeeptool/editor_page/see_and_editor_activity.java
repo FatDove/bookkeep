@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -15,12 +14,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,24 +26,17 @@ import com.jia.libui.CoverFlow.OnPageSelectListener;
 import com.jia.libui.MyControl.EmptyRecyclerView;
 import com.jia.libui.MyDialog.MyDialog;
 import com.wlw.bookkeeptool.R;
-import com.wlw.bookkeeptool.frist_page.fab_slide.FabScrollListener;
-import com.wlw.bookkeeptool.frist_page.fab_slide.HideShowScrollListener;
 import com.wlw.bookkeeptool.tableBean.menuBean;
-import com.wlw.bookkeeptool.utils.FileMananger;
 import com.wlw.bookkeeptool.utils.mWindowUtil;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 import litepal.LitePal;
-import litepal.tablemanager.Connector;
 
 /**
  * Created by wlw on 2018/7/6.
@@ -83,7 +71,6 @@ public class see_and_editor_activity extends Activity {
         initView();
         initdata(foodtype);
         initevent();
-
     }
 
     public void initdata(String foodtype){

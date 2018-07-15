@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.jia.libui.CoverFlow.CoverFlowViewPager
+        android:id="@+id/cover"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@mipmap/vp_bg"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" />
+
+    <com.jia.libui.MyControl.EmptyRecyclerView
+        android:id="@+id/see_editor_rv"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/img" />
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@+id/cover"
+        android:background="@color/gray" />
+
+    <ImageView
+        android:id="@+id/add_menu"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/cover"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="-20dp"
+        android:background="@mipmap/ic_add_bg"
+        android:foreground="@mipmap/ic_add"
+        />
+</RelativeLayout>

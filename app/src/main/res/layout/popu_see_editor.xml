@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="3dp"
+    android:background="@drawable/button_border_white"
+    >
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageButton
+        android:id="@+id/add_food_img"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@mipmap/add_img_def"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+     <TextView
+         android:id="@+id/ET1"
+         android:text="名称:"
+         android:textSize="@dimen/textSize5"
+         android:textColor="@color/black"
+         android:layout_marginTop="20dp"
+         android:layout_marginLeft="10dp"
+         android:layout_toRightOf="@+id/add_food_img"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/food_name"
+        android:hint="输入名称"
+        android:textColorHint="@color/cyan"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/ET1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/ET2"
+        android:text="单价:"
+        android:textSize="@dimen/textSize5"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/add_food_img"
+        android:layout_below="@+id/ET1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/UnitPrice"
+        android:hint="输入价格(元)"
+        android:inputType="number|numberDecimal"
+        android:textColorHint="@color/cyan"
+        android:textSize="25sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/ET2"
+        android:layout_below="@+id/ET1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv1"
+        android:text="介绍："
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/add_food_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/describe"
+        android:hint="输入相关描述（可不填）"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:maxLines="3"
+        android:textColorHint="@color/cyan"
+        android:textSize="25sp"
+        android:layout_below="@id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp" />
+    </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/submit_edit"
+        android:background="@drawable/button_border_cyan"
+        android:text="添加完成"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

@@ -19,7 +19,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,13 +26,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wlw.bookkeeptool.R;
-import com.wlw.bookkeeptool.tableBean.everyDayTable;
-import com.wlw.bookkeeptool.tableBean.everyDishTable;
 import com.wlw.bookkeeptool.tableBean.menuBean;
 import com.wlw.bookkeeptool.utils.FileMananger;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -114,7 +110,7 @@ public class SeeEditorPopupWindow extends PopupWindow {
 
 
     private void popu_config(Context context) {
-        mConvertView = LayoutInflater.from(context).inflate(R.layout.see_editor_popu, null);
+        mConvertView = LayoutInflater.from(context).inflate(R.layout.popu_see_editor, null);
         //PopupWindow基本属性设置-----↓↓↓↓↓↓↓↓↓↓
         setContentView(mConvertView);
         setWidth(mWidth);

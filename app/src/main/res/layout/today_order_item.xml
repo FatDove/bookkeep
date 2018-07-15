@@ -1,61 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
     >
-    <RelativeLayout
-        android:layout_margin="5dp"
+    <LinearLayout
+        android:background="@drawable/button_border_white"
+
         android:layout_width="match_parent"
-        android:layout_height="90dp">
-
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
         <TextView
-            android:id="@+id/dest_num"
-            android:text="9号桌"
+            android:id="@+id/desk_num"
+            android:text="xxx"
             android:background="@drawable/button_border_cyan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="25dp" />
         <TextView
-            android:id="@+id/tv1"
-            android:layout_toLeftOf="@+id/now_Price"
-            android:text="使用"
-            android:background="@drawable/button_border_cyan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/place_order_time"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="XXX" />
+
         <TextView
             android:id="@+id/now_Price"
             android:layout_alignParentRight="true"
-            android:text="200.5"
+            android:text="xxx"
+            android:textSize="15sp"
             android:layout_marginRight="10dp"
             android:background="@drawable/button_border_cyan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="25dp"/>
 
-         <TextView
-             android:id="@+id/menu_describe"
-             android:text="描述111111111111111111111111111111111111111111122222222222222222222222222222222222222222222222222233333333333333333333333333333333333333"
-             android:maxLines="3"
-             android:ellipsize="end"
-             android:layout_below="@+id/dest_num"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/tv2"
-            android:text="描述"
-            android:layout_below="@+id/menu_describe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/place_order_time"
-            android:text="描述"
-            android:layout_below="@+id/menu_describe"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/menu_describe"
+        android:text="描述111111111111111111111111111111111111111111122222222222222222222222222222222222222222222222222233333333333333333333333333333333333333"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_below="@+id/now_Price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="20dp"
+        />
+
+</LinearLayout>

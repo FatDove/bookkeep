@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white"/>
+    <corners android:topLeftRadius="@dimen/radius_lv2"
+        android:topRightRadius="@dimen/radius_lv2"
+        />
+    <stroke android:color="@color/gray"  android:width="2px"
+        />
+    <!--//或者将这段换成下面这个也可以达到效果-->
+    <!--<corners android:radius="8dp"/>-->
+</shape>

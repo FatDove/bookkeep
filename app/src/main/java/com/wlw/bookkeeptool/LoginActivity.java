@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.jia.libutils.SettingUtil;
-import com.wlw.bookkeeptool.editor_page.see_and_editor_activity;
+import com.wlw.bookkeeptool.frist_page.MainActivity;
 
 /**
  * Created by wlw on 2018/7/3.
