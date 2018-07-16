@@ -2,10 +2,16 @@ package com.wlw.bookkeeptool.frist_page.fragment;
 
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,9 +33,13 @@ import com.jia.libui.MyDialog.MyDialog;
 import com.wlw.bookkeeptool.R;
 import com.wlw.bookkeeptool.editor_page.FoodMenuShow_listAdapter;
 import com.wlw.bookkeeptool.editor_page.SeeEditorPopupWindow;
+import com.wlw.bookkeeptool.frist_page.mlistener.Photo_Result_Listener;
 import com.wlw.bookkeeptool.tableBean.menuBean;
 import com.wlw.bookkeeptool.utils.mWindowUtil;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,7 +125,7 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
     //打开PopuWindow 展示 列表
     private void openPopuWindow_add(String[] arrTitle) {
         int type =  Integer.parseInt(foodtype);
-        seeEditorPopupWindow = new SeeEditorPopupWindow(getActivity(),foodtype,arrTitle[type]);
+        seeEditorPopupWindow = new SeeEditorPopupWindow(this,foodtype,arrTitle[type]);
         seeEditorPopupWindow.setAnimationStyle(R.style.mine_popupwindow_anim);//设置出现的动画
         seeEditorPopupWindow.showAsDropDown(addMenu,0,0);//设置显示位置
         mWindowUtil.lightoff(getActivity());
@@ -128,7 +138,7 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
     }
     //打开PopuWindow 修改 列表
     private void openPopuWindow_edit(menuBean menuBean){
-        seeEditorPopupWindow = new SeeEditorPopupWindow(getActivity(),menuBean);
+        seeEditorPopupWindow = new SeeEditorPopupWindow(this,menuBean);
         seeEditorPopupWindow.setAnimationStyle(R.style.mine_popupwindow_anim);//设置出现的动画
         seeEditorPopupWindow.showAsDropDown(addMenu,0,0);//设置显示位置
         mWindowUtil.lightoff(getActivity());
@@ -139,6 +149,11 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
             }
         });
     }
+    public void bitmap_to_popu(Bitmap bitmap){
+        seeEditorPopupWindow.set_img_to_popu(bitmap);
+    }
+
+
     //打开弹窗
     private void openDialog(final menuBean menuBean, final int position) {
         MyDialog.Builde builder = new MyDialog.Builde(getActivity());
@@ -194,8 +209,6 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
 
     }
 
-
-
     private void showTapTarget() {
 //        if (!SPUtils.getInstance().getBoolean(SHOW_TAP_TARGET)) {
         if (true) {
@@ -234,7 +247,6 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
                                     .transparentTarget(false)
                                     .targetRadius(30).icon(getActivity().getResources().getDrawable(R.drawable.es_icon_qq))).start();
 
-//
 //            TapTargetView.showFor(getActivity(),
 //                    TapTarget.forView(view.findViewById(R.id.iv_channel_add), "点击这里，添加频道", "66666666666666666")
 //                            .outerCircleColor(R.color.colorAccent)
@@ -255,6 +267,10 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
 //                    .icon(getActivity().getResources().getDrawable(R.drawable.es_icon_qq));
             SPUtils.getInstance().put(SHOW_TAP_TARGET, true);
         }
-
     }
+
+//    @Override
+//    public void toBitmap(Bitmap bitmap) {
+//        Toast.makeText(getActivity(), "图片图片", Toast.LENGTH_SHORT).show();
+////    }
 }

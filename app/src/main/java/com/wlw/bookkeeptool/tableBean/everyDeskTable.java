@@ -21,6 +21,8 @@ public class everyDeskTable  extends LitePalSupport {
    Date endBillTime;  //每桌结账时间
    @Column(defaultValue = "0")//指定字段默认值 0 代表没打样 ，1表示打过样的记录
    private String isCheckout; //买单结账
+   @Column(defaultValue = "0")//指定字段默认值 0 代表没打样 ，1表示打过样的记录
+   private String isEndwork; //打烊了么
    private List<everyDishTable> everyDeskTableList = new ArrayList<everyDishTable>(); //everyDishTable 表 与 everyDeskTable 表  是 多对一的关系
 
    public String getUsername() {
@@ -77,6 +79,22 @@ public class everyDeskTable  extends LitePalSupport {
 
    public void setIs_shutDown(String isCheckout) {
       this.isCheckout = isCheckout;
+   }
+
+   public String getIsCheckout() {
+      return isCheckout == null ? "" : isCheckout;
+   }
+
+   public void setIsCheckout(String isCheckout) {
+      this.isCheckout = isCheckout;
+   }
+
+   public String getIsEndwork() {
+      return isEndwork == null ? "" : isEndwork;
+   }
+
+   public void setIsEndwork(String isEndwork) {
+      this.isEndwork = isEndwork;
    }
 
    public List<everyDishTable> getEveryDeskTableList() {

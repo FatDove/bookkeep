@@ -106,6 +106,7 @@ public class OrderActivity extends Activity {
     }
 
     private void initView() {
+        
         title = (TextView) findViewById(R.id.title);
         fabSelectMenu = (FloatingActionButton) findViewById(R.id.fab_select_menu);
         desk = (ImageView) findViewById(R.id.desk);
@@ -139,6 +140,8 @@ public class OrderActivity extends Activity {
                 Date endBillTime;  //每桌结账时间
                 String is_shutDown;
 //                计算这一单的总价
+
+
                 float allMenuPrice = 0.0f;
                 everyDeskTable everyDeskTable = new everyDeskTable();
                 for (int i = 0; i < superMenu_rv_adapter.getData().size(); i++) {

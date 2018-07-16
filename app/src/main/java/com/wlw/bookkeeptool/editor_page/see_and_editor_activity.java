@@ -160,7 +160,7 @@ public class see_and_editor_activity extends Activity {
     //打开PopuWindow 展示 列表
     private void openPopuWindow_add(String[] arrTitle) {
          int type =  Integer.parseInt(foodtype);
-        seeEditorPopupWindow = new SeeEditorPopupWindow(context,foodtype,arrTitle[type]);
+//        seeEditorPopupWindow = new SeeEditorPopupWindow(context,foodtype,arrTitle[type]);
         seeEditorPopupWindow.setAnimationStyle(R.style.mine_popupwindow_anim);//设置出现的动画
         seeEditorPopupWindow.showAsDropDown(addMenu,0,0);//设置显示位置
         mWindowUtil.lightoff(activity);
@@ -173,7 +173,7 @@ public class see_and_editor_activity extends Activity {
     }
     //打开PopuWindow 修改 列表
     private void openPopuWindow_edit(menuBean menuBean){
-        seeEditorPopupWindow = new SeeEditorPopupWindow(context,menuBean);
+//        seeEditorPopupWindow = new SeeEditorPopupWindow(context,menuBean);
         seeEditorPopupWindow.setAnimationStyle(R.style.mine_popupwindow_anim);//设置出现的动画
         seeEditorPopupWindow.showAsDropDown(addMenu,0,0);//设置显示位置
         mWindowUtil.lightoff(activity);

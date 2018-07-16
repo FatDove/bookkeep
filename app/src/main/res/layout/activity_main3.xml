@@ -219,7 +219,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:fab_colorNormal="@color/dark_blue"
-            app:fab_colorPressed="@color/Yellow"
+            app:fab_colorPressed="@color/yellow"
             android:src="@drawable/ic_order_white"
             android:padding="20dp"
             app:fabSize="auto"

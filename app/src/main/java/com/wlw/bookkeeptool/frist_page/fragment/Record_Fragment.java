@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.SPUtils;
@@ -49,6 +50,21 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
 
     }
 
+    /**
+     * 每次切换fragment都要刷新调用的方法 onCreateAnimation
+     */
+//    @Override
+//    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+//        //   进入当前Fragment
+//        if (enter && !isGetData) {
+//            isGetData = true;
+//            //   这里可以做网络请求或者需要的数据刷新操作
+////            GetData();
+//        } else {
+//            isGetData = false;
+//        }
+//        return super.onCreateAnimation(transit, enter, nextAnim);
+//    }
 
 
     private void showTapTarget() {

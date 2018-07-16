@@ -3,40 +3,132 @@ package com.wlw.bookkeeptool.frist_page.fragment;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.jia.base.BaseFragment;
 import com.jia.base.BasePresenter;
+import com.jia.libui.MyControl.EmptyRecyclerView;
+import com.jia.libui.Navigation.impl.ChatNavigation;
+import com.jia.libutils.WindowUtils;
 import com.wlw.bookkeeptool.R;
+import com.wlw.bookkeeptool.frist_page.Adapter_today_order_rv;
+import com.wlw.bookkeeptool.tableBean.everyDeskTable;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import litepal.LitePal;
 
 public class Today_Order_Fragment extends BaseFragment implements View.OnClickListener {
     private static final String SHOW_TAP_TARGET = "SHOW_TAP_TARGET";
 
+    private TextView mDateYear;
+    private TextView mDateMonthDay;
+    private TextView mTv2;
+    private TextView mOrderCount;
+    private TextView mTv3;
+    private TextView mUnCheckoutCount;
+    private TextView mTv;
+    private EmptyRecyclerView mTodayOrder;
+    private ArrayList<everyDeskTable> everyDeskTablelist;
+    private int checkout_count=0;
+    private int allDesk_count=0;
+    private Adapter_today_order_rv adapter_today_order_rv;
+    private LinearLayout parentLayout;
 
 
     @Override
     protected View initFragmentView(LayoutInflater inflater) {
         Toast.makeText(getActivity(),  "1", Toast.LENGTH_SHORT).show();
         view = inflater.inflate(R.layout.fg_today_order_layout, null);
+        mTv2 = (TextView) view.findViewById(R.id.tv2);
+        mTv3 = (TextView) view.findViewById(R.id.tv3);
+        mTv = (TextView) view.findViewById(R.id.tv);
+        parentLayout = (LinearLayout) view.findViewById(R.id.parentLayout);
+        mDateYear = (TextView) view.findViewById(R.id.date_year);
+        mDateMonthDay = (TextView) view.findViewById(R.id.date_month_day);
+        mOrderCount = (TextView) view.findViewById(R.id.order_count);
+        mUnCheckoutCount = (TextView) view.findViewById(R.id.unCheckout_count);
+        mTodayOrder = (EmptyRecyclerView) view.findViewById(R.id.today_order);
+        initNavigation();
         return view;
     }
 
     @Override
     protected void initFragmentChildView(View view) {
 
-
 //        showTapTarget();
     }
 
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
+          initdata();
+          initevent();
+    }
+    private void initdata(){
+        try{
+            everyDeskTablelist = (ArrayList<everyDeskTable>) LitePal.where("isCheckout = 0 ; isEndwork = 0").find(everyDeskTable.class,true);//激进查询
+            allDesk_count = everyDeskTablelist.size();
+            checkout_count = LitePal.where("isEndwork = 0 ; isCheckout = 1 ").count(everyDeskTable.class);
+        }catch (Exception e){
+            Toast.makeText(getActivity(), "异常了", Toast.LENGTH_SHORT).show();
+        }
+        adapter_today_order_rv = new Adapter_today_order_rv(getActivity(),everyDeskTablelist);
+        mTodayOrder.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        mTodayOrder.setAdapter(adapter_today_order_rv);
+        mOrderCount.setText(allDesk_count+"");
+        mUnCheckoutCount.setText(checkout_count+"");
+        Calendar c = Calendar.getInstance();//
+        int  mYear = c.get(Calendar.YEAR); // 获取当前年份
+        int  mMonth = c.get(Calendar.MONTH) + 1;// 获取当前月份
+        int  mDay = c.get(Calendar.DAY_OF_MONTH);// 获取当日期
+        int  mWay = c.get(Calendar.DAY_OF_WEEK);// 获取当前日期的星期
+        int  mHour = c.get(Calendar.HOUR_OF_DAY);//时
+        int  mMinute = c.get(Calendar.MINUTE);//分
+        mDateYear.setText(mYear+"年");
+        mDateMonthDay.setText(mMonth+"月"+mDay+"日");
+        System.out.println(mYear+"年");
+        System.out.println(mMonth+"月");
+        System.out.println(mDay+"日");
+        System.out.println(mWay);
+        System.out.println(mHour);
+        System.out.println(mMinute);
 
+    }
+    //初始化Toolbar
+    public void initNavigation() {
+        ChatNavigation.Builder homeBuilder = new ChatNavigation.Builder(getContext(),parentLayout);
+        homeBuilder.setTitleRes("餐厅小助手");
+        homeBuilder.builder().build(); //builder是组装  build是创建
+        AdaptationStatusbar();
+    }
 
+    //计算状态栏
+    private void AdaptationStatusbar() {
+        int statusheight = WindowUtils.getStatusHeight(getContext());
+        LinearLayout layout = (LinearLayout) parentLayout.getChildAt(0);
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layout.getLayoutParams();
+        layoutParams.height += statusheight;
+        layout.setLayoutParams(layoutParams);
+        layout.setPadding(0, layout.getPaddingTop() + statusheight, 0, 0);
+    }
+
+    private void initevent() {
+        adapter_today_order_rv.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+            }
+        });
     }
 
     @Override
@@ -51,7 +143,11 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
 
     }
 
-
+    @Override
+    public void onResume() {
+        initdata();
+        super.onResume();
+    }
 
     private void showTapTarget() {
 //        if (!SPUtils.getInstance().getBoolean(SHOW_TAP_TARGET)) {
@@ -114,4 +210,5 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
         }
 
     }
+
 }

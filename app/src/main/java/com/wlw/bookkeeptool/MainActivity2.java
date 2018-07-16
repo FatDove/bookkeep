@@ -35,7 +35,7 @@ import com.wlw.bookkeeptool.Order.OrderActivity;
 import com.wlw.bookkeeptool.editor_page.see_and_editor_activity;
 import com.wlw.bookkeeptool.frist_page.fab_slide.FabScrollListener;
 import com.wlw.bookkeeptool.frist_page.fab_slide.HideShowScrollListener;
-import com.wlw.bookkeeptool.frist_page.first_page_adapter;
+import com.wlw.bookkeeptool.frist_page.Adapter_today_order_rv;
 import com.wlw.bookkeeptool.tableBean.everyDeskTable;
 
 import java.io.File;
@@ -57,7 +57,7 @@ public class MainActivity2 extends AppCompatActivity implements OnBannerListener
     private FloatingActionMenu fab;
     private LinearLayout lay1;
     private ImageView emptyIv;
-    private first_page_adapter first_page_adapter;
+    private Adapter_today_order_rv first_page_adapter;
     private EmptyRecyclerView todayOrder;
     private FloatingActionButton fabWorkOut;
     private FloatingActionButton fabOrder;
@@ -98,7 +98,7 @@ public class MainActivity2 extends AppCompatActivity implements OnBannerListener
         //        给recycleview添加 滑动监听
         todayOrder_RV.addOnScrollListener(new FabScrollListener(this));
         todayOrder_RV.setEmptyView(emptyIv);
-        first_page_adapter = new first_page_adapter(this, everyDeskTablelist);
+        first_page_adapter = new Adapter_today_order_rv(this, everyDeskTablelist);
         todayOrder_RV.setAdapter(first_page_adapter);
         todayOrder = (EmptyRecyclerView) findViewById(R.id.today_order);
         fab = (FloatingActionMenu) findViewById(R.id.fab);

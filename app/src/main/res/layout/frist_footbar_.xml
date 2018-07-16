@@ -1,12 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_bottom"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="66dp"
     android:layout_alignParentBottom="true"
     android:gravity="bottom"
     android:background="@color/white"
     android:elevation="10dp"
-    android:layout_marginTop="20dp"
     android:orientation="horizontal">
         <RelativeLayout
             android:id="@+id/today_order"
@@ -18,7 +17,7 @@
                 android:id="@+id/today_order_icon"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/ic_today_order1"
                 />
             <TextView
                 android:gravity="center_horizontal"
@@ -26,14 +25,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:text="今日订单"
+                android:textColor="@color/black_qian"
                 />
-            <TextView
-                android:gravity="center_horizontal"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:text="今日订单"
-                />
+
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/record"
@@ -46,7 +40,7 @@
                 android:id="@+id/record_icon"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/ic_record2"
                 />
             <TextView
                 android:gravity="center_horizontal"
@@ -54,26 +48,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:text="流水记录"
+                android:textColor="@color/black_qian"
                 />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/start_work"
             android:layout_width="70dp"
-            android:layout_height="90dp"
+            android:layout_height="80dp"
             android:layout_gravity="bottom"
+            android:src="@mipmap/ic_half_round"
             >
+
             <ImageView
                 android:id="@+id/start_work_icon"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@mipmap/ic_add"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@mipmap/ic_add_180"
+
                 />
             <TextView
                 android:text="开工"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="22dp"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/all_order"
@@ -85,7 +88,7 @@
                 android:id="@+id/all_order_icon"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/ic_all_order2"
                 />
             <TextView
                 android:gravity="center_horizontal"
@@ -93,6 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:text="餐单"
+                android:textColor="@color/black_qian"
                 />
         </RelativeLayout>
         <RelativeLayout
@@ -106,7 +110,7 @@
                 android:id="@+id/mine_icon"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/ic_mine2"
                 />
             <TextView
                 android:gravity="center_horizontal"
@@ -114,6 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:text="我的"
+                android:textColor="@color/black_qian"
                 />
         </RelativeLayout>
 </LinearLayout>

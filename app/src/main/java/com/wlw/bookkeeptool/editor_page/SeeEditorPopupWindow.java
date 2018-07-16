@@ -1,6 +1,7 @@
 package com.wlw.bookkeeptool.editor_page;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,6 +27,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wlw.bookkeeptool.R;
+import com.wlw.bookkeeptool.frist_page.MainActivity;
+import com.wlw.bookkeeptool.frist_page.fragment.All_order_Fragment;
+import com.wlw.bookkeeptool.frist_page.mlistener.Photo_Result_Listener;
 import com.wlw.bookkeeptool.tableBean.menuBean;
 import com.wlw.bookkeeptool.utils.FileMananger;
 
@@ -36,16 +40,18 @@ import java.util.UUID;
 import litepal.LitePal;
 import litepal.tablemanager.Connector;
 
+import static com.wlw.bookkeeptool.MyApplication.AppImgFile;
+
 
 /**
  * Created by wlw on 2017/8/30.
  */
-public class SeeEditorPopupWindow extends PopupWindow {
+public class SeeEditorPopupWindow extends PopupWindow implements Photo_Result_Listener {
     private int mWidth;
     private int mHeight;
     private View mConvertView;
 
-    private Context context;
+    private All_order_Fragment context;
     private ImageButton add_food_img;
     private TextView ET1;
     private EditText food_name;
@@ -54,7 +60,7 @@ public class SeeEditorPopupWindow extends PopupWindow {
     private TextView tv1;
     private EditText describe;
     private Button submit_edit;
-    private final int IMAGE_Local = 1;
+    private final int IMAGE_Local = 8;
     private String food_type;
     private Bitmap bitmap; //用来临时存储 当前展示的图片
 
@@ -75,30 +81,30 @@ public class SeeEditorPopupWindow extends PopupWindow {
 
 
     //添加时进来的构造
-    public SeeEditorPopupWindow(Context context,String food_type,String type_name) {
+    public SeeEditorPopupWindow(All_order_Fragment context, String food_type, String type_name) {
         this.context = context;
         this.food_type = food_type;
         this.type_name = type_name;
         //制定popupwindow的宽高
-        calWidthAndHeight(context);
-        popu_config(context);
+        calWidthAndHeight(context.getContext());
+        popu_config(context.getContext());
         //PopupWindow基本属性设置-----↑↑↑↑↑↑↑↑↑↑↑
         initViews(mConvertView);
         initEvent(isAdd);
     }
 
     //修改时进来的构造
-    public SeeEditorPopupWindow(Context context, menuBean menuBean) {
+    public SeeEditorPopupWindow(All_order_Fragment context, menuBean menuBean) {
         this.context = context;
         this.menuBean = menuBean;
         //制定popupwindow的宽高
-        calWidthAndHeight(context);
-        popu_config(context);
+        calWidthAndHeight(context.getContext());
+        popu_config(context.getContext());
         //PopupWindow基本属性设置-----↑↑↑↑↑↑↑↑↑↑↑
         initViews(mConvertView);
         food_name.setText(menuBean.getFoodname());
         //用Glide框架
-        Glide.with(context).load(menuBean.getFoodimg_path()).error(R.drawable.no_banner).diskCacheStrategy(DiskCacheStrategy.NONE)
+        Glide.with(context.getActivity()).load(menuBean.getFoodimg_path()).error(R.drawable.no_banner).diskCacheStrategy(DiskCacheStrategy.NONE)
                 // .override(100, 100)
                 .into(add_food_img);
         UnitPrice.setText(menuBean.getPrice()+"");
@@ -148,7 +154,6 @@ public class SeeEditorPopupWindow extends PopupWindow {
                 add_img();
             }
         });
-
         if (add_or_edit == isAdd) {
             submit_edit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -194,17 +199,21 @@ public class SeeEditorPopupWindow extends PopupWindow {
     }
 
     public void set_img_to_popu(Bitmap add_img_bitmap) {
+        bitmap=null;
         bitmap = add_img_bitmap;
-        add_food_img.setImageBitmap(bitmap);
         local_imgpath = SendImageDispose(bitmap);//将Bitmap 保存到本地
+
+        Glide.with(context.getActivity()).load(local_imgpath).error(R.drawable.no_banner).diskCacheStrategy(DiskCacheStrategy.NONE)
+                // .override(100, 100)
+                .into(add_food_img);
     }
 
     private void add_img() {
-        Toast.makeText(context, "相册选图片", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context.getActivity(), "相册选图片", Toast.LENGTH_SHORT).show();
         //选择图片
         Intent intent2 = new Intent(Intent.ACTION_GET_CONTENT);
         intent2.setType("image/*");
-        ((Activity) context).startActivityForResult(intent2, IMAGE_Local);
+        context.getActivity().startActivityForResult(intent2, IMAGE_Local);
     }
 
     //将数据保存到数据库
@@ -219,25 +228,25 @@ public class SeeEditorPopupWindow extends PopupWindow {
             update_menu.setDescription(describe.getText().toString());
             int i = update_menu.updateAll("foodid = ?", menuBean.getFoodid());
             if (i > 0) {
-                Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
-                see_and_editor_activity s = (see_and_editor_activity) this.context;
+                Toast.makeText(context.getActivity(), "修改成功", Toast.LENGTH_SHORT).show();
+                All_order_Fragment s = context;
                 s.initdata(menuBean.getFoodtype());
                 dismiss();
             } else {
-                Toast.makeText(context, "修改失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context.getActivity(), "修改失败", Toast.LENGTH_SHORT).show();
             }
         } else if (insert_or_updata == isInsert){
             //判断是否包含
             if (isContainFood()) {
                 nameflag = true;
                 tempfoodname = food_name.getText().toString();
-                Toast.makeText(context, "该名称已存在", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context.getActivity(), "该名称已存在", Toast.LENGTH_SHORT).show();
 //            名称输入框 获取焦点并弹出软键盘
                 food_name.setFocusable(true);
                 food_name.setFocusableInTouchMode(true);
                 food_name.requestFocus();
                 food_name.setTextColor(Color.RED);
-                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) context.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(food_name, 0);
                 return;
             }
@@ -247,7 +256,7 @@ public class SeeEditorPopupWindow extends PopupWindow {
             add_food_img = mConvertView.findViewById(R.id.add_food_img);
             UnitPrice = mConvertView.findViewById(R.id.UnitPrice);
             describe = mConvertView.findViewById(R.id.describe);
-            Toast.makeText(context, db.getVersion() + "__@", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context.getActivity(), db.getVersion() + "__@", Toast.LENGTH_SHORT).show();
             menuBean menuBean = new menuBean();
             menuBean.setFoodid(UUID.randomUUID() + "");
             menuBean.setDescription(describe.getText() + "");
@@ -258,12 +267,12 @@ public class SeeEditorPopupWindow extends PopupWindow {
             menuBean.setPrice(Float.parseFloat(UnitPrice.getText().toString()));
             menuBean.setUsername("嘟小四");
             if (menuBean.save()) {
-                Toast.makeText(context, menuBean.getId() + "测试", Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, "存储成功", Toast.LENGTH_SHORT).show();
-                see_and_editor_activity s = (see_and_editor_activity) this.context;
+                Toast.makeText(context.getActivity(), menuBean.getId() + "测试", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context.getActivity(), "存储成功", Toast.LENGTH_SHORT).show();
+                All_order_Fragment s = context;
                 s.initdata(food_type);
             } else {
-                Toast.makeText(context, "存储失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context.getActivity(), "存储失败", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -302,9 +311,14 @@ public class SeeEditorPopupWindow extends PopupWindow {
      */
     private String SendImageDispose(Bitmap bp) {
         //2 将文件保存到设置 好的路径下
-        File saveimgfile = FileMananger.savePhotoToSDCard(bp, "IMFan", UUID.randomUUID() + "");
+        File saveimgfile = FileMananger.savePhotoToSDCard(bp, AppImgFile, UUID.randomUUID() + "");
         //3 在将文件保存 到本地数据库
         //刷新后释放防止手机休眠后自动添加
         return saveimgfile.getAbsolutePath();
+    }
+
+    @Override
+    public void toBitmap(Bitmap bitmap) {
+        Toast.makeText(context.getActivity(), "我在这"+bitmap.toString(), Toast.LENGTH_SHORT).show();
     }
 }
