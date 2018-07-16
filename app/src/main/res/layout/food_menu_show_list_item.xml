@@ -11,15 +11,15 @@
     <com.jia.libui.sildeItemLayout.SlidingContentView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
- <RelativeLayout
+    <RelativeLayout
      android:layout_width="match_parent"
      android:layout_height="wrap_content">
- <ImageView
+    <ImageView
      android:layout_margin="5dp"
      android:id="@+id/menu_show_item_img"
      android:src="@mipmap/icon_stub"
-     android:layout_width="60dp"
-     android:layout_height="60dp" />
+     android:layout_width="50dp"
+     android:layout_height="50dp" />
 
   <TextView
       android:id="@+id/food_name"

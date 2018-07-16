@@ -2,117 +2,73 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            >
-            <TextView
-                android:id="@+id/date_year"
-                android:text="xxx"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-            <TextView
-                android:id="@+id/date_month_day"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:text="XXXX"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="45dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tv2"
-                android:text="订单数量"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-            <TextView
-                android:id="@+id/order_count"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:text="XXXX"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="45dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tv3"
-                android:text="未买单数"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-            <TextView
-                android:id="@+id/unCheckout_count"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:text="XXXX"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="45dp" />
-        </LinearLayout>
-
-    </LinearLayout>
+    android:orientation="vertical"
+    android:id="@+id/parentLayout"
+    >
     <TextView
-        android:layout_marginTop="5dp"
+        android:paddingTop="5dp"
         android:id="@+id/tv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="今日订单"
-        android:textColor="@color/light_blue"
-        android:textSize="27sp"
-        android:textStyle="bold"/>
+        android:text=" 设置查询日期"
+        android:background="@color/yellow"
+        android:textSize="20sp"
+        android:textStyle="normal"/>
     <LinearLayout
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/yellow"
+        >
         <TextView
-            android:text="桌位号"
+            android:id="@+id/star_date"
+            android:text=""
+            android:hint="起始日期"
+            android:gravity="center"
+            android:textColorHint="@color/cyan"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="至"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:autoLink="all"
+            android:textColorLink="@color/black"
+            android:id="@+id/end_date"
+            android:text=""
+            android:hint="截止日期"
+            android:gravity="center"
+            android:textColorHint="@color/cyan"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/query"
+            android:text=""
+            android:hint="起始日期"
+            android:gravity="center"
+            android:textColorHint="@color/cyan"
             android:textSize="15sp"
             android:layout_marginLeft="10dp"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="下单时间"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="当前消费"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_delete"
+            />
     </LinearLayout>
 
     <com.jia.libui.MyControl.EmptyRecyclerView
-        android:id="@+id/today_order"
+        android:id="@+id/record_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -126,4 +82,27 @@
     <!--android:contentDescription="@null"-->
     <!--android:src="@mipmap/ic_launcher"-->
     <!--android:layout_centerInParent="true" />-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+           android:gravity="center"
+           android:text="总计："
+           android:textSize="30sp"
+           android:textColor="@color/black"
+           android:textStyle="bold"
+           android:layout_width="wrap_content"
+           android:layout_height="50dp"/>
+        <TextView
+            android:id="@+id/Total"
+            android:gravity="center"
+            android:text="100"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+
 </LinearLayout>

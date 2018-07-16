@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:id="@+id/parentLayout">
+    <RelativeLayout
+        android:background="@mipmap/vp_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <com.jia.libui.CoverFlow.CoverFlowViewPager
         android:id="@+id/cover"
         android:layout_width="match_parent"
@@ -37,4 +42,5 @@
         android:background="@mipmap/ic_add_bg"
         android:foreground="@mipmap/ic_add"
         />
-</RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

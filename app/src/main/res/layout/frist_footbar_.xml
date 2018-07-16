@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_bottom"
     android:layout_width="match_parent"
-    android:layout_height="66dp"
+    android:layout_height="65dp"
     android:layout_alignParentBottom="true"
     android:gravity="bottom"
     android:background="@color/white"
@@ -11,12 +11,13 @@
             android:id="@+id/today_order"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:layout_weight="1">
             <ImageView
                 android:id="@+id/today_order_icon"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginTop="3dp"
                 android:src="@mipmap/ic_today_order1"
                 />
             <TextView
@@ -40,6 +41,7 @@
                 android:id="@+id/record_icon"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginTop="3dp"
                 android:src="@mipmap/ic_record2"
                 />
             <TextView
@@ -88,6 +90,7 @@
                 android:id="@+id/all_order_icon"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginTop="3dp"
                 android:src="@mipmap/ic_all_order2"
                 />
             <TextView
@@ -110,6 +113,7 @@
                 android:id="@+id/mine_icon"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginTop="3dp"
                 android:src="@mipmap/ic_mine2"
                 />
             <TextView

@@ -70,7 +70,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
     }
 
     @Override
-    protected void initFragmentData(Bundle savedInstanceState) {
+    protected void initFragmentData(Bundle savedInstanceState){
           initdata();
           initevent();
     }

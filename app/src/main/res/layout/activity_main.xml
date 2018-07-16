@@ -10,7 +10,6 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="-10dp"
         android:layout_weight="1">
         <FrameLayout
             android:id="@+id/frag_container"
@@ -18,7 +17,8 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </android.support.design.widget.CoordinatorLayout>
-    <include layout="@layout/frist_footbar_"/>
+    <include layout="@layout/frist_footbar_"
+        />
     <TextView
         android:id="@+id/tv_foot"
         android:layout_width="match_parent"

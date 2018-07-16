@@ -82,7 +82,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             file.mkdirs();
         }
     }
-
     private void initView() {
         //状态变化时删除老的Fragment
         FragmentManager fm = getSupportFragmentManager();
