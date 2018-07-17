@@ -6,15 +6,15 @@
     >
 <ImageView
     android:id="@+id/iv_Right_left"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
+    android:layout_width="28dp"
+    android:layout_height="28dp"
     android:background="@drawable/icon"
     />
     <ImageView
         android:layout_marginRight="10dp"
         android:id="@+id/iv_Right_right"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/icon"
         />

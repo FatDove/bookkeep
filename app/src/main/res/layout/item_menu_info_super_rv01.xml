@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jia.libui.sildeItemLayout.SlidingItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/button_border_white"
+    android:layout_margin="5dp"
+    android:id="@+id/SlidingItemLayout"
+    app:my_layout_type="Right">
+
+    <com.jia.libui.sildeItemLayout.SlidingContentView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/food_name"
+            android:text="111"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_toRightOf="@+id/food_name"
+            android:id="@+id/food_count"
+            android:text="111"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_toRightOf="@+id/food_name"
+            android:layout_below="@id/food_count"
+            android:text="数量"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+        <TextView
+            android:id="@+id/Sum"
+            android:layout_alignParentRight="true"
+            android:text="100"
+            android:textColor="@color/Blue"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            />
+    </RelativeLayout>
+    </com.jia.libui.sildeItemLayout.SlidingContentView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:padding="12dp"
+            android:id="@+id/delete_view"
+            android:src="@drawable/menu_delete_select"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+    </LinearLayout>
+</com.jia.libui.sildeItemLayout.SlidingItemLayout>

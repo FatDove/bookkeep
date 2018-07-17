@@ -1,15 +1,18 @@
 package com.wlw.bookkeeptool.tableBean;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import litepal.annotation.Column;
 import litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 每点一道菜的记录
  */
 
-public class everyDishTable extends LitePalSupport {
+public class everyDishTable extends LitePalSupport implements Serializable,MultiItemEntity {
    @Column(unique = true)
    private int id;
    String username;
@@ -18,17 +21,17 @@ public class everyDishTable extends LitePalSupport {
    float totalPrice_dish; //一道菜的总和 比如 5个鸡蛋的总价
    float unitPrice_dish; //一道菜的总和 比如 5个鸡蛋的总价
    Date startBillTime; //下单时间
-
-   public everyDishTable(String username, String foodname, int foodCount, float totalPrice_dish, float unitPrice_dish, Date startBillTime) {
+   @Column(defaultValue ="0")//指定字段默认值
+   int itemType; // 0 1 2   0 普通默认  1 追加的菜单样式  2 新增待确认的样式
+   public everyDishTable(String username, String foodname, int foodCount, float totalPrice_dish, float unitPrice_dish, Date startBillTime,int itemType) {
       this.username = username;
       this.foodname = foodname;
       this.foodCount = foodCount;
       this.totalPrice_dish = totalPrice_dish;
       this.unitPrice_dish = unitPrice_dish;
       this.startBillTime = startBillTime;
+      this.itemType = itemType;
    }
-
-
    public String getUsername() {
       return username == null ? "" : username;
    }
@@ -83,5 +86,13 @@ public class everyDishTable extends LitePalSupport {
 
    public void setStartBillTime(Date startBillTime) {
       this.startBillTime = startBillTime;
+   }
+
+   public int getItemType() {
+       return itemType;
+   }
+
+   public void setItemType(int itemType) {
+      this.itemType = itemType;
    }
 }

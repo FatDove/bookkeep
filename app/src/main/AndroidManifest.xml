@@ -40,12 +40,14 @@
         </activity>
 
         <activity android:name=".editor_page.editor_activity"/>
-
+         <!--下单界面-->
         <activity android:name=".Order.OrderActivity"/>
         <!--主页面-->
         <activity android:name=".frist_page.MainActivity"/>
         <!--查看与编辑页面-->
         <activity android:name=".editor_page.see_and_editor_activity"/>
+        <!--消费账单 加菜结账-->
+        <activity android:name=".AddMenu_Check.AddMenu_CheckActivity"/>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"

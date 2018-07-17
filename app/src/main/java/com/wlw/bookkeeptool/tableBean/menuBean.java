@@ -6,7 +6,7 @@ import litepal.crud.LitePalSupport;
 /**
  * 菜单表
  */
-public class menuBean extends LitePalSupport {
+public class menuBean extends LitePalSupport{
    @Column(unique = true)
    private int id;
    @Column(nullable = false)

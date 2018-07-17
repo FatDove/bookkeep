@@ -106,7 +106,7 @@ public class OrderActivity extends Activity {
     }
 
     private void initView() {
-        
+
         title = (TextView) findViewById(R.id.title);
         fabSelectMenu = (FloatingActionButton) findViewById(R.id.fab_select_menu);
         desk = (ImageView) findViewById(R.id.desk);
@@ -198,7 +198,7 @@ public class OrderActivity extends Activity {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 menuBean superMenu = (menuBean) adapter.getData().get(position);
-                final everyDishTable everyDishTable = new everyDishTable(UserName, superMenu.getFoodname(), 1, superMenu.getPrice(),superMenu.getPrice(), new Date());
+                final everyDishTable everyDishTable = new everyDishTable(UserName, superMenu.getFoodname(), 1, superMenu.getPrice(),superMenu.getPrice(),new Date(),0);
                 RxjavaUtil.doInUIThread(new UITask<String>() {
                     @Override
                     public void doInUIThread() {

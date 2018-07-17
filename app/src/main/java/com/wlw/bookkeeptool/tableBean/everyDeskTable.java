@@ -4,6 +4,7 @@ import litepal.annotation.Column;
 import litepal.crud.LitePalSupport;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * 每一桌菜的记录（每一桌结账就会记录）
  */
-public class everyDeskTable  extends LitePalSupport {
+public class everyDeskTable extends LitePalSupport implements Serializable {
    @Column(unique = true)
    private int id;
    String username;

@@ -1,5 +1,6 @@
 package com.wlw.bookkeeptool.tableBean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,7 @@ import litepal.crud.LitePalSupport;
 /**
  * 每一天的记录（每次打烊就会记录）
  */
-public class everyDayTable extends LitePalSupport {
+public class everyDayTable extends LitePalSupport implements Serializable {
    @Column(unique = true)
    private int id;
    private String username;

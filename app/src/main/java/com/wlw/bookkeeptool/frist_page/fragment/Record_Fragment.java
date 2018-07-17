@@ -60,6 +60,12 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
     public void initNavigation() {
         ChatNavigation.Builder homeBuilder = new ChatNavigation.Builder(getContext(), parentLayout);
         homeBuilder.setTitleRes("流水账查询");
+//        homeBuilder.setRightImageLeftRes(R.drawable.ic_delete_select).setRightImageLeftOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
         homeBuilder.builder().build(); //builder是组装  build是创建
         AdaptationStatusbar();
     }

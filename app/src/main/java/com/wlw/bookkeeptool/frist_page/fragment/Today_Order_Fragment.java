@@ -1,9 +1,11 @@
 package com.wlw.bookkeeptool.frist_page.fragment;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -19,6 +21,7 @@ import com.jia.base.BasePresenter;
 import com.jia.libui.MyControl.EmptyRecyclerView;
 import com.jia.libui.Navigation.impl.ChatNavigation;
 import com.jia.libutils.WindowUtils;
+import com.wlw.bookkeeptool.AddMenu_Check.AddMenu_CheckActivity;
 import com.wlw.bookkeeptool.R;
 import com.wlw.bookkeeptool.frist_page.Adapter_today_order_rv;
 import com.wlw.bookkeeptool.tableBean.everyDeskTable;
@@ -38,7 +41,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
     private TextView mTv3;
     private TextView mUnCheckoutCount;
     private TextView mTv;
-    private EmptyRecyclerView mTodayOrder;
+    private RecyclerView mTodayOrder;
     private ArrayList<everyDeskTable> everyDeskTablelist;
     private int checkout_count=0;
     private int allDesk_count=0;
@@ -58,7 +61,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
         mDateMonthDay = (TextView) view.findViewById(R.id.date_month_day);
         mOrderCount = (TextView) view.findViewById(R.id.order_count);
         mUnCheckoutCount = (TextView) view.findViewById(R.id.unCheckout_count);
-        mTodayOrder = (EmptyRecyclerView) view.findViewById(R.id.today_order);
+        mTodayOrder = view.findViewById(R.id.today_order);
         initNavigation();
         return view;
     }
@@ -71,8 +74,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
 
     @Override
     protected void initFragmentData(Bundle savedInstanceState){
-          initdata();
-          initevent();
+
     }
     private void initdata(){
         try{
@@ -124,9 +126,13 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
 
     private void initevent() {
         adapter_today_order_rv.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                everyDeskTable everyDeskTable = (everyDeskTable) adapter.getData().get(position);
+                Intent intent = new Intent(getActivity(), AddMenu_CheckActivity.class);
+                intent.putExtra("DeskID", everyDeskTable.getId());
+                startActivity(intent);
             }
         });
     }
@@ -146,6 +152,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
     @Override
     public void onResume() {
         initdata();
+        initevent();
         super.onResume();
     }
 
