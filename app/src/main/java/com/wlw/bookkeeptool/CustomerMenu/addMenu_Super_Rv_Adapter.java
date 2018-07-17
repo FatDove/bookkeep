@@ -1,14 +1,12 @@
-package com.wlw.bookkeeptool.AddMenu_Check;
+package com.wlw.bookkeeptool.CustomerMenu;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wlw.bookkeeptool.R;
 import com.wlw.bookkeeptool.tableBean.everyDishTable;

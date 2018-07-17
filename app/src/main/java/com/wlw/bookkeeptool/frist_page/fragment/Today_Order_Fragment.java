@@ -18,10 +18,9 @@ import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.jia.base.BaseFragment;
 import com.jia.base.BasePresenter;
-import com.jia.libui.MyControl.EmptyRecyclerView;
 import com.jia.libui.Navigation.impl.ChatNavigation;
 import com.jia.libutils.WindowUtils;
-import com.wlw.bookkeeptool.AddMenu_Check.AddMenu_CheckActivity;
+import com.wlw.bookkeeptool.CustomerMenu.CustomerMenu_infoActivity;
 import com.wlw.bookkeeptool.R;
 import com.wlw.bookkeeptool.frist_page.Adapter_today_order_rv;
 import com.wlw.bookkeeptool.tableBean.everyDeskTable;
@@ -130,7 +129,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 everyDeskTable everyDeskTable = (everyDeskTable) adapter.getData().get(position);
-                Intent intent = new Intent(getActivity(), AddMenu_CheckActivity.class);
+                Intent intent = new Intent(getActivity(), CustomerMenu_infoActivity.class);
                 intent.putExtra("DeskID", everyDeskTable.getId());
                 startActivity(intent);
             }

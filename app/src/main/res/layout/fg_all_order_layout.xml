@@ -16,7 +16,6 @@
         android:background="@mipmap/vp_bg"
         android:paddingBottom="10dp"
         android:paddingTop="10dp" />
-
     <com.jia.libui.MyControl.EmptyRecyclerView
         android:id="@+id/see_editor_rv"
         android:layout_marginTop="10dp"

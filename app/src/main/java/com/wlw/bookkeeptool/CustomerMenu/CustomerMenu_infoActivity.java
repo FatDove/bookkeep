@@ -1,5 +1,8 @@
-package com.wlw.bookkeeptool.AddMenu_Check;
+package com.wlw.bookkeeptool.CustomerMenu;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,9 +11,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -25,7 +31,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jia.libui.MyControl.EmptyRecyclerView;
 import com.jia.libui.MyDialog.MyDialog;
 import com.jia.libui.Navigation.impl.ChatNavigation;
-import com.jia.libutils.DateUtils;
 import com.jia.libutils.RxAndroidUtils.RxjavaUtil;
 import com.jia.libutils.RxAndroidUtils.UITask;
 import com.jia.libutils.WindowUtils;
@@ -34,7 +39,6 @@ import com.wlw.bookkeeptool.tableBean.everyDeskTable;
 import com.wlw.bookkeeptool.tableBean.everyDishTable;
 import com.wlw.bookkeeptool.tableBean.menuBean;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +52,7 @@ import static com.wlw.bookkeeptool.MyApplication.UserName;
  * Created by wlw on 2018/7/12.
  */
 
-public class AddMenu_CheckActivity extends Activity {
+public class CustomerMenu_infoActivity extends Activity {
     Context context;
     private OrderMenuShow_Rv_Adapter orderMenuShow_rv_adapter;
     private addMenu_Super_Rv_Adapter addMenu_super_rv_adapter;
@@ -86,8 +90,6 @@ public class AddMenu_CheckActivity extends Activity {
         getData_for_showMenuRv();
         getData_for_superMenuRv();
     }
-
-
     //    给SuperMenuRv取数据
     private void getData_for_superMenuRv() {
         Intent intent = getIntent();
@@ -109,7 +111,6 @@ public class AddMenu_CheckActivity extends Activity {
         orderMenuShow_rv_adapter = new OrderMenuShow_Rv_Adapter(context, allmenuBean);
         mShowMenuRv.setAdapter(orderMenuShow_rv_adapter);
     }
-
     //    给imglist取数据
     private void getData_for_imglist() {
         String[] arrTitle = {"热", "凉", "主", "饮", "其他"};
@@ -117,7 +118,6 @@ public class AddMenu_CheckActivity extends Activity {
         mImgList.setAdapter(imgListAdapter);
         imgListAdapter.notifyDataSetChanged();
     }
-
     private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDeskNum = (TextView) findViewById(R.id.desk_num);
@@ -133,42 +133,25 @@ public class AddMenu_CheckActivity extends Activity {
         mTypeShowId = (TextView) findViewById(R.id.type_show_id);
         parentLayout = findViewById(R.id.parentLayout);
         mShowMenuRv = (EmptyRecyclerView) findViewById(R.id.show_menu_rv);
-
         mShowMenuRv.setLayoutManager(new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false));
         mSuperRv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
     }
 
     private void initevent() {
-//        submitOrder.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                String username;
-////                String deskNum; //顾客所在的桌子号
-//                String totalPrice_desk; // 这一桌的总价
-//                Date startBillTime; //下单时间
-//                Date endBillTime;  //每桌结账时间
-//                String is_shutDown;
-////                计算这一单的总价
-//                float allMenuPrice = 0.0f;
-//                everyDeskTable everyDeskTable = new everyDeskTable();
-//                for (int i = 0; i < addMenu_super_rv_adapter.getData().size(); i++) {
-//                    everyDeskTable.getEveryDeskTableList().add(addMenu_super_rv_adapter.getData().get(i));
-//                    addMenu_super_rv_adapter.getData().get(i).save();//单条菜保存
-//                    allMenuPrice += addMenu_super_rv_adapter.getData().get(i).getTotalPrice_dish();
-//                }
-//                everyDeskTable.setDeskNum(mDeskNum.getText().toString());
-//                everyDeskTable.setUsername(UserName);
-//                everyDeskTable.setStartBillTime(new Date());
-//                float endPrice = (float) (Math.round(allMenuPrice * 100) / 100);//如果要求精确4位就*10000然后/10000</span>
-//                everyDeskTable.setTotalPrice_desk(endPrice);//当前消费 保留两位小数
-//                everyDeskTable.setIs_shutDown("0");
-//                if (everyDeskTable.save()) {//单桌菜保存
-//                    Toast.makeText(context, "下单成功", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(context, "下单失败", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+        mImgAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scaleAnimation(v);
+                mDrawerLayout.openDrawer(Gravity.RIGHT);
+            }
+        });
+        mImgCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scaleAnimation(v);
+                the_order_checkout();
+            }
+        });
         mImgList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -234,11 +217,10 @@ public class AddMenu_CheckActivity extends Activity {
                     case R.id.delete_view:
                         RxjavaUtil.doInUIThread(new UITask<String>() {
                             @Override
-                            public void doInUIThread() {
+                            public void doInUIThread(){
                                 showDig();
-                                Toast.makeText(context, "删", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "删",Toast.LENGTH_SHORT).show();
                             }
-
                             private void showDig() {
                                 MyDialog.Builde builde = new MyDialog.Builde(context);
                                 builde.setMessage("您确定清除【" + everyDishTable.getFoodname() + "】？");
@@ -253,8 +235,26 @@ public class AddMenu_CheckActivity extends Activity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
-                                        addMenu_super_rv_adapter.remove(position);
-                                        addMenu_super_rv_adapter.notifyDataSetChanged();
+                                        SQLiteDatabase database = LitePal.getDatabase();
+                                        database.beginTransaction();
+                                        try{
+                                            everyDishTable everyDT = addMenu_super_rv_adapter.getData().get(position);
+                                            if (everyDT.isSaved()){
+                                                everyDT.delete();
+                                            }
+                                            float s = everyDKTbean.getTotalPrice_desk() - everyDT.getTotalPrice_dish();
+                                            everyDKTbean.setTotalPrice_desk(s);
+                                            everyDKTbean.save();
+                                            addMenu_super_rv_adapter.remove(position);
+                                            addMenu_super_rv_adapter.notifyDataSetChanged();
+                                            mNowPrice.setText(s+"");
+//                                            int a = 1/0;
+                                            database.setTransactionSuccessful();
+                                        }catch (Exception e){
+                                            Log.i("FANJAVA", "异常了");
+                                        }finally {
+                                            database.endTransaction();
+                                        }
                                     }
                                 });
                                 builde.create().show();
@@ -265,16 +265,25 @@ public class AddMenu_CheckActivity extends Activity {
                         RxjavaUtil.doInUIThread(new UITask<String>() {
                             @Override
                             public void doInUIThread() {
-                                everyDishTable.setItemType(1);
-                                everyDishTable.save();//单条菜保存;
+                                SQLiteDatabase database = LitePal.getDatabase();
+                                database.beginTransaction(); //开始
+                                try{
+                                    everyDishTable.setItemType(1);
+                                    everyDishTable.save();//单条菜保存;
+                                    float s = everyDishTable.getTotalPrice_dish() + everyDKTbean.getTotalPrice_desk();
+                                    everyDKTbean.getEveryDeskTableList().add(everyDishTable);
+                                    everyDKTbean.setTotalPrice_desk(s);
+                                    everyDKTbean.save();
+                                    addMenu_super_rv_adapter.notifyDataSetChanged();
+                                    mNowPrice.setText(s + "元");
+                                    Toast.makeText(context, "加", Toast.LENGTH_SHORT).show();
+                                    database.setTransactionSuccessful(); //中间不出错就成功
+                                }catch (Exception e){
+                                    Log.i("FANJAVA", "异常了");
+                                }finally {
+                                    database.endTransaction(); // 事物结束
+                                }
 
-                                float s = everyDishTable.getTotalPrice_dish() + everyDKTbean.getTotalPrice_desk();
-                                everyDKTbean.getEveryDeskTableList().add(everyDishTable);
-                                everyDKTbean.setTotalPrice_desk(s);
-                                everyDKTbean.save();
-                                addMenu_super_rv_adapter.notifyDataSetChanged();
-                                mNowPrice.setText(s + "元");
-                                Toast.makeText(context, "加", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -308,7 +317,42 @@ public class AddMenu_CheckActivity extends Activity {
     //删除这张餐单
     private void delete_the_order() {
         Toast.makeText(context, "删除此餐单", Toast.LENGTH_SHORT).show();
-//        、、、、、
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.drawable.ic_remind2).setTitle("重要提示").setMessage("您是否要删除此菜单全部数据")
+                .setNegativeButton("取消",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).setPositiveButton("确定",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (everyDKTbean.isSaved()){
+                    everyDKTbean.delete();
+                  }
+                dialog.dismiss();
+                finish();
+            }
+        }).show();
+    }
+    //此餐单结账
+    private void the_order_checkout(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.drawable.ic_check_1).setTitle("结账").setMessage("您是现在要结账吗？")
+                .setNegativeButton("等等",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).setPositiveButton("嗯，现在",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (everyDKTbean.isSaved()){
+                    everyDKTbean.delete();
+                }
+                dialog.dismiss();
+            }
+        }).show();
     }
 
     //计算状态栏
@@ -319,6 +363,22 @@ public class AddMenu_CheckActivity extends Activity {
         layoutParams.height += statusheight;
         layout.setLayoutParams(layoutParams);
         layout.setPadding(0, layout.getPaddingTop() + statusheight, 0, 0);
+    }
+    public void scaleAnimation(View bt){
+        PropertyValuesHolder holder1 = PropertyValuesHolder.ofFloat("alpha",1f,0.2f,1f);
+        PropertyValuesHolder holder2 = PropertyValuesHolder.ofFloat("scaleX",1f,0.7f,1f);
+        PropertyValuesHolder holder3 = PropertyValuesHolder.ofFloat("scaleY",1f,0.7f,1f);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(bt, holder1, holder2, holder3);
+        objectAnimator.setDuration(400);
+        objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                animation.getAnimatedFraction();
+                animation.getAnimatedValue();
+                animation.getCurrentPlayTime();
+            }
+        });
+        objectAnimator.start();
     }
 
 }
