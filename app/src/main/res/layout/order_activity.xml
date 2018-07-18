@@ -51,7 +51,7 @@
                android:layout_width="wrap_content"
                android:layout_height="50dp" />
 
-              <com.jia.libui.MyControl.EmptyRecyclerView
+              <android.support.v7.widget.RecyclerView
                   android:id="@+id/super_rv"
                   android:background="@drawable/button_border_rice_white"
                   android:layout_below="@+id/fab_select_menu"
@@ -61,7 +61,7 @@
                   android:layout_marginBottom="60dp"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
-              </com.jia.libui.MyControl.EmptyRecyclerView>
+              </android.support.v7.widget.RecyclerView>
               <Button
                   android:id="@+id/submit_order"
                   android:text="现在下单"

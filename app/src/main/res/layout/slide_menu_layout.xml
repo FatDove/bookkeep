@@ -34,13 +34,13 @@
             android:background="@color/orange"
             android:layout_width="60dp"
             android:layout_height="50dp"/>
-        <com.jia.libui.MyControl.EmptyRecyclerView
+        <android.support.v7.widget.RecyclerView
             android:layout_toRightOf="@+id/img_list"
             android:layout_below="@id/type_show_id"
             android:id="@+id/show_menu_rv"
             android:layout_width="210dp"
             android:layout_height="match_parent">
 
-        </com.jia.libui.MyControl.EmptyRecyclerView>
+        </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

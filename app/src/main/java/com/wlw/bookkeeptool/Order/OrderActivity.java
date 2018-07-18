@@ -9,8 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.github.clans.fab.FloatingActionButton;
-import com.jia.libui.MyControl.EmptyRecyclerView;
 import com.jia.libui.MyDialog.MyDialog;
 import com.jia.libutils.RxAndroidUtils.RxjavaUtil;
 import com.jia.libutils.RxAndroidUtils.UITask;
@@ -33,7 +32,6 @@ import com.wlw.bookkeeptool.tableBean.everyDeskTable;
 import com.wlw.bookkeeptool.tableBean.everyDishTable;
 import com.wlw.bookkeeptool.tableBean.menuBean;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +39,6 @@ import java.util.List;
 import litepal.LitePal;
 import litepal.tablemanager.Connector;
 
-import static android.widget.GridLayout.HORIZONTAL;
 import static com.wlw.bookkeeptool.MyApplication.UserName;
 
 /**
@@ -54,13 +51,13 @@ public class OrderActivity extends Activity {
     private FloatingActionButton fabSelectMenu;
     private ImageView desk;
     private EditText deskName;
-    private EmptyRecyclerView superRv;
     private Button submitOrder;
     private RelativeLayout slideMenu;
     private ListView imgList;
     private TextView typeShowId;
-    private EmptyRecyclerView showMenuRv;
     private DrawerLayout drawerLayout;
+    private RecyclerView superRv;
+    private RecyclerView showMenuRv;
     private OrderMenuShow_Rv_Adapter orderMenuShow_rv_adapter;
     private SuperMenu_Rv_Adapter superMenu_rv_adapter;
 
@@ -113,12 +110,12 @@ public class OrderActivity extends Activity {
         fabSelectMenu = (FloatingActionButton) findViewById(R.id.fab_select_menu);
         desk = (ImageView) findViewById(R.id.desk);
         deskName = (EditText) findViewById(R.id.desk_name);
-        superRv = (EmptyRecyclerView) findViewById(R.id.super_rv);
+        superRv = (RecyclerView) findViewById(R.id.super_rv);
         submitOrder = (Button) findViewById(R.id.submit_order);
         slideMenu = (RelativeLayout) findViewById(R.id.slide_menu);
         imgList = (ListView) findViewById(R.id.img_list);
         typeShowId = (TextView) findViewById(R.id.type_show_id);
-        showMenuRv = (EmptyRecyclerView) findViewById(R.id.show_menu_rv);
+        showMenuRv = (RecyclerView) findViewById(R.id.show_menu_rv);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         showMenuRv.setLayoutManager(new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false));
@@ -126,12 +123,13 @@ public class OrderActivity extends Activity {
     }
 
     private void initevent() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        // 隐藏软键盘
-        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+
         fabSelectMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                // 隐藏软键盘
+                imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
                 drawerLayout.openDrawer(slideMenu);//打开侧边栏
 
             }
@@ -208,7 +206,7 @@ public class OrderActivity extends Activity {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 menuBean superMenu = (menuBean) adapter.getData().get(position);
-                final everyDishTable everyDishTable = new everyDishTable(UserName, superMenu.getFoodname(), 1, superMenu.getPrice(),superMenu.getPrice(),new Date(),0);
+                final everyDishTable everyDishTable = new everyDishTable(UserName, superMenu.getFoodname(),"0", 1, superMenu.getPrice(),superMenu.getPrice(),new Date(),0);
                 RxjavaUtil.doInUIThread(new UITask<String>() {
                     @Override
                     public void doInUIThread() {

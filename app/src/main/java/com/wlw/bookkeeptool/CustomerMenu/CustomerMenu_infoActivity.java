@@ -28,14 +28,14 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.jia.libui.MyControl.EmptyRecyclerView;
 import com.jia.libui.MyDialog.MyDialog;
 import com.jia.libui.Navigation.impl.ChatNavigation;
+import com.jia.libui.sildeItemLayout.SlidingContentView;
+import com.jia.libui.sildeItemLayout.SlidingItemLayout;
 import com.jia.libutils.RxAndroidUtils.RxjavaUtil;
 import com.jia.libutils.RxAndroidUtils.UITask;
 import com.jia.libutils.WindowUtils;
 import com.wlw.bookkeeptool.R;
-import com.wlw.bookkeeptool.tableBean.everyDayTable;
 import com.wlw.bookkeeptool.tableBean.everyDeskTable;
 import com.wlw.bookkeeptool.tableBean.everyDishTable;
 import com.wlw.bookkeeptool.tableBean.menuBean;
@@ -45,7 +45,6 @@ import java.util.Date;
 import java.util.List;
 
 import litepal.LitePal;
-import litepal.annotation.Column;
 import litepal.tablemanager.Connector;
 
 import static com.wlw.bookkeeptool.MyApplication.UserName;
@@ -57,7 +56,7 @@ import static com.wlw.bookkeeptool.MyApplication.UserName;
 public class CustomerMenu_infoActivity extends Activity {
     Context context;
     private SelectMenuShow_Rv_Adapter selectMenuShow_rv_adapter;  //选择菜单
-    private addMenu_Super_Rv_Adapter addMenu_super_rv_adapter; //填充菜单
+    private CustomerMenu_Super_Rv_Adapter customerMenu_super_rv_adapter; //填充菜单
     private DrawerLayout mDrawerLayout;
     private TextView mDeskNum;
     private TextView mDownMenuTime;
@@ -101,8 +100,8 @@ public class CustomerMenu_infoActivity extends Activity {
         String strDate = TimeUtils.date2String(everyDKTbean.getStartBillTime());
         mDownMenuTime.setText(strDate);
         mDeskNum.setText(everyDKTbean.getDeskNum() + "");
-        addMenu_super_rv_adapter = new addMenu_Super_Rv_Adapter(everyDKTbean.getEveryDishTableList());
-        mSuperRv.setAdapter(addMenu_super_rv_adapter);
+        customerMenu_super_rv_adapter = new CustomerMenu_Super_Rv_Adapter(everyDKTbean.getEveryDishTableList());
+        mSuperRv.setAdapter(customerMenu_super_rv_adapter);
     }
 
     //    给showMenuR取数据
@@ -134,7 +133,7 @@ public class CustomerMenu_infoActivity extends Activity {
         mImgList = (ListView) findViewById(R.id.img_list);
         mTypeShowId = (TextView) findViewById(R.id.type_show_id);
         parentLayout = findViewById(R.id.parentLayout);
-        mShowMenuRv = (EmptyRecyclerView) findViewById(R.id.show_menu_rv);
+        mShowMenuRv =  findViewById(R.id.show_menu_rv);
         mShowMenuRv.setLayoutManager(new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false));
         mSuperRv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
     }
@@ -171,16 +170,16 @@ public class CustomerMenu_infoActivity extends Activity {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 menuBean superMenu = (menuBean) adapter.getData().get(position);
-                final everyDishTable everyDishTable = new everyDishTable(UserName, superMenu.getFoodname(), 1, superMenu.getPrice(), superMenu.getPrice(), new Date(), 2);
+                final everyDishTable everyDishTable = new everyDishTable(UserName, superMenu.getFoodname(),"0",1, superMenu.getPrice(), superMenu.getPrice(), new Date(), 2);
                 RxjavaUtil.doInUIThread(new UITask<String>() {
                     @Override
                     public void doInUIThread() {
-                        addMenu_super_rv_adapter.addData(everyDishTable);
+                        customerMenu_super_rv_adapter.addData(everyDishTable);
                     }
                 });
             }
         });
-        addMenu_super_rv_adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        customerMenu_super_rv_adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
                 final everyDishTable everyDishTable = (com.wlw.bookkeeptool.tableBean.everyDishTable) adapter.getData().get(position);
@@ -199,7 +198,7 @@ public class CustomerMenu_infoActivity extends Activity {
 //                                BigDecimal v = b1.multiply(BigDecimal.valueOf(foodCount));
 //                                String s = v.toString();
                                 everyDishTable.setTotalPrice_dish(foodCount * everyDishTable.getUnitPrice_dish());
-                                addMenu_super_rv_adapter.notifyDataSetChanged();
+                                customerMenu_super_rv_adapter.notifyItemChanged(position);
                             }
                         });
                         break;
@@ -211,7 +210,7 @@ public class CustomerMenu_infoActivity extends Activity {
                                 everyDishTable.setFoodCount(foodCount += 5);
                                 float v1 = foodCount * everyDishTable.getTotalPrice_dish();
                                 everyDishTable.setTotalPrice_dish(foodCount * everyDishTable.getUnitPrice_dish());
-                                addMenu_super_rv_adapter.notifyDataSetChanged();
+                                customerMenu_super_rv_adapter.notifyItemChanged(position);
                                 Toast.makeText(context, "加", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -237,18 +236,22 @@ public class CustomerMenu_infoActivity extends Activity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
+                                     if (everyDishTable.getItemType()==2){
+                                         customerMenu_super_rv_adapter.remove(position);
+                                         customerMenu_super_rv_adapter.notifyItemChanged(position);
+                                     }else{
                                         SQLiteDatabase database = LitePal.getDatabase();
                                         database.beginTransaction();
                                         try{
-                                            everyDishTable everyDT = addMenu_super_rv_adapter.getData().get(position);
+                                            everyDishTable everyDT = customerMenu_super_rv_adapter.getData().get(position);
                                             if (everyDT.isSaved()){
                                                 everyDT.delete();
                                             }
                                             float s = everyDKTbean.getTotalPrice_desk() - everyDT.getTotalPrice_dish();
                                             everyDKTbean.setTotalPrice_desk(s);
                                             everyDKTbean.save();
-                                            addMenu_super_rv_adapter.remove(position);
-                                            addMenu_super_rv_adapter.notifyDataSetChanged();
+                                            customerMenu_super_rv_adapter.remove(position);
+                                            customerMenu_super_rv_adapter.notifyItemChanged(position);
                                             mNowPrice.setText(s+"");
 //                                            int a = 1/0;
                                             database.setTransactionSuccessful();
@@ -257,6 +260,7 @@ public class CustomerMenu_infoActivity extends Activity {
                                         }finally {
                                             database.endTransaction();
                                         }
+                                     }
                                     }
                                 });
                                 builde.create().show();
@@ -272,12 +276,12 @@ public class CustomerMenu_infoActivity extends Activity {
                                 try{
                                     everyDishTable.setItemType(1);
                                     everyDishTable.save();//单条菜保存;
-                                    addMenu_super_rv_adapter.remove(position);
+                                    customerMenu_super_rv_adapter.remove(position);
                                     float s = everyDishTable.getTotalPrice_dish() + everyDKTbean.getTotalPrice_desk();
                                     everyDKTbean.getEveryDishTableList().add(everyDishTable);
                                     everyDKTbean.setTotalPrice_desk(s);
                                     everyDKTbean.save();
-                                    addMenu_super_rv_adapter.notifyDataSetChanged();
+                                    customerMenu_super_rv_adapter.notifyItemChanged(position);
                                     mNowPrice.setText(s + "元");
                                     Toast.makeText(context, "加", Toast.LENGTH_SHORT).show();
                                     database.setTransactionSuccessful(); //中间不出错就成功
@@ -286,11 +290,24 @@ public class CustomerMenu_infoActivity extends Activity {
                                 }finally {
                                     database.endTransaction(); // 事物结束
                                 }
-
                             }
                         });
                         break;
-
+                    case R.id.slidingContentView:
+                        SlidingItemLayout parent = (SlidingItemLayout) view.getParent();
+                        SlidingContentView slidingContentView = (SlidingContentView)view;
+                        SlidingItemLayout.SlidingStatus currentStaus = parent.getCurrentStaus();
+                        if (currentStaus== SlidingItemLayout.SlidingStatus.Close){
+                            parent.open();
+                        }
+                        Toast.makeText(context, view.getId()+"|||||"+view.toString(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.up_food:
+                        everyDishTable.setIsfinish("1");
+                        everyDishTable.save();//单条菜保存;
+                        customerMenu_super_rv_adapter.notifyItemChanged(position);
+//
+                        break;
                 }
             }
         });

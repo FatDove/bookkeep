@@ -9,6 +9,7 @@
     app:my_layout_type="Right">
 
     <com.jia.libui.sildeItemLayout.SlidingContentView
+        android:id="@+id/slidingContentView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <RelativeLayout

@@ -6,9 +6,9 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +19,6 @@ import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.jia.base.BaseFragment;
 import com.jia.base.BasePresenter;
-import com.jia.libui.MyControl.EmptyRecyclerView;
 import com.jia.libui.Navigation.impl.ChatNavigation;
 import com.jia.libutils.DateUtils;
 import com.jia.libutils.WindowUtils;
@@ -29,8 +28,6 @@ import com.wlw.bookkeeptool.tableBean.everyDayTable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 import litepal.LitePal;
 
@@ -47,7 +44,7 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
     private LinearLayout parentLayout;
     private ArrayList<everyDayTable> dataList;
     private Adapter_record_rv adapter_record_rv;
-
+    private boolean isGetData = false;
     @Override
     protected View initFragmentView(LayoutInflater inflater) {
         Toast.makeText(getActivity(), "2", Toast.LENGTH_SHORT).show();
@@ -124,7 +121,19 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
         return null;
     }
 
-
+    //在切换时有刷新的效果
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        //   进入当前Fragment
+        if (enter && !isGetData) {
+            isGetData = true;
+            initdata();
+            initevent();
+        } else {
+            isGetData = false;
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -245,5 +254,11 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
         initdata();
         initevent();
         super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isGetData = false;
     }
 }

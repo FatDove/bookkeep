@@ -21,7 +21,6 @@ public class SlidingContentView extends LinearLayout {
 	public SlidingContentView(Context context) {
 		super(context);
 	}
-
 	// 拦截事件
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
