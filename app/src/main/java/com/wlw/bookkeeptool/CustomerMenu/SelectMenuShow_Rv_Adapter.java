@@ -13,12 +13,12 @@ import java.util.ArrayList;
 /**
  * https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  */
-public class OrderMenuShow_Rv_Adapter extends BaseQuickAdapter<menuBean,BaseViewHolder> {
+public class SelectMenuShow_Rv_Adapter extends BaseQuickAdapter<menuBean,BaseViewHolder> {
 
     Context context;
     ArrayList<menuBean> its;
 
-    public OrderMenuShow_Rv_Adapter(Context context, ArrayList<menuBean> its) {
+    public SelectMenuShow_Rv_Adapter(Context context, ArrayList<menuBean> its) {
         super(R.layout.slide_showmenu_rv_item, its);
         this.context=context;
         this.its=its;

@@ -1,9 +1,12 @@
 package com.wlw.bookkeeptool.frist_page.fragment;
 
+import android.database.Cursor;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,6 +24,17 @@ import com.jia.libui.Navigation.impl.ChatNavigation;
 import com.jia.libutils.DateUtils;
 import com.jia.libutils.WindowUtils;
 import com.wlw.bookkeeptool.R;
+import com.wlw.bookkeeptool.frist_page.adapter.Adapter_record_rv;
+import com.wlw.bookkeeptool.tableBean.everyDayTable;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import litepal.LitePal;
+
+import static com.wlw.bookkeeptool.MyApplication.UserName;
 
 public class Record_Fragment extends BaseFragment implements View.OnClickListener {
     private static final String SHOW_TAP_TARGET = "SHOW_TAP_TARGET";
@@ -28,9 +42,11 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
     private TextView star_date;
     private TextView end_date;
     private ImageView query;
-    private EmptyRecyclerView record_rv;
+    private RecyclerView record_rv;
     private TextView Total;
     private LinearLayout parentLayout;
+    private ArrayList<everyDayTable> dataList;
+    private Adapter_record_rv adapter_record_rv;
 
     @Override
     protected View initFragmentView(LayoutInflater inflater) {
@@ -44,6 +60,7 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
         Total = view.findViewById(R.id.Total);
         record_rv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         initNavigation();
+
         return view;
     }
     //点击事件
@@ -52,9 +69,23 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
         end_date.setOnClickListener(this);
         query.setOnClickListener(this);
     }
-    //数据初始化
+    //数据初始化 (默认查当前月)
     public void  initdata(){
-
+        float sum = 0.0f;
+        Calendar c = Calendar.getInstance();//
+        int  mYear = c.get(Calendar.YEAR); // 获取当前年份
+        int  mMonth = c.get(Calendar.MONTH) + 1;// 获取当前月份
+        int  mDay = c.get(Calendar.DAY_OF_MONTH);// 获取当前日期
+        int  mWay = c.get(Calendar.DAY_OF_WEEK);// 获取当前日期的星期
+        int  mHour = c.get(Calendar.HOUR_OF_DAY);//时
+        int  mMinute = c.get(Calendar.MINUTE);//分
+        dataList = (ArrayList<everyDayTable>) LitePal.where("year = "+mYear+"; month = "+mMonth+"").find(everyDayTable.class);
+        adapter_record_rv = new Adapter_record_rv(dataList);
+        record_rv.setAdapter(adapter_record_rv);
+        for (everyDayTable e:dataList){
+            sum+=e.getTotalPrice_day();
+        }
+        Total.setText(sum+"元");
     }
     //初始化Toolbar
     public void initNavigation() {
@@ -104,13 +135,32 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
                 DateUtils.showDateDialog(getContext(),end_date);
                 break;
             case R.id.query:
-                go_query("","");
+                go_query(star_date.getText().toString(),end_date.getText().toString());
                 break;
         }
     }
     //按日期去查询
     private void go_query(String Stardate, String Enddate) {
-
+        dataList.clear();
+        float sum=0.0f;
+        Cursor cursor = LitePal.findBySQL("select * from everyDayTable where username='"+UserName+"'and shutDownTimeStr>='"+Stardate+"' and shutDownTimeStr<='"+Enddate+"'");
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String deskCount = cursor.getString(cursor.getColumnIndex("deskcount"));
+            String shutDownTimeStr = cursor.getString(cursor.getColumnIndex("shutdowntimestr"))+"";
+            float totalPrice_day = cursor.getFloat(cursor.getColumnIndex("totalprice_day"));
+            everyDayTable everyDayTable = new everyDayTable();
+            everyDayTable.setId(id);
+            everyDayTable.setTotalPrice_day(totalPrice_day);
+            everyDayTable.setShutDownTimeStr(shutDownTimeStr);
+            everyDayTable.setDeskCount(deskCount);
+            dataList.add(everyDayTable);
+                sum+=totalPrice_day;
+//            adapter_record_rv = new Adapter_record_rv(dataList);
+//            record_rv.setAdapter(adapter_record_rv);
+        }
+            adapter_record_rv.notifyDataSetChanged();
+            Total.setText(sum+"元");
     }
 
     /**
@@ -191,7 +241,7 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    public void onResume() {
+    public void onResume(){
         initdata();
         initevent();
         super.onResume();

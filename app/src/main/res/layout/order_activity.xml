@@ -41,7 +41,7 @@
               android:layout_width="50dp"
               android:layout_height="50dp"/>
            <EditText
-               android:id="@+id/desk_num"
+               android:id="@+id/desk_name"
                android:text=""
                android:hint="输入座位号(默认'散客')"
                android:gravity="center"

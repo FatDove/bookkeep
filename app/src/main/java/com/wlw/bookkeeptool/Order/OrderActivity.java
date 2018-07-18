@@ -9,8 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,7 +53,7 @@ public class OrderActivity extends Activity {
     private TextView title;
     private FloatingActionButton fabSelectMenu;
     private ImageView desk;
-    private EditText deskNum;
+    private EditText deskName;
     private EmptyRecyclerView superRv;
     private Button submitOrder;
     private RelativeLayout slideMenu;
@@ -110,7 +112,7 @@ public class OrderActivity extends Activity {
         title = (TextView) findViewById(R.id.title);
         fabSelectMenu = (FloatingActionButton) findViewById(R.id.fab_select_menu);
         desk = (ImageView) findViewById(R.id.desk);
-        deskNum = (EditText) findViewById(R.id.desk_num);
+        deskName = (EditText) findViewById(R.id.desk_name);
         superRv = (EmptyRecyclerView) findViewById(R.id.super_rv);
         submitOrder = (Button) findViewById(R.id.submit_order);
         slideMenu = (RelativeLayout) findViewById(R.id.slide_menu);
@@ -124,10 +126,14 @@ public class OrderActivity extends Activity {
     }
 
     private void initevent() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        // 隐藏软键盘
+        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
         fabSelectMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(slideMenu);
+                drawerLayout.openDrawer(slideMenu);//打开侧边栏
+
             }
         });
         submitOrder.setOnClickListener(new View.OnClickListener() {
@@ -145,17 +151,21 @@ public class OrderActivity extends Activity {
                 float allMenuPrice = 0.0f;
                 everyDeskTable everyDeskTable = new everyDeskTable();
                 for (int i = 0; i < superMenu_rv_adapter.getData().size(); i++) {
-                    everyDeskTable.getEveryDeskTableList().add(superMenu_rv_adapter.getData().get(i));
+                    everyDeskTable.getEveryDishTableList().add(superMenu_rv_adapter.getData().get(i));
                     superMenu_rv_adapter.getData().get(i).save();//单条菜保存
                     allMenuPrice += superMenu_rv_adapter.getData().get(i).getTotalPrice_dish();
                 }
-                everyDeskTable.setDeskNum(deskNum.getText().toString());
+                if (TextUtils.isEmpty(deskName.getText().toString())){
+                    everyDeskTable.setDeskNum("散客");
+                }else{
+                    everyDeskTable.setDeskNum(deskName.getText().toString());
+                }
                 everyDeskTable.setUsername(UserName);
                 everyDeskTable.setStartBillTime(new Date());
 
                 float endPrice=(float)(Math.round(allMenuPrice*100)/100);//如果要求精确4位就*10000然后/10000</span>
                 everyDeskTable.setTotalPrice_desk(endPrice);//当前消费 保留两位小数
-                everyDeskTable.setIs_shutDown("0");
+                everyDeskTable.setIsCheckout("0");
                 if(everyDeskTable.save()){//单桌菜保存
                     Toast.makeText(context, "下单成功", Toast.LENGTH_SHORT).show();
                 }else{

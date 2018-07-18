@@ -24,7 +24,7 @@ public class everyDeskTable extends LitePalSupport implements Serializable {
    private String isCheckout; //买单结账
    @Column(defaultValue = "0")//指定字段默认值 0 代表没打样 ，1表示打过样的记录
    private String isEndwork; //打烊了么
-   private List<everyDishTable> everyDeskTableList = new ArrayList<everyDishTable>(); //everyDishTable 表 与 everyDeskTable 表  是 多对一的关系
+   private List<everyDishTable> everyDishTableList = new ArrayList<everyDishTable>(); //everyDishTable 表 与 everyDeskTable 表  是 多对一的关系
 
    public String getUsername() {
       return username == null ? "" : username;
@@ -74,14 +74,6 @@ public class everyDeskTable extends LitePalSupport implements Serializable {
       this.endBillTime = endBillTime;
    }
 
-   public String getIs_shutDown() {
-      return isCheckout == null ? "" : isCheckout;
-   }
-
-   public void setIs_shutDown(String isCheckout) {
-      this.isCheckout = isCheckout;
-   }
-
    public String getIsCheckout() {
       return isCheckout == null ? "" : isCheckout;
    }
@@ -98,14 +90,13 @@ public class everyDeskTable extends LitePalSupport implements Serializable {
       this.isEndwork = isEndwork;
    }
 
-   public List<everyDishTable> getEveryDeskTableList() {
-      if (everyDeskTableList == null) {
+   public List<everyDishTable> getEveryDishTableList() {
+      if (everyDishTableList == null) {
          return new ArrayList<>();
       }
-      return everyDeskTableList;
+      return everyDishTableList;
    }
-
-   public void setEveryDeskTableList(List<everyDishTable> everyDeskTableList){
-      this.everyDeskTableList = everyDeskTableList;
+   public void setEveryDishTableList(List<everyDishTable> everyDishTableList){
+      this.everyDishTableList = everyDishTableList;
    }
 }

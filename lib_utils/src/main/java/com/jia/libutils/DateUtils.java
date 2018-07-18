@@ -14,7 +14,7 @@ import java.util.Locale;
  */
 
 public class DateUtils {
-    public static String showDateDialog(Context context, final TextView view1){
+    public static Date showDateDialog(Context context, final TextView view1){
         Calendar d = Calendar.getInstance(Locale.CHINA);
         // 创建一个日历引用d，通过静态方法getInstance() 从指定时区 Locale.CHINA 获得一个日期实例
         Date myDate = new Date();
@@ -43,7 +43,6 @@ public class DateUtils {
                     day="0"+dayOfMonth;
                 }
               String date = "" + year + "-" + (month) + "-" + day;
-
                 view1.setText(date);
 //                switch (id){
 //                    case R.id.startDate:
@@ -57,6 +56,6 @@ public class DateUtils {
         },year, month, day);
         datePickerDialog.setMessage("请选择日期");
         datePickerDialog.show();
-        return view1.getText().toString();
+        return myDate;
     }
 }

@@ -1,8 +1,7 @@
-package com.wlw.bookkeeptool.frist_page;
+package com.wlw.bookkeeptool.frist_page.adapter;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -21,7 +20,7 @@ public class Adapter_today_order_rv extends BaseQuickAdapter<everyDeskTable, Bas
     Context context;
     ArrayList<everyDeskTable> its;
     public Adapter_today_order_rv(Context context, ArrayList<everyDeskTable> its) {
-        super(R.layout.today_order_item, its);
+        super(R.layout.item_today_order, its);
         this.context = context;
         this.its = its;
 //                Log.i(TAG, "convert123: " + its.get(0).getAddress().toString());
@@ -33,13 +32,17 @@ public class Adapter_today_order_rv extends BaseQuickAdapter<everyDeskTable, Bas
         helper.setText(R.id.desk_num,item.getDeskNum());
         helper.setText(R.id.now_Price,item.getTotalPrice_desk()+"元");
         String describeStr = "";
-        for (everyDishTable e :item.getEveryDeskTableList()){
+        for (everyDishTable e :item.getEveryDishTableList()){
             describeStr+= e.getFoodname()+"("+e.getFoodCount()+")~";
         }
         helper.setText(R.id.menu_describe,describeStr);
         String time_str =  TimeUtils.date2String(item.getStartBillTime());
         String[] split = time_str.split(" ");
         helper.setText(R.id.place_order_time,split[1]);
+        if (item.getIsCheckout().equals("1")){
+        helper.setVisible(R.id.img_finish_check,true);
+        }
+
 
     }
 

@@ -35,6 +35,7 @@ import com.jia.libutils.RxAndroidUtils.RxjavaUtil;
 import com.jia.libutils.RxAndroidUtils.UITask;
 import com.jia.libutils.WindowUtils;
 import com.wlw.bookkeeptool.R;
+import com.wlw.bookkeeptool.tableBean.everyDayTable;
 import com.wlw.bookkeeptool.tableBean.everyDeskTable;
 import com.wlw.bookkeeptool.tableBean.everyDishTable;
 import com.wlw.bookkeeptool.tableBean.menuBean;
@@ -44,6 +45,7 @@ import java.util.Date;
 import java.util.List;
 
 import litepal.LitePal;
+import litepal.annotation.Column;
 import litepal.tablemanager.Connector;
 
 import static com.wlw.bookkeeptool.MyApplication.UserName;
@@ -54,8 +56,8 @@ import static com.wlw.bookkeeptool.MyApplication.UserName;
 
 public class CustomerMenu_infoActivity extends Activity {
     Context context;
-    private OrderMenuShow_Rv_Adapter orderMenuShow_rv_adapter;
-    private addMenu_Super_Rv_Adapter addMenu_super_rv_adapter;
+    private SelectMenuShow_Rv_Adapter selectMenuShow_rv_adapter;  //选择菜单
+    private addMenu_Super_Rv_Adapter addMenu_super_rv_adapter; //填充菜单
     private DrawerLayout mDrawerLayout;
     private TextView mDeskNum;
     private TextView mDownMenuTime;
@@ -99,7 +101,7 @@ public class CustomerMenu_infoActivity extends Activity {
         String strDate = TimeUtils.date2String(everyDKTbean.getStartBillTime());
         mDownMenuTime.setText(strDate);
         mDeskNum.setText(everyDKTbean.getDeskNum() + "");
-        addMenu_super_rv_adapter = new addMenu_Super_Rv_Adapter(everyDKTbean.getEveryDeskTableList());
+        addMenu_super_rv_adapter = new addMenu_Super_Rv_Adapter(everyDKTbean.getEveryDishTableList());
         mSuperRv.setAdapter(addMenu_super_rv_adapter);
     }
 
@@ -108,8 +110,8 @@ public class CustomerMenu_infoActivity extends Activity {
         //这里分两种策略 1 一次性全查  2用哪类查哪类
         //目前预估数量不大 使用 1
         ArrayList<menuBean> allmenuBean = (ArrayList<menuBean>) LitePal.findAll(menuBean.class);
-        orderMenuShow_rv_adapter = new OrderMenuShow_Rv_Adapter(context, allmenuBean);
-        mShowMenuRv.setAdapter(orderMenuShow_rv_adapter);
+        selectMenuShow_rv_adapter = new SelectMenuShow_Rv_Adapter(context, allmenuBean);
+        mShowMenuRv.setAdapter(selectMenuShow_rv_adapter);
     }
     //    给imglist取数据
     private void getData_for_imglist() {
@@ -160,12 +162,12 @@ public class CustomerMenu_infoActivity extends Activity {
                 RxjavaUtil.doInUIThread(new UITask<String>() {
                     @Override
                     public void doInUIThread() {
-                        orderMenuShow_rv_adapter.replaceData(menuBean_type_list);
+                        selectMenuShow_rv_adapter.replaceData(menuBean_type_list);
                     }
                 });
             }
         });
-        orderMenuShow_rv_adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        selectMenuShow_rv_adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 menuBean superMenu = (menuBean) adapter.getData().get(position);
@@ -270,8 +272,9 @@ public class CustomerMenu_infoActivity extends Activity {
                                 try{
                                     everyDishTable.setItemType(1);
                                     everyDishTable.save();//单条菜保存;
+                                    addMenu_super_rv_adapter.remove(position);
                                     float s = everyDishTable.getTotalPrice_dish() + everyDKTbean.getTotalPrice_desk();
-                                    everyDKTbean.getEveryDeskTableList().add(everyDishTable);
+                                    everyDKTbean.getEveryDishTableList().add(everyDishTable);
                                     everyDKTbean.setTotalPrice_desk(s);
                                     everyDKTbean.save();
                                     addMenu_super_rv_adapter.notifyDataSetChanged();
@@ -346,10 +349,18 @@ public class CustomerMenu_infoActivity extends Activity {
                     }
                 }).setPositiveButton("嗯，现在",new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (everyDKTbean.isSaved()){
-                    everyDKTbean.delete();
+            public void onClick(DialogInterface dialog, int which){
+                everyDKTbean.setEndBillTime(new Date());
+                everyDKTbean.setIsCheckout("1");
+                if (everyDKTbean.save()){
+                    Toast.makeText(context, "结账成功", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
+//                    Date endBillTime;  //每桌结账时间
+//                    @Column(defaultValue = "0")//指定字段默认值 0 代表没打样 ，1表示打过样的记录
+//                    private String isCheckout; //买单结账
+//                    @Column(defaultValue = "0")//指定字段默认值 0 代表没打样 ，1表示打过样的记录
+//                    private String isEndwork; //打烊了么
                 dialog.dismiss();
             }
         }).show();

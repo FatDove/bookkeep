@@ -5,15 +5,34 @@
     android:orientation="vertical"
     android:id="@+id/parentLayout"
     >
-    <TextView
-        android:paddingTop="5dp"
-        android:id="@+id/tv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" 设置查询日期"
-        android:background="@color/yellow"
-        android:textSize="20sp"
-        android:textStyle="normal"/>
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:paddingTop="5dp"
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 设置查询日期"
+            android:background="@color/yellow"
+            android:textSize="20sp"
+            android:textStyle="normal"/>
+        <TextView
+            android:gravity="bottom"
+            android:paddingTop="5dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/tv2"
+            android:textColor="@color/red"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="(默认查看当前月的)"
+            android:background="@color/yellow"
+            android:textSize="16sp"
+            android:textStyle="normal"/>
+    </LinearLayout>
+
     <LinearLayout
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -28,10 +47,11 @@
             android:gravity="center"
             android:textColorHint="@color/cyan"
             android:textSize="15sp"
+            android:textColor="@color/black"
             android:layout_marginLeft="10dp"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
         <TextView
             android:text="至"
             android:textSize="18sp"
@@ -41,33 +61,53 @@
             android:layout_height="wrap_content" />
         <TextView
             android:autoLink="all"
-            android:textColorLink="@color/black"
             android:id="@+id/end_date"
             android:text=""
             android:hint="截止日期"
             android:gravity="center"
             android:textColorHint="@color/cyan"
             android:textSize="15sp"
+            android:textColor="@color/black"
             android:layout_marginLeft="10dp"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
         <ImageView
             android:id="@+id/query"
-            android:text=""
-            android:hint="起始日期"
-            android:gravity="center"
-            android:textColorHint="@color/cyan"
+            android:layout_marginRight="5dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/ic_query3"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="23dp">
+        <TextView
+            android:text="日期"
             android:textSize="15sp"
             android:layout_marginLeft="10dp"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="40dp"
-            android:src="@mipmap/ic_delete"
-            />
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="桌单数"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="收入"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <com.jia.libui.MyControl.EmptyRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/record_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -83,12 +123,13 @@
     <!--android:src="@mipmap/ic_launcher"-->
     <!--android:layout_centerInParent="true" />-->
     <RelativeLayout
+        android:background="@color/gray"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="wrap_content">
         <TextView
            android:gravity="center"
            android:text="总计："
-           android:textSize="30sp"
+           android:textSize="25sp"
            android:textColor="@color/black"
            android:textStyle="bold"
            android:layout_width="wrap_content"
@@ -97,7 +138,7 @@
             android:id="@+id/Total"
             android:gravity="center"
             android:text="100"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textColor="@color/black"
             android:layout_marginRight="20dp"
             android:layout_alignParentRight="true"

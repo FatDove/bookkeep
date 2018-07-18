@@ -14,15 +14,15 @@ import litepal.crud.LitePalSupport;
 public class everyDayTable extends LitePalSupport implements Serializable {
    @Column(unique = true)
    private int id;
-   private String username;
-   private String totalPrice_day; //一天的流水总和
+   private float totalPrice_day; //一天的流水总和
    private String deskCount; // 记录一天上了多少桌
+   private Date shutDownTime; //打烊下班的时间
+   private String username;
    private int year;
    private int month;
    private int day;
    @Column(defaultValue = "0")//指定字段默认值 0 代表没打样 ，1表示打过样的记录
-   private String is_shutDown;
-   private Date shutDownTime; //打烊下班的时间
+   private String shutDownTimeStr;
    private List<everyDeskTable> everyDeskTableList = new ArrayList<everyDeskTable>(); //everyDeskTable 表 与 everyDayTable 表  是 多对一的关系
 
    public String getUsername() {
@@ -33,11 +33,11 @@ public class everyDayTable extends LitePalSupport implements Serializable {
       this.username = username;
    }
 
-   public String getTotalPrice_day() {
-      return totalPrice_day == null ? "" : totalPrice_day;
+   public float getTotalPrice_day() {
+      return totalPrice_day;
    }
 
-   public void setTotalPrice_day(String totalPrice_day) {
+   public void setTotalPrice_day(float totalPrice_day) {
       this.totalPrice_day = totalPrice_day;
    }
 
@@ -100,11 +100,11 @@ public class everyDayTable extends LitePalSupport implements Serializable {
       this.id = id;
    }
 
-   public String getIs_shutDown() {
-      return is_shutDown == null ? "" : is_shutDown;
+   public String getShutDownTimeStr() {
+      return shutDownTimeStr == null ? "" : shutDownTimeStr;
    }
 
-   public void setIs_shutDown(String is_shutDown) {
-      this.is_shutDown = is_shutDown;
+   public void setShutDownTimeStr(String shutDownTimeStr) {
+      this.shutDownTimeStr = shutDownTimeStr;
    }
 }

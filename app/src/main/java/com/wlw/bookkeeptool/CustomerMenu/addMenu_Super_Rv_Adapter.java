@@ -6,12 +6,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wlw.bookkeeptool.R;
 import com.wlw.bookkeeptool.tableBean.everyDishTable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,15 +44,22 @@ public class addMenu_Super_Rv_Adapter extends BaseMultiItemQuickAdapter<everyDis
     protected void convert(BaseViewHolder helper, everyDishTable item) {
         switch (helper.getItemViewType()) {
             case itemtype_def:
+                Date date = new Date();
+                String result_time1 = TimeUtils.getFitTimeSpan(date.getTime(),item.getStartBillTime().getTime(), 3);
                 helper.setText(R.id.food_name, item.getFoodname())
                         .setText(R.id.food_count, item.getFoodCount() + "")
                         .setText(R.id.Sum, item.getTotalPrice_dish() + "元")
+                        .setText(R.id.down_menu_time, result_time1+ "前")
                         .addOnClickListener(R.id.delete_view);
                 break;
             case itemtype_add:
+                Date date2 = new Date();
+//                long result_time = date.getTime() - item.getStartBillTime().getTime();
+                String result_time2 = TimeUtils.getFitTimeSpan(date2.getTime(),item.getStartBillTime().getTime(), 3);
                 helper.setText(R.id.food_name, item.getFoodname())
                         .setText(R.id.food_count, item.getFoodCount() + "")
                         .setText(R.id.Sum, item.getTotalPrice_dish() + "元")
+                        .setText(R.id.down_menu_time, result_time2+"前")
                         .addOnClickListener(R.id.delete_view);
                 break;
             case itemtype_edit:

@@ -1,6 +1,9 @@
 package com.wlw.bookkeeptool.frist_page.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -22,13 +25,15 @@ import com.jia.libui.Navigation.impl.ChatNavigation;
 import com.jia.libutils.WindowUtils;
 import com.wlw.bookkeeptool.CustomerMenu.CustomerMenu_infoActivity;
 import com.wlw.bookkeeptool.R;
-import com.wlw.bookkeeptool.frist_page.Adapter_today_order_rv;
+import com.wlw.bookkeeptool.frist_page.adapter.Adapter_today_order_rv;
 import com.wlw.bookkeeptool.tableBean.everyDeskTable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import litepal.LitePal;
+
+import static com.wlw.bookkeeptool.MyApplication.UserName;
 
 public class Today_Order_Fragment extends BaseFragment implements View.OnClickListener {
     private static final String SHOW_TAP_TARGET = "SHOW_TAP_TARGET";
@@ -46,6 +51,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
     private int allDesk_count=0;
     private Adapter_today_order_rv adapter_today_order_rv;
     private LinearLayout parentLayout;
+    private WorkOutBroadcastReceiver workOutBroadcastReceiver;
 
 
     @Override
@@ -62,6 +68,11 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
         mUnCheckoutCount = (TextView) view.findViewById(R.id.unCheckout_count);
         mTodayOrder = view.findViewById(R.id.today_order);
         initNavigation();
+
+        workOutBroadcastReceiver = new WorkOutBroadcastReceiver();
+        IntentFilter fff = new IntentFilter("WorkOut");
+        getActivity().registerReceiver(workOutBroadcastReceiver,fff);
+
         return view;
     }
 
@@ -77,9 +88,9 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
     }
     private void initdata(){
         try{
-            everyDeskTablelist = (ArrayList<everyDeskTable>) LitePal.where("isCheckout = 0 ; isEndwork = 0").find(everyDeskTable.class,true);//激进查询
+            everyDeskTablelist = (ArrayList<everyDeskTable>) LitePal.where( "isEndwork = 0 ; username = "+UserName+"").find(everyDeskTable.class,true);//激进查询
             allDesk_count = everyDeskTablelist.size();
-            checkout_count = LitePal.where("isEndwork = 0 ; isCheckout = 1 ").count(everyDeskTable.class);
+            checkout_count = LitePal.where("isEndwork = 0 ; username = "+UserName+"; isCheckout = 1 ").count(everyDeskTable.class);
         }catch (Exception e){
             Toast.makeText(getActivity(), "异常了", Toast.LENGTH_SHORT).show();
         }
@@ -125,7 +136,6 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
 
     private void initevent() {
         adapter_today_order_rv.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 everyDeskTable everyDeskTable = (everyDeskTable) adapter.getData().get(position);
@@ -150,9 +160,15 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
 
     @Override
     public void onResume() {
+        super.onResume();
         initdata();
         initevent();
-        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        getActivity().unregisterReceiver(workOutBroadcastReceiver);
+        super.onDestroy();
     }
 
     private void showTapTarget() {
@@ -216,5 +232,19 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
         }
 
     }
+
+    class WorkOutBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String isWorkOut = intent.getStringExtra("WorkOut");
+            if(isWorkOut.equals("Yes")){
+//                Log.i("onReceive", "新朋友"+newFriendRequest);
+                 Toast.makeText(context,"打烊收工咯！可以去【流水记录】中查看。", Toast.LENGTH_SHORT).show();
+                  initdata();
+                  initevent();
+            }
+        }
+    }
+
 
 }

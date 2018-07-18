@@ -51,6 +51,16 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp" />
         <TextView
+            android:id="@+id/down_menu_time"
+            android:layout_toRightOf="@+id/food_count"
+            android:text="XXX"
+            android:textSize="16sp"
+            android:textColor="@color/purple"
+            android:gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <TextView
             android:id="@+id/Sum"
             android:layout_alignParentRight="true"
             android:text="100"
