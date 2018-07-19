@@ -2,10 +2,7 @@ package com.jia.base;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.jaeger.library.StatusBarUtil;
 import com.jia.base.annotation.BindEventBus;
@@ -54,7 +51,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends RxAppC
         }
 
         initView();
-
         initData();
 
     }

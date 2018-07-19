@@ -1,5 +1,6 @@
 package com.wlw.bookkeeptool.frist_page.fragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.jia.base.BaseFragment;
@@ -23,6 +25,7 @@ import com.jia.libui.Navigation.impl.ChatNavigation;
 import com.jia.libutils.DateUtils;
 import com.jia.libutils.WindowUtils;
 import com.wlw.bookkeeptool.R;
+import com.wlw.bookkeeptool.Record.Record_Info_Activity;
 import com.wlw.bookkeeptool.frist_page.adapter.Adapter_record_rv;
 import com.wlw.bookkeeptool.tableBean.everyDayTable;
 
@@ -65,6 +68,15 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
         star_date.setOnClickListener(this);
         end_date.setOnClickListener(this);
         query.setOnClickListener(this);
+        adapter_record_rv.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                everyDayTable everyDayTable = (everyDayTable) adapter.getData().get(position);
+                Intent intent = new Intent(getActivity(), Record_Info_Activity.class);
+                intent.putExtra("DayID",everyDayTable.getId());
+                getActivity().startActivity(intent);
+            }
+        });
     }
     //数据初始化 (默认查当前月)
     public void  initdata(){
@@ -112,7 +124,7 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
     }
 
     @Override
-    protected void initFragmentData(Bundle savedInstanceState) {
+    protected void initFragmentData(Bundle savedInstanceState){
 
     }
 

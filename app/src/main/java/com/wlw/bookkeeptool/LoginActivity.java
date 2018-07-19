@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.jia.libutils.SettingUtil;
 import com.wlw.bookkeeptool.frist_page.MainActivity;
@@ -24,7 +25,7 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login);
 //        PermissionUtils.launchAppDetailsSettings();
 //        isGranted();
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//透明状态栏
         SettingUtil.isHavePermission(this,Manifest.permission.READ_EXTERNAL_STORAGE);
 //        SettingUtil.goSettingPage(this);
 //        SettingUtil.goPermissionPage(this);

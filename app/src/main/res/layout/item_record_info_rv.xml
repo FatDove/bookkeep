@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_border_white"
+    android:layout_margin="5dp"
+>
+  <TextView
+      android:id="@+id/food_name"
+      android:text="XXX"
+      android:textColor="@color/Blue"
+      android:textSize="20dp"
+      android:textStyle="bold"
+      android:gravity="center"
+      android:layout_weight="1"
+      android:layout_width="0dp"
+      android:layout_height="40dp" />
+    <TextView
+        android:id="@+id/food_count_sum"
+        android:text="XXX"
+        android:textColor="@color/Blue"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="40dp" />
+    <TextView
+        android:id="@+id/sum_price"
+        android:text="XXX"
+        android:textColor="@color/Blue"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="40dp" />
+
+</LinearLayout>
