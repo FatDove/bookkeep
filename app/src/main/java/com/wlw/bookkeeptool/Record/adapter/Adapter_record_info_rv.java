@@ -23,7 +23,7 @@ public class Adapter_record_info_rv extends BaseQuickAdapter<Record_Info_Rv_Bean
     protected void convert(BaseViewHolder helper, Record_Info_Rv_Bean item){
         Log.i(TAG, "convert: " + item.toString());
         helper.setText(R.id.food_name,item.getName());
-        helper.setText(R.id.food_count_sum,item.getSum_count());
+        helper.setText(R.id.food_count_sum,item.getSum_count()+"");
         helper.setText(R.id.sum_price,item.getSum_price()+"元");
 
     }

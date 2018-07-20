@@ -86,6 +86,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
     protected void initFragmentData(Bundle savedInstanceState){
 
     }
+    
     private void initdata(){
         try{
             everyDeskTablelist = (ArrayList<everyDeskTable>) LitePal.where( "isEndwork = 0 ; username = "+UserName+"").find(everyDeskTable.class,true);//激进查询
@@ -106,6 +107,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
         int  mWay = c.get(Calendar.DAY_OF_WEEK);// 获取当前日期的星期
         int  mHour = c.get(Calendar.HOUR_OF_DAY);//时
         int  mMinute = c.get(Calendar.MINUTE);//分
+        int  mSecond = c.get(Calendar.SECOND);//分
         mDateYear.setText(mYear+"年");
         mDateMonthDay.setText(mMonth+"月"+mDay+"日");
         System.out.println(mYear+"年");

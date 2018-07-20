@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.jia.base.BaseActivity;
 import com.jia.base.BasePresenter;
+import com.jia.libui.Navigation.impl.ChatNavigation;
+import com.jia.libutils.DateUtils;
+import com.jia.libutils.WindowUtils;
 import com.wlw.bookkeeptool.R;
 import com.wlw.bookkeeptool.Record.adapter.Adapter_record_info_rv;
 import com.wlw.bookkeeptool.tableBean.everyDayTable;
@@ -37,6 +40,9 @@ public class Record_Info_Activity extends BaseActivity {
     private LinearLayout parentLayout;
     private ArrayList<Record_Info_Rv_Bean> needlist= new ArrayList<>();
     private Adapter_record_info_rv adapter_record_info_rv;
+    private int desk_count;
+    private float totalPrice_day;
+    private TextView desk_count_tv;
 
     @Override
     protected void initActivityView(Bundle savedInstanceState) {
@@ -56,7 +62,8 @@ public class Record_Info_Activity extends BaseActivity {
         //将查询出来的 所有单条数据都存在 一个dataList集合里
         for (everyDeskTable deskTable :everyDayTables.getEveryDeskTableList())
      {
-         dataList.addAll(deskTable.getEveryDishTableList());
+         everyDeskTable everyDeskTable = LitePal.find(everyDeskTable.class, deskTable.getId(), true);
+         dataList.addAll(everyDeskTable.getEveryDishTableList());
      }
         //将dataList集合中的数据 按名称分类存在 HashMap中  HashMap的value也是 everyDishTable数组集合
         HashMap<String,ArrayList<everyDishTable>> dataHashMap = new HashMap<>();
@@ -83,12 +90,17 @@ public class Record_Info_Activity extends BaseActivity {
             needlist.add(record_info_rvrv_bean);
         }
         //-------拿到结果----------
-
+        desk_count = everyDayTables.getEveryDeskTableList().size();
+        totalPrice_day = everyDayTables.getTotalPrice_day();
         adapter_record_info_rv = new Adapter_record_info_rv(needlist);
         record_info_rv.setAdapter(adapter_record_info_rv);
+        desk_count_tv.setText("共"+desk_count+"单");
+        big_Sum.setText(totalPrice_day+"元");
+        that_time_date.setText(DateUtils.BackDateStr(everyDayTables.getShutDownTime(),1));
+        that_time_weekday.setText(DateUtils.BackDateStr(everyDayTables.getShutDownTime(),2));
+        desk_count_tv.setText(desk_count+"单");
 
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +108,7 @@ public class Record_Info_Activity extends BaseActivity {
     @Override
     protected void initView() {
         that_time_date = (TextView) findViewById(R.id.that_time_date);
+        desk_count_tv = (TextView) findViewById(R.id.desk_count_tv);
         that_time_weekday = (TextView) findViewById(R.id.that_time_weekday);
         record_info_rv = (RecyclerView) findViewById(R.id.record_info_rv);
         big_Sum = (TextView) findViewById(R.id.big_Sum);
@@ -103,5 +116,25 @@ public class Record_Info_Activity extends BaseActivity {
         share_text = (ImageView) findViewById(R.id.share_text);
         parentLayout = (LinearLayout) findViewById(R.id.parentLayout);
         record_info_rv.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        initNavigation();
     }
+
+    //初始化Toolbar
+    public void initNavigation() {
+        ChatNavigation.Builder homeBuilder = new ChatNavigation.Builder(this,parentLayout);
+        homeBuilder.setTitleRes("当日盘点");
+        homeBuilder.builder().build(); //builder是组装  build是创建
+        AdaptationStatusbar();
+    }
+
+    //计算状态栏
+    private void AdaptationStatusbar() {
+        int statusheight = WindowUtils.getStatusHeight(this);
+        LinearLayout layout = (LinearLayout) parentLayout.getChildAt(0);
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layout.getLayoutParams();
+        layoutParams.height += statusheight;
+        layout.setLayoutParams(layoutParams);
+        layout.setPadding(0, layout.getPaddingTop() + statusheight, 0, 0);
+    }
+
 }

@@ -58,4 +58,41 @@ public class DateUtils {
         datePickerDialog.show();
         return myDate;
     }
+
+    /**
+     *
+     * @param date
+     * @param type  1 返回年月日   2 返回星期几  3 返回时分秒
+     * @return
+     */
+    public static String BackDateStr (Date date ,int type){
+        String [] weeks = {"六","日","一","二","三","四","五"};
+        String DateStr="";
+        Calendar d = Calendar.getInstance(Locale.CHINA);
+        // 创建一个日历引用d，通过静态方法getInstance() 从指定时区 Locale.CHINA 获得一个日期实例
+        // 创建一个Date实例
+        d.setTime(date);
+        // 设置日历的时间，把一个新建Date实例myDate传入
+        int  mYear = d.get(Calendar.YEAR); // 获取当前年份
+        int  mMonth = d.get(Calendar.MONTH) + 1;// 获取当前月份
+        int  mDay = d.get(Calendar.DAY_OF_MONTH);// 获取当日期
+        int  mWay = d.get(Calendar.DAY_OF_WEEK);// 获取当前日期的星期
+        int  mHour = d.get(Calendar.HOUR_OF_DAY);//时
+        int  mMinute = d.get(Calendar.MINUTE);//分
+        int  mSecond = d.get(Calendar.SECOND);//分
+
+        switch (type){
+            case 1:
+               DateStr = mYear+"-"+mMonth+"-"+mDay;
+                break;
+            case 2:
+                DateStr = "星期"+weeks[mWay];
+                break;
+            case 3:
+                DateStr = mHour+":"+mMinute+":"+mSecond;
+        }
+
+        return DateStr;
+    }
+
 }

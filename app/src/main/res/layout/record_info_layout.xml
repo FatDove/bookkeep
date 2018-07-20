@@ -8,7 +8,7 @@
     >
 
     <LinearLayout
-        android:background="@color/orange"
+        android:background="@color/yellow"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="40dp">
@@ -17,15 +17,8 @@
             android:gravity="center"
             android:text="XXX"
             android:textSize="20sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="35dp" />
-        <TextView
-            android:gravity="center"
-            android:textSize="18sp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="35dp" />
@@ -34,11 +27,22 @@
             android:gravity="center"
             android:text="XXX"
             android:textSize="20sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="35dp" />
+        <TextView
+            android:id="@+id/desk_count_tv"
+            android:text="XXX"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="35dp" />
+
     </LinearLayout>
    <LinearLayout
        android:orientation="horizontal"
@@ -97,7 +101,7 @@
             android:layout_alignParentRight="true"
             />
         <TextView
-            android:text="总合："
+            android:text="合计："
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18sp"
