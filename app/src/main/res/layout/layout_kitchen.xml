@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/parentLayout">
+    <LinearLayout
+        android:paddingTop="15dp"
+        android:background="@color/rice"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:text="下单人员数:3"
+            android:id="@+id/front_people_count"
+            android:layout_gravity="left|bottom"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="后端专用"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="刷新数据"
+            android:id="@+id/update"
+            android:layout_gravity="right|bottom"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/purple"
+            android:background="@drawable/text_border_select"
+            android:layout_marginRight="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp" />
+    </LinearLayout>
+    <RelativeLayout
+        android:background="@mipmap/vp_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv"
+            android:text="菜单队列"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/dark_blue"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <com.jia.libui.CoverFlow.CoverFlowViewPager
+            android:id="@+id/front_people_vp"
+            android:layout_toRightOf="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginRight="50dp"
+            android:background="@mipmap/vp_bg"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/see_menu_rv"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/img" />
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/front_people_vp"
+            android:background="@color/gray" />
+    </RelativeLayout>
+</LinearLayout>

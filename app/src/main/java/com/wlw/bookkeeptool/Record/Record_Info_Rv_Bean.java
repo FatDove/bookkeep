@@ -34,4 +34,13 @@ public class Record_Info_Rv_Bean {
     public void setSum_count(int sum_count) {
         this.sum_count = sum_count;
     }
+
+    @Override
+    public String toString() {
+        return "Record_Info_Rv_Bean{" +
+                "name='" + name + '\'' +
+                ", sum_price=" + sum_price +
+                ", sum_count=" + sum_count +
+                '}';
+    }
 }

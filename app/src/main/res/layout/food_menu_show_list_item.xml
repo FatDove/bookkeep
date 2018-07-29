@@ -17,23 +17,23 @@
     <ImageView
      android:layout_margin="5dp"
      android:id="@+id/menu_show_item_img"
-     android:src="@mipmap/icon_stub"
-     android:layout_width="50dp"
-     android:layout_height="50dp" />
+     android:background="@mipmap/icon_stub"
+     android:layout_width="45dp"
+     android:layout_height="45dp" />
 
   <TextView
       android:id="@+id/food_name"
       android:text="XXX"
-      android:textSize="25sp"
+      android:textSize="20sp"
       android:textColor="@color/black"
       android:layout_marginLeft="10dp"
       android:layout_toRightOf="@+id/menu_show_item_img"
-      android:layout_width="wrap_content"
+      android:layout_width="130dp"
       android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/food_price"
         android:text="XXX"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:textColor="@color/black"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/food_name"
@@ -49,13 +49,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView
-        android:padding="12dp"
+        android:padding="8dp"
         android:layout_marginRight="15dp"
         android:id="@+id/menu_show_item_edit"
         android:src="@drawable/menu_editor_select"
         android:layout_alignParentRight="true"
-        android:layout_width="60dp"
-        android:layout_height="60dp" />
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
     </RelativeLayout>
     </com.jia.libui.sildeItemLayout.SlidingContentView>
 
@@ -66,7 +66,7 @@
             android:padding="12dp"
             android:id="@+id/delete_view"
             android:src="@drawable/menu_delete_select"
-            android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
     </LinearLayout>
 </com.jia.libui.sildeItemLayout.SlidingItemLayout>

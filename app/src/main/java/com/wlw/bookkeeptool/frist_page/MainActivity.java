@@ -42,11 +42,12 @@ import java.util.List;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
     Context context;
-    private static final int TAB_TOADY_ORDER = 0;
-    private static final int TAB_RECORD = 1;
-    private static final int TAB_START_WORK = 2;
-    private static final int TAB_ALL_ORDER = 3;
-    private static final int TAB_MINE = 4;
+    public static final int TOADY_FG_FRAG = 100;
+    public static final int TAB_TOADY_ORDER = 0;
+    public static final int TAB_RECORD = 1;
+    public static final int TAB_START_WORK = 2;
+    public static final int TAB_ALL_ORDER = 3;
+    public static final int TAB_MINE = 4;
     private final int IMAGE_Local = 8;
     private FrameLayout frag_container;
     private ImageView today_order_icon;
@@ -121,24 +122,24 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.today_order:
                 select(TAB_TOADY_ORDER);
                 ResetIcon();
-                today_order_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_today_order1));
+                today_order_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_today_order_new_1));
 
                 break;
             case R.id.record:
                 select(TAB_RECORD);
                 ResetIcon();
-                record_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_record1));
+                record_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_record_new_1));
 
                 break;
             case R.id.all_order:
                 select(TAB_ALL_ORDER);
                 ResetIcon();
-                all_order_icon .setImageDrawable(getResources().getDrawable(R.mipmap.ic_all_order1));
+                all_order_icon .setImageDrawable(getResources().getDrawable(R.mipmap.ic_all_order_new1));
                 break;
             case R.id.mine:
                 select(TAB_MINE);
                 ResetIcon();
-                mine_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_mine1));
+                mine_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_mine_new_1));
 
                 break;
             case R.id.start_work:
@@ -153,10 +154,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
     //将底部图标重置
     private void ResetIcon(){
-        today_order_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_today_order2));
-        record_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_record2));
-        all_order_icon .setImageDrawable(getResources().getDrawable(R.mipmap.ic_all_order2));
-        mine_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_mine2));
+        today_order_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_today_order_new_2));
+        record_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_record_new_2));
+        all_order_icon .setImageDrawable(getResources().getDrawable(R.mipmap.ic_all_order_new2));
+        mine_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_mine_new_2));
     }
 
     //打开PopuWindow 修改 列表
@@ -222,7 +223,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if (mine_fragment != null) transaction.hide(mine_fragment);
     }
 
-
     //获取图片路径 响应startActivityForResult
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -230,7 +230,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if (resultCode == RESULT_OK && requestCode == IMAGE_Local) {
             Log.i("fjl","渲图");
             Uri uri = data.getData();
-
             Toast.makeText(this,uri + "0000",Toast.LENGTH_SHORT).show();
             Log.i("FanJava", uri.toString() + "666");
             //将从相册获取到的图片,做发送前  和 发送处理
@@ -256,22 +255,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }finally {
                 try {is.close();} catch (IOException e) {e.printStackTrace();}
             }
-
         }
-//        //拍照处理
-//        else if (resultCode == RESULT_OK&&requestCode == IMAGE_Camera) {
-//
-//            File newfile = new File(Camerafile.getAbsolutePath());
-////          Toast.makeText(this, newfile.toString(), Toast.LENGTH_LONG).show();
-//            //1 图像压缩
-//            BitmapFactory.Options options1 = new BitmapFactory.Options();
-//            options1.inSampleSize = 8;
-//            options1.inPreferredConfig = Bitmap.Config.ARGB_8888;
-//            Bitmap bmpDefaultPic = BitmapFactory.decodeFile(newfile.toString(), options1);
-////            SendImageDispose(bmpDefaultPic);//处理图片 进行了多步操作
-//            SendImageWebService(bmpDefaultPic,null);
-//
-//        }
+      if (requestCode==TOADY_FG_FRAG){
+          select(TAB_TOADY_ORDER);
+          ResetIcon();
+          today_order_icon.setImageDrawable(getResources().getDrawable(R.mipmap.ic_today_order_new_1));
+      }
+
     }
 
 

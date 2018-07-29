@@ -13,13 +13,21 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:background="@drawable/button_border_orange_round"
+            android:gravity="center"
+            android:layout_width="75dp"
+            android:layout_height="75dp">
           <ImageView
-              android:background="@drawable/button_border_green"
+              android:foreground="@drawable/icon_down_menu"
+              android:padding="10dp"
               android:layout_width="60dp"
               android:layout_height="60dp"/>
+        </LinearLayout>
           <TextView
               android:text="点餐下单"
-              android:textSize="25sp"
+              android:textSize="23sp"
               android:textColor="@color/black"
               android:layout_marginTop="8dp"
               android:layout_width="wrap_content"
@@ -33,13 +41,20 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent">
-        <ImageView
-            android:background="@drawable/button_border_green"
-            android:layout_width="60dp"
-            android:layout_height="60dp"/>
+        <LinearLayout
+            android:background="@drawable/button_border_orange_round"
+            android:gravity="center"
+            android:layout_width="75dp"
+            android:layout_height="75dp">
+            <ImageView
+                android:foreground="@drawable/ic_shut_down"
+                android:padding="10dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"/>
+        </LinearLayout>
         <TextView
-            android:text="打烊下班"
-            android:textSize="25sp"
+            android:text="打烊收工"
+            android:textSize="23sp"
             android:layout_marginTop="8dp"
             android:textColor="@color/black"
             android:layout_width="wrap_content"

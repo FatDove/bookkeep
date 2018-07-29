@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jia.libui.sildeItemLayout.SlidingItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/button_border_white"
+    android:layout_margin="5dp"
+    android:id="@+id/SlidingItemLayout"
+    app:my_layout_type="Right">
+
+    <com.jia.libui.sildeItemLayout.SlidingContentView
+        android:id="@+id/slidingContentView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:id="@+id/jia"
+            android:text="加"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="@drawable/button_border_green_round"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"/>
+        <ImageView
+            android:id="@+id/finish_food"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ic_finish_food"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:visibility="invisible"
+            />
+        <TextView
+            android:id="@+id/food_name"
+            android:text="111"
+            android:layout_marginLeft="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_width="80dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_toRightOf="@+id/food_name"
+            android:id="@+id/food_count"
+            android:text="111"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginLeft="5dp"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/remark_tv"
+            android:layout_toRightOf="@+id/food_name"
+            android:layout_below="@+id/down_menu_time"
+            android:text="备注："
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/dark_blue"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:id="@+id/down_menu_time"
+            android:layout_toRightOf="@+id/food_count"
+            android:text="XXX"
+            android:textSize="15sp"
+            android:textColor="@color/purple"
+            android:gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+    </RelativeLayout>
+    </com.jia.libui.sildeItemLayout.SlidingContentView>
+
+    <LinearLayout
+        android:visibility="invisible"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:padding="12dp"
+            android:id="@+id/up_food"
+            android:src="@drawable/up_food_select"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <ImageView
+            android:padding="12dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/delete_view"
+            android:src="@drawable/menu_delete_select"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+    </LinearLayout>
+</com.jia.libui.sildeItemLayout.SlidingItemLayout>

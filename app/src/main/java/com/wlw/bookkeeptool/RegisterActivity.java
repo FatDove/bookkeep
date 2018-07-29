@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mob.MobSDK;
@@ -73,7 +74,7 @@ public class RegisterActivity extends Activity {
     private LinearLayout activityMain;
     private EditText etPhone;
     private EditText etSecurity;
-    private Button btnGet;
+    private TextView send_code;
     private Button btnRegister;
 
     public void onCreate( Bundle savedInstanceState) {
@@ -135,7 +136,7 @@ public class RegisterActivity extends Activity {
         activityMain = (LinearLayout) findViewById(R.id.activity_main);
         etPhone = (EditText) findViewById(R.id.et_phone);
         etSecurity = (EditText) findViewById(R.id.et_security);
-        btnGet = (Button) findViewById(R.id.btn_get);
+        send_code =  findViewById(R.id.send_code);
         btnRegister = (Button) findViewById(R.id.btn_register);
     }
 }

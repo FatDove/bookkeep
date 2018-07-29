@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="59dp">
         <TextView
             android:text="新"
             android:textColor="@color/white"
@@ -29,8 +29,9 @@
             android:text="111"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:gravity="center"
+            android:layout_marginTop="5dp"
             android:layout_width="80dp"
             android:layout_height="50dp" />
         <ImageView
@@ -40,29 +41,25 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:padding="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
             />
         <LinearLayout
             android:id="@+id/num_layout"
             android:layout_toRightOf="@+id/minus"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
             android:orientation="vertical"
             >
             <TextView
                 android:id="@+id/food_count_variable"
                 android:text="15"
                 android:textColor="@color/cyan"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:gravity="center"
-                android:layout_width="60dp"
+                android:layout_width="40dp"
                 android:layout_height="30dp" />
-            <TextView
-                android:text="数量"
-                android:gravity="center"
-                android:layout_width="60dp"
-                android:layout_height="20dp" />
+
         </LinearLayout>
         <ImageView
             android:id="@+id/plus"
@@ -70,9 +67,29 @@
             android:background="@mipmap/ic_plus"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:padding="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             />
+        <Button
+            android:layout_toRightOf="@+id/plus"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/remark_bt"
+            android:text="备 注"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:layout_width="60dp"
+            android:layout_height="36dp" />
+        <TextView
+            android:id="@+id/remark_tv"
+            android:layout_toRightOf="@+id/food_name"
+            android:layout_below="@+id/plus"
+            android:text="备注："
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/dark_blue"
+            android:gravity="center"
+            android:layout_marginLeft="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
         <Button
             android:id="@+id/add_menu"
             android:text="确认添加"

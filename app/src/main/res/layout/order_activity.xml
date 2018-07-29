@@ -7,6 +7,7 @@
       
      <!--正页面-->
      <RelativeLayout
+         android:background="@color/yellow"
           android:layout_width="match_parent"
           android:layout_height="match_parent">
           <TextView
@@ -14,24 +15,40 @@
               android:layout_marginTop="5dp"
               android:id="@+id/title"
               android:textSize="25sp"
-              android:text="选材菜单"
+              android:text="选菜下单"
+              android:paddingTop="35dp"
               android:textStyle="bold"
               android:textColor="@color/cyan"
               android:gravity="center_vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content" />
 
-          <com.github.clans.fab.FloatingActionButton
-              android:id="@+id/fab_select_menu"
-              android:layout_width="50dp"
-              android:layout_height="50dp"
-              android:layout_below="@+id/title"
-              android:layout_alignParentRight="true"
-              app:fab_colorNormal="@color/light_blue"
-              app:fab_colorPressed="@color/dark_blue"
-              android:src="@drawable/ic_select_menulist"
-              app:fabSize="auto"
-              app:fab_label="点我下菜" />
+         <android.support.v7.widget.CardView
+             android:id="@+id/cd"
+             android:layout_alignParentRight="true"
+             android:layout_marginRight="10dp"
+             android:layout_below="@+id/title"
+             android:layout_width="60dp"
+             android:layout_height="60dp"
+             android:layout_marginBottom="5dp"
+             app:cardCornerRadius="30dp"
+             app:cardElevation="5dp"
+             app:cardMaxElevation="12dp"
+             >
+             <LinearLayout
+                 android:layout_width="60dp"
+                 android:layout_height="60dp"
+                 android:gravity="center"
+                 android:background="@drawable/button_border_orange_round"
+                 >
+             <ImageView
+                 android:id="@+id/fab_select_menu"
+                 android:layout_width="45dp"
+                 android:layout_height="45dp"
+                 android:background="@drawable/ic_menu_in_out" />
+             </LinearLayout>
+         </android.support.v7.widget.CardView>
+
           <ImageView
               android:id="@+id/desk"
               android:layout_marginLeft="5dp"
@@ -43,32 +60,47 @@
            <EditText
                android:id="@+id/desk_name"
                android:text=""
-               android:hint="输入座位号(默认'散客')"
-               android:gravity="center"
+               android:hint="输入桌位"
+               android:gravity="bottom|center_horizontal"
                android:textColorHint="@color/orange"
                android:layout_below="@+id/title"
                android:layout_toRightOf="@id/desk"
                android:layout_width="wrap_content"
                android:layout_height="50dp" />
+         <TextView
+             android:id="@+id/tv"
+             android:text="(不填为'散客')"
+             android:gravity="bottom"
+             android:textColor="@color/dark_blue"
+             android:layout_below="@+id/title"
+             android:layout_toRightOf="@id/desk_name"
+             android:layout_width="wrap_content"
+             android:layout_height="40dp" />
 
               <android.support.v7.widget.RecyclerView
                   android:id="@+id/super_rv"
-                  android:background="@drawable/button_border_rice_white"
-                  android:layout_below="@+id/fab_select_menu"
-                  android:layout_marginTop="4dp"
-                  android:layout_marginLeft="4dp"
-                  android:layout_marginRight="4dp"
+                  android:background="@mipmap/vp_bg"
+                  android:layout_below="@+id/cd"
+                  android:layout_marginTop="5dp"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
                   android:layout_marginBottom="60dp"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
               </android.support.v7.widget.RecyclerView>
               <Button
                   android:id="@+id/submit_order"
-                  android:text="现在下单"
-                  android:textSize="@dimen/textSize2"
+                  android:text="现 在 下 单"
+                  android:textSize="@dimen/textSize4"
                   android:layout_alignParentBottom="true"
                   android:layout_width="match_parent"
-                  android:layout_height="60dp" />
+                  android:textStyle="bold"
+                  android:textColor="@color/white"
+                  android:layout_height="57dp"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+                  android:background="@drawable/down_menu_select"
+                  />
       </RelativeLayout>
       <!--侧边栏-->
        <include layout="@layout/slide_menu_layout"/>

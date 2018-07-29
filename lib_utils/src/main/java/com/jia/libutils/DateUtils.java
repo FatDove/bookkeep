@@ -66,7 +66,7 @@ public class DateUtils {
      * @return
      */
     public static String BackDateStr (Date date ,int type){
-        String [] weeks = {"六","日","一","二","三","四","五"};
+        String [] weeks = {"日","一","二","三","四","五","六"};
         String DateStr="";
         Calendar d = Calendar.getInstance(Locale.CHINA);
         // 创建一个日历引用d，通过静态方法getInstance() 从指定时区 Locale.CHINA 获得一个日期实例
@@ -81,15 +81,24 @@ public class DateUtils {
         int  mMinute = d.get(Calendar.MINUTE);//分
         int  mSecond = d.get(Calendar.SECOND);//分
 
+        String mSecondStr="";
+        String mMinuteStr="";
+        String mHourStr="";
+        mSecondStr = mSecond<10 ? "0"+mSecond : ""+mSecond;
+        mHourStr = mHour<10 ? "0"+mHour : ""+mHour;
+        mMinuteStr = mMinute<10 ? "0"+mMinute : ""+mMinute;
+
         switch (type){
             case 1:
                DateStr = mYear+"-"+mMonth+"-"+mDay;
                 break;
             case 2:
-                DateStr = "星期"+weeks[mWay];
+                DateStr = "星期"+weeks[mWay-1];
                 break;
             case 3:
-                DateStr = mHour+":"+mMinute+":"+mSecond;
+                DateStr = mHourStr+":"+mMinuteStr+":"+mSecondStr;
+            case 4:
+                DateStr = mHourStr+":"+mMinuteStr;
         }
 
         return DateStr;

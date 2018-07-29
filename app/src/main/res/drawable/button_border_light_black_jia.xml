@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/light_black_cc"/>
+    <corners android:topLeftRadius="@dimen/radius_lv4"
+        android:topRightRadius="@dimen/radius_lv4"
+        android:bottomLeftRadius="@dimen/radius_lv4"
+        android:bottomRightRadius="@dimen/radius_lv4"/>
+    <!--<stroke android:color="@color/edit_bg_color"  android:width="10px"-->
+        />
+    <!--//或者将这段换成下面这个也可以达到效果-->
+    <!--<corners android:radius="8dp"/>-->
+</shape>

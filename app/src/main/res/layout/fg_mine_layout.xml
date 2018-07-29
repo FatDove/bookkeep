@@ -3,127 +3,211 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            >
-            <TextView
-                android:id="@+id/date_year"
-                android:text="xxx"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-            <TextView
-                android:id="@+id/date_month_day"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:text="XXXX"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="45dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tv2"
-                android:text="订单数量"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-            <TextView
-                android:id="@+id/order_count"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:text="XXXX"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="45dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tv3"
-                android:text="未买单数"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-            <TextView
-                android:id="@+id/unCheckout_count"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:text="XXXX"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="45dp" />
-        </LinearLayout>
+<LinearLayout
+    android:paddingTop="40dp"
+    android:orientation="vertical"
+    android:background="@color/yellow"
+    android:layout_width="match_parent"
+    android:layout_height="140dp">
 
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/head_portrait"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/duxiaosi"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
     <TextView
         android:layout_marginTop="5dp"
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="今日订单"
-        android:textColor="@color/light_blue"
-        android:textSize="27sp"
-        android:textStyle="bold"/>
+        android:id="@+id/username"
+        android:text="XXXXXX"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+   <LinearLayout
+       android:background="@color/yellow"
+       android:orientation="horizontal"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <LinearLayout
+           android:gravity="center"
+           android:orientation="vertical"
+           android:layout_gravity="center"
+           android:layout_weight="1"
+           android:layout_width="0dp"
+           android:layout_height="60dp">
+           <ImageView
+               android:id="@+id/duxiaosi"
+               android:background="@drawable/ic_smile"
+               android:layout_width="30dp"
+               android:layout_height="30dp"/>
+       </LinearLayout>
+       <LinearLayout
+           android:gravity="center"
+           android:orientation="vertical"
+           android:layout_gravity="center"
+           android:layout_weight="1"
+           android:layout_width="0dp"
+           android:layout_height="60dp">
+           <TextView
+               android:id="@+id/day_count"
+               android:text="1"
+               android:textColor="@color/black"
+               android:textSize="18sp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+           <TextView
+               android:layout_marginTop="2dp"
+               android:text="一起走过日子"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+       </LinearLayout>
+       <LinearLayout
+           android:gravity="center"
+           android:orientation="vertical"
+           android:layout_gravity="center"
+           android:layout_weight="1"
+           android:layout_width="0dp"
+           android:layout_height="60dp">
+           <TextView
+               android:id="@+id/make_count"
+               android:text="1"
+               android:textColor="@color/black"
+               android:textSize="18sp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+           <TextView
+               android:layout_marginTop="2dp"
+               android:text="记录的总笔数"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+       </LinearLayout>
+
+   </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
+        android:background="@color/light_gray"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="5dp">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:id="@+id/vip"
+        android:gravity="center_vertical"
+        android:background="@color/light_gray"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/ic_vip"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
         <TextView
-            android:text="桌位号"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
+            android:text="升 级 VIP"
+            android:paddingLeft="25dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
             android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="下单时间"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="当前消费"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:layout_height="40dp" />
+        <ImageView
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/ic_vip_lv1"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
     </LinearLayout>
 
-    <com.jia.libui.MyControl.EmptyRecyclerView
-        android:id="@+id/today_order"
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:id="@+id/feedback"
+        android:gravity="center_vertical"
+        android:background="@color/light_gray"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
-    <!--Empty提示图-->
-    <!--<ImageView-->
-    <!--android:id="@+id/empty_iv"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:scaleType="centerCrop"-->
-    <!--android:contentDescription="@null"-->
-    <!--android:src="@mipmap/ic_launcher"-->
-    <!--android:layout_centerInParent="true" />-->
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/ic_mine_feedback"
+            android:layout_width="30dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:text="意 见 反 馈"
+            android:paddingLeft="25dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:id="@+id/clear_data"
+        android:gravity="center_vertical"
+        android:background="@color/light_gray"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:background="@drawable/ic_mine_clear_date"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:text="清 除 数 据"
+            android:paddingLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:id="@+id/setting"
+        android:gravity="center_vertical"
+        android:background="@color/light_gray"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:background="@drawable/ic_mine_setting"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:text="设 置"
+            android:paddingLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:id="@+id/about_app"
+        android:gravity="center_vertical"
+        android:background="@color/light_gray"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/ic_mine_about"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:text="关 于 我 们"
+            android:paddingLeft="25dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
 </LinearLayout>

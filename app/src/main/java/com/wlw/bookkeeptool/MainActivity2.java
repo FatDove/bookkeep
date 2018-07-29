@@ -35,7 +35,7 @@ import com.wlw.bookkeeptool.editor_page.see_and_editor_activity;
 import com.wlw.bookkeeptool.frist_page.fab_slide.FabScrollListener;
 import com.wlw.bookkeeptool.frist_page.fab_slide.HideShowScrollListener;
 import com.wlw.bookkeeptool.frist_page.adapter.Adapter_today_order_rv;
-import com.wlw.bookkeeptool.tableBean.everyDeskTable;
+import com.wlw.bookkeeptool.tableBean.EveryDeskTable;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class MainActivity2 extends AppCompatActivity implements OnBannerListener
     private EmptyRecyclerView todayOrder;
     private FloatingActionButton fabWorkOut;
     private FloatingActionButton fabOrder;
-    private ArrayList<everyDeskTable> everyDeskTablelist;
+    private ArrayList<EveryDeskTable> everyDeskTablelist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +122,7 @@ public class MainActivity2 extends AppCompatActivity implements OnBannerListener
 
     //  首次进入添加数据
     private void initData() {
-        everyDeskTablelist = (ArrayList<everyDeskTable>) LitePal.where("isCheckout == ?"  ,"0").find(everyDeskTable.class,true);//激进查询
+        everyDeskTablelist = (ArrayList<EveryDeskTable>) LitePal.where("isCheckout == ?"  ,"0").find(EveryDeskTable.class,true);//激进查询
         int size = everyDeskTablelist.size();
     }
 //    private void initBanner() {

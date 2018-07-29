@@ -7,19 +7,19 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wlw.bookkeeptool.R;
-import com.wlw.bookkeeptool.tableBean.everyDeskTable;
-import com.wlw.bookkeeptool.tableBean.everyDishTable;
+import com.wlw.bookkeeptool.tableBean.EveryDeskTable;
+import com.wlw.bookkeeptool.tableBean.EveryDishTable;
 
 import java.util.ArrayList;
 
 /**
  * https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  */
-public class Adapter_today_order_rv extends BaseQuickAdapter<everyDeskTable, BaseViewHolder> {
+public class Adapter_today_order_rv extends BaseQuickAdapter<EveryDeskTable, BaseViewHolder> {
 
     Context context;
-    ArrayList<everyDeskTable> its;
-    public Adapter_today_order_rv(Context context, ArrayList<everyDeskTable> its) {
+    ArrayList<EveryDeskTable> its;
+    public Adapter_today_order_rv(Context context, ArrayList<EveryDeskTable> its) {
         super(R.layout.item_today_order, its);
         this.context = context;
         this.its = its;
@@ -27,12 +27,12 @@ public class Adapter_today_order_rv extends BaseQuickAdapter<everyDeskTable, Bas
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, everyDeskTable item){
+    protected void convert(BaseViewHolder helper, EveryDeskTable item){
         Log.i(TAG, "convert: " + item.toString());;
         helper.setText(R.id.desk_num,item.getDeskNum());
         helper.setText(R.id.now_Price,item.getTotalPrice_desk()+"元");
         String describeStr = "";
-        for (everyDishTable e :item.getEveryDishTableList()){
+        for (EveryDishTable e :item.getEveryDishTableList()){
             describeStr+= e.getFoodname()+"("+e.getFoodCount()+")~";
         }
         helper.setText(R.id.menu_describe,describeStr);

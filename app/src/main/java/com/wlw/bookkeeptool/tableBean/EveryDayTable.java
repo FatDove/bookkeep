@@ -11,7 +11,7 @@ import litepal.crud.LitePalSupport;
 /**
  * 每一天的记录（每次打烊就会记录）
  */
-public class everyDayTable extends LitePalSupport implements Serializable {
+public class EveryDayTable extends LitePalSupport implements Serializable {
    @Column(unique = true)
    private int id;
    private float totalPrice_day; //一天的流水总和
@@ -23,7 +23,7 @@ public class everyDayTable extends LitePalSupport implements Serializable {
    private int day;
    @Column(defaultValue = "0")//指定字段默认值 0 代表没打样 ，1表示打过样的记录
    private String shutDownTimeStr;
-   private List<everyDeskTable> everyDeskTableList = new ArrayList<everyDeskTable>(); //everyDeskTable 表 与 everyDayTable 表  是 多对一的关系
+   private List<EveryDeskTable> everyDeskTableList = new ArrayList<EveryDeskTable>(); //everyDeskTable 表 与 everyDayTable 表  是 多对一的关系
 
    public String getUsername() {
       return username == null ? "" : username;
@@ -81,14 +81,14 @@ public class everyDayTable extends LitePalSupport implements Serializable {
       this.shutDownTime = shutDownTime;
    }
 
-   public List<everyDeskTable> getEveryDeskTableList() {
+   public List<EveryDeskTable> getEveryDeskTableList() {
       if (everyDeskTableList == null) {
          return new ArrayList<>();
       }
       return everyDeskTableList;
    }
 
-   public void setEveryDeskTableList(List<everyDeskTable> everyDeskTableList) {
+   public void setEveryDeskTableList(List<EveryDeskTable> everyDeskTableList) {
       this.everyDeskTableList = everyDeskTableList;
    }
 

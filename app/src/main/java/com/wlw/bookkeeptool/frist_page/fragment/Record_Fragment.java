@@ -27,7 +27,7 @@ import com.jia.libutils.WindowUtils;
 import com.wlw.bookkeeptool.R;
 import com.wlw.bookkeeptool.Record.Record_Info_Activity;
 import com.wlw.bookkeeptool.frist_page.adapter.Adapter_record_rv;
-import com.wlw.bookkeeptool.tableBean.everyDayTable;
+import com.wlw.bookkeeptool.tableBean.EveryDayTable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,7 +45,7 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
     private RecyclerView record_rv;
     private TextView Total;
     private LinearLayout parentLayout;
-    private ArrayList<everyDayTable> dataList;
+    private ArrayList<EveryDayTable> dataList;
     private Adapter_record_rv adapter_record_rv;
     private boolean isGetData = false;
     @Override
@@ -71,7 +71,7 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
         adapter_record_rv.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                everyDayTable everyDayTable = (everyDayTable) adapter.getData().get(position);
+                EveryDayTable everyDayTable = (EveryDayTable) adapter.getData().get(position);
                 Intent intent = new Intent(getActivity(), Record_Info_Activity.class);
                 intent.putExtra("DayID",everyDayTable.getId());
                 getActivity().startActivity(intent);
@@ -88,10 +88,10 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
         int  mWay = c.get(Calendar.DAY_OF_WEEK);// 获取当前日期的星期
         int  mHour = c.get(Calendar.HOUR_OF_DAY);//时
         int  mMinute = c.get(Calendar.MINUTE);//分
-        dataList = (ArrayList<everyDayTable>) LitePal.where("year = "+mYear+"; month = "+mMonth+"").find(everyDayTable.class);
+        dataList = (ArrayList<EveryDayTable>) LitePal.where("year = "+mYear+"; month = "+mMonth+"").find(EveryDayTable.class);
         adapter_record_rv = new Adapter_record_rv(dataList);
         record_rv.setAdapter(adapter_record_rv);
-        for (everyDayTable e:dataList){
+        for (EveryDayTable e:dataList){
             sum+=e.getTotalPrice_day();
         }
         Total.setText(sum+"元");
@@ -170,7 +170,7 @@ public class Record_Fragment extends BaseFragment implements View.OnClickListene
             String deskCount = cursor.getString(cursor.getColumnIndex("deskcount"));
             String shutDownTimeStr = cursor.getString(cursor.getColumnIndex("shutdowntimestr"))+"";
             float totalPrice_day = cursor.getFloat(cursor.getColumnIndex("totalprice_day"));
-            everyDayTable everyDayTable = new everyDayTable();
+            EveryDayTable everyDayTable = new EveryDayTable();
             everyDayTable.setId(id);
             everyDayTable.setTotalPrice_day(totalPrice_day);
             everyDayTable.setShutDownTimeStr(shutDownTimeStr);

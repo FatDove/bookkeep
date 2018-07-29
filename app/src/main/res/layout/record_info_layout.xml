@@ -84,6 +84,7 @@
     <TextView
         android:text="(可复制/分享该页内容)到微信/QQ以便保存管理"
         android:textColor="@color/red"
+        android:paddingLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <RelativeLayout
@@ -111,17 +112,18 @@
             android:layout_toLeftOf="@+id/big_Sum"
             />
            <LinearLayout
+               android:paddingLeft="5dp"
                android:gravity="center_vertical"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content">
                <ImageView
-                   android:id="@+id/copy_text"
+                   android:id="@+id/copy_img"
                    android:background="@drawable/ic_copy"
                    android:layout_width="50dp"
                    android:layout_height="50dp" />
                <ImageView
                    android:layout_marginLeft="15dp"
-                   android:id="@+id/share_text"
+                   android:id="@+id/share_img"
                    android:background="@drawable/ic_share"
                    android:layout_width="50dp"
                    android:layout_height="50dp" />

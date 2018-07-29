@@ -1,13 +1,13 @@
 package com.wlw.bookkeeptool.editor_page;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -25,9 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.wlw.bookkeeptool.R;
-import com.wlw.bookkeeptool.frist_page.MainActivity;
 import com.wlw.bookkeeptool.frist_page.fragment.All_order_Fragment;
 import com.wlw.bookkeeptool.frist_page.mlistener.Photo_Result_Listener;
 import com.wlw.bookkeeptool.tableBean.menuBean;
@@ -104,9 +104,22 @@ public class SeeEditorPopupWindow extends PopupWindow implements Photo_Result_Li
         initViews(mConvertView);
         food_name.setText(menuBean.getFoodname());
         //用Glide框架
-        Glide.with(context.getActivity()).load(menuBean.getFoodimg_path()).error(R.drawable.no_banner).diskCacheStrategy(DiskCacheStrategy.NONE)
-                // .override(100, 100)
-                .into(add_food_img);
+        Glide.with(context)
+                .load(menuBean.getFoodimg_path())
+                .asBitmap()
+                .into(new SimpleTarget<Bitmap>(180,180) {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        Drawable drawable = new BitmapDrawable(resource);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            add_food_img.setBackground(drawable);   //设置背景
+                        }
+                    }        //设置宽高
+                });
+
+//        Glide.with(context.getActivity()).load(menuBean.getFoodimg_path()).error(R.drawable.no_banner).diskCacheStrategy(DiskCacheStrategy.NONE)
+//                // .override(100, 100)
+//                .into(add_food_img);
         UnitPrice.setText(menuBean.getPrice()+"");
         describe.setText(menuBean.getDescription());
         submit_edit.setText("修改完成");
@@ -203,11 +216,22 @@ public class SeeEditorPopupWindow extends PopupWindow implements Photo_Result_Li
         bitmap = add_img_bitmap;
         local_imgpath = SendImageDispose(bitmap);//将Bitmap 保存到本地
 
-        Glide.with(context.getActivity()).load(local_imgpath).error(R.drawable.no_banner).diskCacheStrategy(DiskCacheStrategy.NONE)
-                // .override(100, 100)
-                .into(add_food_img);
+//        Glide.with(context.getActivity()).load(local_imgpath).error(R.drawable.no_banner).diskCacheStrategy(DiskCacheStrategy.NONE)
+//                // .override(100, 100)
+//                .into(add_food_img);
+        Glide.with(context)
+                .load(local_imgpath)
+                .asBitmap()
+                .into(new SimpleTarget<Bitmap>(180,180) {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        Drawable drawable = new BitmapDrawable(resource);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            add_food_img.setBackground(drawable);   //设置背景
+                        }
+                    }        //设置宽高
+                });
     }
-
     private void add_img() {
         Toast.makeText(context.getActivity(), "相册选图片", Toast.LENGTH_SHORT).show();
         //选择图片
@@ -219,7 +243,6 @@ public class SeeEditorPopupWindow extends PopupWindow implements Photo_Result_Li
     //将数据保存到数据库
     private void Save_to_DB(int insert_or_updata) {
         SQLiteDatabase db = Connector.getDatabase();
-
         if (insert_or_updata == isUpdata) {
             menuBean update_menu = new menuBean();
             update_menu.setFoodname(food_name.getText().toString());

@@ -12,10 +12,12 @@
     <dimen name="textSize4">24sp</dimen>
     <dimen name="textSize5">26sp</dimen>
     <dimen name="textSize6">30sp</dimen>
+    <dimen name="toast_height">64dp</dimen>
 
     <!--圆角角度-->
     <dimen name="radius_lv1">10dp</dimen>
     <dimen name="radius_lv2">25dp</dimen>
     <dimen name="radius_lv3">100dp</dimen>
+    <dimen name="radius_lv4">15dp</dimen>
 
 </resources>

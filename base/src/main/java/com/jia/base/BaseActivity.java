@@ -44,15 +44,12 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends RxAppC
 
         //创建presenter
         mPresenter = createPresenter();
-
         // view与presenter绑定
         if (null != mPresenter) {
             mPresenter.attachView((V) this);
         }
-
         initView();
         initData();
-
     }
 
 

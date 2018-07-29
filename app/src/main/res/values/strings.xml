@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">BookKeepTool</string>
-    <string name="login_title">欢迎登录</string>
-    <string name="username">用户名</string>
+    <string name="app_name">餐厅小助手</string>
+    <string name="login_title">餐厅服务助手</string>
+    <string name="username">用户名/手机号</string>
     <string name="password">密码</string>
-    <string name="register">注册</string>
+    <string name="bosscord">(掌柜码)员工登陆无需填写</string>
+    <string name="register"><u>注 册</u></string>
+    <string name="forget"><u>忘记密码</u></string>
 </resources>

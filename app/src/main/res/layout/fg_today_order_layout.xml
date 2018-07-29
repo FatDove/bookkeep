@@ -6,7 +6,7 @@
     android:id="@+id/parentLayout"
     >
     <LinearLayout
-        android:paddingTop="5dp"
+        android:paddingTop="10dp"
         android:background="@color/yellow"
         android:layout_width="match_parent"
         android:layout_height="70dp">
@@ -43,7 +43,7 @@
                 android:id="@+id/tv2"
                 android:text="订单总数"
                 android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="25dp" />
@@ -53,7 +53,7 @@
                 android:textSize="18sp"
                 android:text="XXXX"
                 android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="35dp" />
         </LinearLayout>
@@ -66,17 +66,17 @@
                 android:id="@+id/tv3"
                 android:text="未买单数"
                 android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:textSize="16sp"
                 android:layout_height="25dp" />
             <TextView
                 android:id="@+id/unCheckout_count"
-                android:textColor="@color/black"
+                android:textColor="@color/red"
                 android:textSize="18sp"
                 android:text="XXXX"
                 android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="35dp" />
         </LinearLayout>
@@ -90,7 +90,7 @@
         android:text="今日订单"
         android:layout_marginLeft="3dp"
         android:textColor="@color/black"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         />
     <LinearLayout

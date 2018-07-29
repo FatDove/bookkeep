@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="3dp"
-                android:src="@mipmap/ic_today_order1"
+                android:src="@mipmap/ic_today_order_new_1"
                 />
             <TextView
                 android:gravity="center_horizontal"
@@ -30,44 +30,42 @@
                 />
 
         </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/record"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            >
-            <ImageView
-                android:id="@+id/record_icon"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="3dp"
-                android:src="@mipmap/ic_record2"
-                />
-            <TextView
-                android:gravity="center_horizontal"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:text="流水记录"
-                android:textColor="@color/black_qian"
-                />
-        </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/all_order"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/all_order_icon"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="3dp"
+            android:src="@mipmap/ic_all_order_new2"
+            />
+        <TextView
+            android:gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="本店菜谱"
+            android:textColor="@color/black_qian"
+            />
+    </RelativeLayout>
         <RelativeLayout
             android:id="@+id/start_work"
             android:layout_width="70dp"
             android:layout_height="80dp"
             android:layout_gravity="bottom"
-            android:src="@mipmap/ic_half_round"
             >
 
             <ImageView
                 android:id="@+id/start_work_icon"
                 android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_height="62dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:background="@mipmap/ic_add_180"
+                android:foreground="@mipmap/ic_add_new_180"
 
                 />
             <TextView
@@ -80,28 +78,30 @@
                 android:textStyle="bold"
                 />
         </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/all_order"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/all_order_icon"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="3dp"
-                android:src="@mipmap/ic_all_order2"
-                />
-            <TextView
-                android:gravity="center_horizontal"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:text="餐单"
-                android:textColor="@color/black_qian"
-                />
-        </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/record"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        >
+        <ImageView
+            android:id="@+id/record_icon"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="3dp"
+            android:src="@mipmap/ic_record_new_2"
+            />
+        <TextView
+            android:gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="流水记录"
+            android:textColor="@color/black_qian"
+            />
+    </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/mine"
             android:layout_width="0dp"
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="3dp"
-                android:src="@mipmap/ic_mine2"
+                android:src="@mipmap/ic_mine_new_2"
                 />
             <TextView
                 android:gravity="center_horizontal"

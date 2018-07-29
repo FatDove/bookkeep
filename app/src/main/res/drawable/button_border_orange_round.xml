@@ -5,7 +5,7 @@
         android:topRightRadius="@dimen/radius_lv3"
         android:bottomLeftRadius="@dimen/radius_lv3"
         android:bottomRightRadius="@dimen/radius_lv3"/>
-    <!--<stroke android:color="@color/edit_bg_color"  android:width="10px"-->
+    <!--<stroke android:color="@color/edit_bg_color"  android:width="20px"-->
         />
     <!--//或者将这段换成下面这个也可以达到效果-->
     <!--<corners android:radius="8dp"/>-->

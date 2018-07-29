@@ -40,8 +40,9 @@
             android:text="111"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:gravity="center"
+            android:layout_marginTop="5dp"
             android:layout_width="80dp"
             android:layout_height="50dp" />
         <TextView
@@ -50,9 +51,9 @@
             android:text="111"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="30dp" />
         <TextView
             android:layout_toRightOf="@+id/food_name"
@@ -60,8 +61,21 @@
             android:text="数量"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="30dp" />
+        <TextView
+            android:id="@+id/remark_tv"
+            android:layout_toRightOf="@+id/food_count"
+            android:layout_below="@+id/down_menu_time"
+            android:text="备注："
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/dark_blue"
+            android:gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
         <TextView
             android:id="@+id/down_menu_time"
             android:layout_toRightOf="@+id/food_count"
@@ -69,9 +83,9 @@
             android:textSize="16sp"
             android:textColor="@color/purple"
             android:gravity="center"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
-            android:layout_height="50dp" />
+            android:layout_height="30dp" />
         <TextView
             android:id="@+id/Sum"
             android:layout_alignParentRight="true"

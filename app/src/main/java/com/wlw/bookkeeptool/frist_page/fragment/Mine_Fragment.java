@@ -1,12 +1,16 @@
 package com.wlw.bookkeeptool.frist_page.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
@@ -17,13 +21,15 @@ import com.wlw.bookkeeptool.R;
 public class Mine_Fragment extends BaseFragment implements View.OnClickListener {
     private static final String SHOW_TAP_TARGET = "SHOW_TAP_TARGET";
 
-
-
     @Override
     protected View initFragmentView(LayoutInflater inflater) {
         Toast.makeText(getActivity(),  "4", Toast.LENGTH_SHORT).show();
 
-        view = inflater.inflate(R.layout.fg_today_order_layout, null);
+        view = inflater.inflate(R.layout.fg_mine_layout, null);
+        Bitmap bitmap = ImageUtils.getBitmap(R.mipmap.duxiaosi);
+        ImageView head_portrait = view.findViewById(R.id.head_portrait);
+        Bitmap bitmapBorder = ImageUtils.toRound(bitmap, 5,Color.parseColor("#FFFFFF"));
+        head_portrait.setImageBitmap(bitmapBorder);
         return view;
     }
 

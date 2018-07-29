@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +25,6 @@ import com.jia.base.BasePresenter;
 import com.jia.libui.CoverFlow.CoverFlowAdapter;
 import com.jia.libui.CoverFlow.CoverFlowViewPager;
 import com.jia.libui.CoverFlow.OnPageSelectListener;
-import com.jia.libui.MyControl.EmptyRecyclerView;
 import com.jia.libui.MyDialog.MyDialog;
 import com.jia.libui.Navigation.impl.ChatNavigation;
 import com.jia.libutils.WindowUtils;
@@ -52,7 +52,7 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
     private SeeEditorPopupWindow seeEditorPopupWindow;
     private final int IMAGE_Local = 1;
     //    private int food_type;  //用来标记食欲的大类
-    private EmptyRecyclerView emptyRecyclerView;
+    private RecyclerView emptyRecyclerView;
     private String foodtype = "0"; //查询菜品的类型 {0 1 2 3 4}
     //显示数据的集合
     ArrayList<menuBean> menuBeanList = new ArrayList<>();
@@ -79,17 +79,16 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
             viewList.add(v);
         }
         vpConverFlow.setViewList(viewList);
-        vpConverFlow.setOnPageSelectListener(new OnPageSelectListener() {
+        vpConverFlow.setOnPageSelectListener(new OnPageSelectListener(){
             @Override
             public void select(int position) {
                 foodtype = position+"";
                 Toast.makeText(getActivity(), position+"?", Toast.LENGTH_SHORT).show();
                 initdata(foodtype);
-                initevent();
             }
         });
         addMenu = (ImageView) view.findViewById(R.id.add_menu);
-        emptyRecyclerView = (EmptyRecyclerView) view.findViewById(R.id.see_editor_rv);
+        emptyRecyclerView = (RecyclerView) view.findViewById(R.id.see_editor_rv);
         emptyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
     }
     private void initevent(){
@@ -116,9 +115,10 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
     public void initdata(String foodtype){
         menuBeanList.clear();
         menuBeanList = (ArrayList<menuBean>) LitePal.where("foodtype = ?",foodtype).find(menuBean.class);
-        foodMenuShow_listAdapter = new FoodMenuShow_listAdapter(getActivity(), menuBeanList);
+        foodMenuShow_listAdapter = new FoodMenuShow_listAdapter(getActivity(),menuBeanList);
         foodMenuShow_listAdapter.openLoadAnimation();//加载Item动画效果
         emptyRecyclerView.setAdapter(foodMenuShow_listAdapter);
+        initevent();
     }
     //打开PopuWindow 展示 列表
     private void openPopuWindow_add(String[] arrTitle) {
@@ -129,7 +129,7 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
         mWindowUtil.lightoff(getActivity());
         seeEditorPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
-            public void onDismiss() {
+            public void onDismiss(){
                 mWindowUtil.lightOn(getActivity());
             }
         });
@@ -208,7 +208,6 @@ public class All_order_Fragment extends BaseFragment implements View.OnClickList
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
         initdata(foodtype);
-        initevent();
     }
 
     @Override

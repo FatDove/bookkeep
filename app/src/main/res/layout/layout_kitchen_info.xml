@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/parentLayout">
+
+    <RelativeLayout
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        <TextView
+            android:text="桌 单 详 情"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/Blue"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp" />
+        <RelativeLayout
+            android:gravity="bottom"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp">
+        <TextView
+            android:id="@+id/tv1"
+            android:text="加"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/button_border_green_round"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:text="为【追加】的菜品"
+            android:layout_toRightOf="@+id/tv1"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+        <TextView
+            android:id="@+id/tv2"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_below="@+id/tv1"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/ic_finish_food"
+            android:layout_width="23dp"
+            android:layout_height="23dp" />
+        <TextView
+            android:text="为【前台已上】的菜品"
+            android:layout_toRightOf="@+id/tv1"
+            android:layout_below="@+id/tv1"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:paddingTop="15dp"
+        android:background="@color/rice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:text="桌位号"
+            android:id="@+id/desk_name"
+            android:layout_gravity="left|bottom"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="下单时间"
+            android:id="@+id/down_menu_time"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:text="刷新数据"
+            android:id="@+id/update"
+            android:layout_gravity="right|bottom"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/purple"
+            android:background="@drawable/text_border_select"
+            android:layout_marginRight="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:background="@mipmap/vp_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/see_menu_rv"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/img" />
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray" />
+    </RelativeLayout>
+</LinearLayout>

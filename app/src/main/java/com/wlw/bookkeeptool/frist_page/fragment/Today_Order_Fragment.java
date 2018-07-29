@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
@@ -26,10 +28,12 @@ import com.jia.libutils.WindowUtils;
 import com.wlw.bookkeeptool.CustomerMenu.CustomerMenu_infoActivity;
 import com.wlw.bookkeeptool.R;
 import com.wlw.bookkeeptool.frist_page.adapter.Adapter_today_order_rv;
-import com.wlw.bookkeeptool.tableBean.everyDeskTable;
+import com.wlw.bookkeeptool.tableBean.EveryDeskTable;
+import com.wlw.bookkeeptool.utils.CustomToast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 import litepal.LitePal;
 
@@ -46,7 +50,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
     private TextView mUnCheckoutCount;
     private TextView mTv;
     private RecyclerView mTodayOrder;
-    private ArrayList<everyDeskTable> everyDeskTablelist;
+    private ArrayList<EveryDeskTable> everyDeskTablelist;
     private int checkout_count=0;
     private int allDesk_count=0;
     private Adapter_today_order_rv adapter_today_order_rv;
@@ -72,7 +76,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
         workOutBroadcastReceiver = new WorkOutBroadcastReceiver();
         IntentFilter fff = new IntentFilter("WorkOut");
         getActivity().registerReceiver(workOutBroadcastReceiver,fff);
-
+        resetToast();
         return view;
     }
 
@@ -89,9 +93,13 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
     
     private void initdata(){
         try{
-            everyDeskTablelist = (ArrayList<everyDeskTable>) LitePal.where( "isEndwork = 0 ; username = "+UserName+"").find(everyDeskTable.class,true);//激进查询
+             //条件暂时不用 query_role_id = ? and
+            everyDeskTablelist = (ArrayList<EveryDeskTable>) LitePal.where( "username = ? and isEndwork = ?",UserName,"0").find(EveryDeskTable.class,true);//激进查询
             allDesk_count = everyDeskTablelist.size();
-            checkout_count = LitePal.where("isEndwork = 0 ; username = "+UserName+"; isCheckout = 1 ").count(everyDeskTable.class);
+            checkout_count =  LitePal.where( "isCheckout = ? and isEndwork = ? and username = ?","0","0",UserName).count(EveryDeskTable.class);//激进查询
+            allDesk_count = everyDeskTablelist.size();
+
+//            checkout_count = count;
         }catch (Exception e){
             Toast.makeText(getActivity(), "异常了", Toast.LENGTH_SHORT).show();
         }
@@ -118,12 +126,45 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
         System.out.println(mMinute);
 
     }
+
+    private void resetToast() {
+        ToastUtils.setMsgColor(0xFEFFFFFF);
+        ToastUtils.setBgColor(0xFEFFFFFF);
+        ToastUtils.setBgResource(-1);
+        ToastUtils.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, getResources().getDimensionPixelSize(R.dimen.dp_10));
+    }
     //初始化Toolbar
     public void initNavigation() {
         ChatNavigation.Builder homeBuilder = new ChatNavigation.Builder(getContext(),parentLayout);
         homeBuilder.setTitleRes("餐厅小助手");
+        homeBuilder.setLeftImageLeftRes(R.drawable.ic_smile).setLeftImageLeftOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               smile_today();
+            }
+        });
         homeBuilder.builder().build(); //builder是组装  build是创建
         AdaptationStatusbar();
+    }
+    //展示随机的Toast
+    private void smile_today() {
+        Random random = new Random();
+        int i = random.nextInt(3)+1;
+
+        ToastUtils.showLong(R.string.password);
+        CustomToast.showLong(0,"哇哈哈");
+//        CustomToast.showLong(R.layout.toast_custom2,"乐呵呵");
+        switch (i){
+            case 1:
+                Toast.makeText(getContext(), "欢迎使用==>餐厅小助手", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(getContext(), "新的一天，一起加油努力吧", Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                Toast.makeText(getContext(), "马云说，梦想还是要有的，万一实现了呢", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     //计算状态栏
@@ -140,7 +181,7 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
         adapter_today_order_rv.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                everyDeskTable everyDeskTable = (everyDeskTable) adapter.getData().get(position);
+                EveryDeskTable everyDeskTable = (EveryDeskTable) adapter.getData().get(position);
                 Intent intent = new Intent(getActivity(), CustomerMenu_infoActivity.class);
                 intent.putExtra("DeskID", everyDeskTable.getId());
                 startActivity(intent);
@@ -241,7 +282,8 @@ public class Today_Order_Fragment extends BaseFragment implements View.OnClickLi
             String isWorkOut = intent.getStringExtra("WorkOut");
             if(isWorkOut.equals("Yes")){
 //                Log.i("onReceive", "新朋友"+newFriendRequest);
-                 Toast.makeText(context,"打烊收工咯！可以去【流水记录】中查看。", Toast.LENGTH_SHORT).show();
+                ToastUtils.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, getResources().getDimensionPixelSize(R.dimen.toast_height));
+                CustomToast.showLong(R.layout.toast_good_layout,"打烊收工咯！可以去【流水记录】中查看。");
                   initdata();
                   initevent();
             }
